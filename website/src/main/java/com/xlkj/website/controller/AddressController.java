@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/search")
 @CrossOrigin
 public class AddressController {
-
+/*
     private Logger logger = LoggerFactory.getLogger(OrderFormController.class);
 
     @ApiOperation(value = "查询省接口", httpMethod = "POST")
@@ -30,5 +30,5 @@ public class AddressController {
             logger.error("addEquipment is error", e.getMessage());
         }
         return resultVo;
-    }
+    }*/
 }

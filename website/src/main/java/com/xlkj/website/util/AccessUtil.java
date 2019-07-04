@@ -19,6 +19,7 @@ public class AccessUtil {
 
     private static final String WECHATUSERINFO = "https://api.weixin.qq.com/sns/userinfo";
 
+
     public static Map getAccessToken(String code,String appId,String secret){
 
         String url = new StringBuilder(ACCESSTOKEN)
@@ -26,25 +27,30 @@ public class AccessUtil {
                 .append(secret).append("&code=").append(code).toString();
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(url).build();
-        try {
-            Response response = client.newCall(request).execute();
-            String resultJson = response.body().string();
-            /** 正确返回示例
-             * "access_token":"ACCESS_TOKEN",
-             * "expires_in":7200,
-             * "refresh_token":"REFRESH_TOKEN",
-             * "openid":"OPENID",
-             * "scope":"SCOPE",
-             * "unionid":"o6_bmasdasdsad6_2sgVt7hMZOPfL"
-             */
-            Map parseObject = JSONObject.parseObject(resultJson, Map.class);
-            //将json专还成map，方便取值
-            String access_token = (String)parseObject.get("access_token");
-            if (access_token != null){//有token说明请求正确，返回Map信息
-                return parseObject;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+
+
+        StringBuilder urlPath = new StringBuilder("https://api.weixin.qq.com/sns/jscode2session");
+        urlPath.append(String.format("?appid=%s", appId)); //小程序appid
+        urlPath.append(String.format("&secret=%s", secret)); //小程序secretid
+        urlPath.append(String.format("&js_code=%s", code));
+        urlPath.append(String.format("&grant_type=%s", "authorization_code"));
+        String object = HttpUtil.sendGet(urlPath.toString());
+
+        /*  Response response = client.newCall(request).execute();
+          String resultJson = response.body().string();*/
+        /** 正确返回示例
+         * "access_token":"ACCESS_TOKEN",
+         * "expires_in":7200,
+         * "refresh_token":"REFRESH_TOKEN",
+         * "openid":"OPENID",
+         * "scope":"SCOPE",
+         * "unionid":"o6_bmasdasdsad6_2sgVt7hMZOPfL"
+         */
+        Map parseObject = JSONObject.parseObject(object, Map.class);
+        //将json专还成map，方便取值
+        String access_token = (String)parseObject.get("openid");
+        if (access_token != null){//有token说明请求正确，返回Map信息
+            return parseObject;
         }
         return null;
     }
