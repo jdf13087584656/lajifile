@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xlkj.website.mapper.OrderFormMapper">
+
+    <!--订单新增 -->
+    <insert id="addOrderForm" useGeneratedKeys="true" keyProperty="oid" keyColumn="oid"
+            parameterType="com.xlkj.website.model.OrderFormAddDto" >
+		INSERT INTO lp_order (
+          oid,
+          order_code,
+          client_id,
+          receive_id,
+          admin_id,
+          address_id,
+          appointment_time,
+          is_account,
+          price_evaluation,
+          is_deleted,
+          order_create_time,
+          order_get_time,
+          order_finish_time,
+          create_user_id,
+          modify_user_id,
+          order_state,
+          sp_state,
+          sp_msg,
+          rubbish_bag_code
+		)
+		VALUES
+		(
+		  #{oid},
+		  #{orderCode},
+		  #{clientId},
+		  #{receiveId},
+		  #{adminId},
+		  #{addressId},
+		  #{appointmentTime},
+		  #{isAccount},
+		  #{priceEvaluation},
+		  #{isDeleted},
+		  now(),
+		  #{orderModifyTime},
+		  #{orderGetTime},
+		  #{orderFinishTime},
+		  #{createUserId},
+		  #{modifyUserId},
+		  1,
+		  1,
+		  #{spMsg},
+		  #{rubbishBagCode}
+		);
+	</insert>
+
+	<!-- 修改订单信息 -->
+	<update id="modifyOrderForm" parameterType="com.xlkj.website.model.OrderFormAddDto">
+	UPDATE lp_order
+	<set>
+		<if test="null != orderCode and '' != orderCode">
+			order_code = #{orderCode},
+		</if>
+		<if test="null != clientId and '' != clientId">
+			client_id = #{clientId},
+		</if>
+		<if test="null != receiveId and '' != receiveId">
+			receive_id = #{receiveId},
+		</if>
+		<if test="null != adminId and '' != adminId">
+			admin_id = #{adminId},
+		</if>
+		<if test="null != addressId and '' != addressId">
+			address_id = #{addressId},
+		</if>
+		<if test="null != appointmentTime and '' != appointmentTime">
+			appointment_time = #{appointmentTime},
+		</if>
+		<if test="null != isAccount and '' != isAccount">
+			is_account = #{isAccount},
+		</if>
+		<if test="null != priceEvaluation and '' != priceEvaluation">
+			price_evaluation = #{priceEvaluation},
+		</if>
+		<if test="null != isDeleted and '' != isDeleted">
+			is_deleted = #{isDeleted},
+		</if>
+		<if test="null != orderGetTime and '' != orderGetTime">
+			order_get_time = #{orderGetTime},
+		</if>
+		<if test="null != orderFinishTime and '' != orderFinishTime">
+			order_finish_time = #{orderFinishTime},
+		</if>
+		<if test="null != modifyUserId and '' != modifyUserId">
+			modify_user_id = #{modifyUserId},
+		</if>
+		<if test="null != orderState and '' != orderState">
+			order_state = #{orderState},
+		</if>
+		<if test="null != spState and '' != spState">
+			sp_state = #{spState},
+		</if>
+		<if test="null != spMsg and '' != spMsg">
+			sp_msg = #{spMsg},
+		</if>
+		<if test="null != rubbishBagCode and '' != rubbishBagCode">
+			rubbish_bag_code = #{rubbishBagCode},
+		</if>
+	</set>
+	WHERE
+	oid = #{oid};
+   </update>
+
+
+
+	<!--订单列表 -->
+	<select id="listOrderForm" parameterType="com.xlkj.website.model.CommonSearch"
+			resultType="com.xlkj.website.model.OrderFormAddDto">
+		select
+		lo.oid as oId,
+		lo.order_code as orderCode,
+		lo.client_id as clientId,
+		lo.receive_id AS receiveId,
+		lo.admin_id AS adminId,
+		lo.address_id AS addressId,
+		lo.appointment_time AS appointmentTime,
+		lo.is_account AS isAccount,
+		lo.price_evaluation AS priceEvaluation,
+		lo.is_deleted AS isDeleted,
+		lo.order_modify_time AS orderModifyTime,
+		lo.order_get_time AS orderGetTime,
+		lo.order_finish_time AS orderFinishTime,
+		lo.create_user_id AS createUserId,
+		lo.modify_user_id AS modifyUserId
+		DATE_FORMAT(lo.order_create_time,'%Y/%m/%d %H:%i:%S') as orderCreateTime,
+		DATE_FORMAT(lo.order_modify_time,'%Y/%m/%d %H:%i:%S') as orderModifyTime,
+		lo.order_state as orderState,
+		lo.sp_state as spState,
+		lo.rubbish_bag_code as rubbishBagCode
+		from lp_order lo
+		where 1=1
+		<if test="null != rubbishBagCode and rubbishBagCode != ''">
+			AND lo.rubbish_bag_code = #{rubbishBagCode}
+		</if>
+		<if test="null != orderState and orderState != ''">
+			AND lo.order_state = #{orderState}
+		</if>
+		<if test="startTime != null and startTime != ''">
+			AND DATE_FORMAT(lo.order_create_time,'%Y/%m/%d %H:%i:%S') <![CDATA[>=]]> DATE_FORMAT(#{startTime},'%Y/%m/%d %H:%i:%S')
+		</if>
+		<if test="endTime != null and endTime != ''">
+			AND DATE_FORMAT(lo.order_create_time,'%Y/%m/%d %H:%i:%S') <![CDATA[<=]]>DATE_FORMAT(#{endTime},'%Y/%m/%d %H:%i:%S')
+		</if>
+		order by lo.order_create_time desc
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

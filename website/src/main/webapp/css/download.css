@@ -1,0 +1,117 @@
+
+.onlyFile{
+	border-bottom: 1px solid #999;
+	display: flex;
+	box-sizing: border-box;
+}
+.FileNum{
+	width: 14%;
+	font-size: 56px;
+	line-height: 94px;
+}
+.FileList{
+	width:86%;
+}
+/* white-space:pre-wrap;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    text-align: left;
+    -webkit-box-orient: vertical;*/
+.FileName{
+	white-space:pre-wrap;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    text-align: left;
+    -webkit-box-orient: vertical;
+    font-size: 19px;
+    line-height: 27px;
+    margin-top: 10px;
+}
+.FileName a{
+	color: #333;
+}
+.FileName a:hover{
+	color: blue;
+	text-decoration: underline;
+}
+.FileIntro{
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	line-height: 30px;
+	font-size: 12px;
+}
+.hotFile .FileIntro:last-child{
+	margin-bottom: 28px;
+}
+.seeMore{
+	width: 100%;
+	margin-top: 28px;
+	margin-bottom: 26px;
+	display: flex;
+}
+.MoreLeft{
+	margin-left: 9px;
+	width:34px;
+	height: 34px;
+	border-radius: 50%;
+	border: 3px solid #272636;
+	line-height: 40px;
+	font-weight: bold;
+	text-align: center;
+	font-size: 18px;
+	margin-right: 14px;
+}
+.moreRight a,.upList{
+	font-size: 20px;
+	line-height: 40px;
+	color:#333333;
+}
+.upList{
+	margin-left:100px;
+	cursor: pointer;
+	display: none;
+}
+#FileBox{
+	height:488px;
+	overflow: hidden;
+}
+@media screen and (min-width: 950px) and (max-width: 1300px){
+	.hotFile{
+		padding-right: 270px;
+	}
+}
+@media screen and (min-width: 800px) and (max-width: 950px){
+	.hotFile{
+		padding-right: 70px;
+	}
+}
+@media screen and (min-width: 700px) and (max-width: 800px){
+	.hotFile{
+		padding-right: 40px;
+		padding-left: 40px;
+	}
+}
+@media screen and (min-width: 0px) and (max-width: 700px){
+	.hotFile{
+		padding-right: 20px;
+		padding-left: 20px;
+	}
+	.onlyFile{
+		flex-direction: column; 
+	}
+	.FileNum{
+		width: 100%;
+		text-align: center;
+	}
+	.FileList{
+		width: 100%;
+	}
+	.hotFile #FileBox{
+		height: 864px;
+		overflow: hidden;
+	}
+}

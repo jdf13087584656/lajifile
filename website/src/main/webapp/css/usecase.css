@@ -1,0 +1,175 @@
+.UseCase{
+	width: 100%;
+	height:630px;
+	background-color: #e0f0e9;
+	margin-bottom: 86px;
+	padding-top: 80px;
+	padding-left: 132px;
+	padding-right: 247px;
+	box-sizing: border-box;
+	position: relative;
+	margin-top: 50px;
+	display: flex;
+}
+.serviceTop{
+	top: -30px;
+}
+.CaseLeftText{
+	width: 138px;
+	margin-top: 110px;
+	margin-right: 274px;
+}
+.CaseLeftText p{
+	width: 100%;
+	font-size: 13px;
+	color: #333;
+	line-height: 13px;
+	font-weight: bold;
+	letter-spacing: 5px;
+}
+.CaseLeftText p:nth-child(2){
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.CaseRiBnner{
+	width: 550px;
+	height: 475px;
+	position: relative;
+}
+.CaseImgBox{
+	position: absolute;
+	width: 240px;
+	height: 373px;
+	background-color: #bacac6;
+	top: 40px;
+	box-sizing: border-box;
+	transform: translateX(0);
+	padding-top: 45px;
+	transition: all .5s;
+	z-index: 5;
+}
+.CaseImgBox img{
+	width: 200px;
+	height: 130px;
+	margin: 0 auto 40px;
+}
+.CaseImgBox .caseExplain{
+	
+	width: 70%;
+	margin: 0 auto;
+	font-size: 10px;
+	white-space:pre-wrap;
+    overflow: hidden;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    text-align: center;
+    -webkit-box-orient: vertical;
+    display: none;
+}
+.CaseImgBox .imgText{
+	font-size: 12px;
+	width: 100%;
+	text-align: center;
+	color: #000;
+	display: block;
+}
+.activeImg{
+	/*width: 310px;*/
+	/*height: 475px;*/
+	background-color: #bacad2;
+	/*left: 240px;*/
+	top: 0px;
+	box-sizing: border-box;
+	padding-top: 30px;
+	transform: translateX(274px) scaleX(1.29) scaleY(1.273) translateY(40px);
+	transition: all .5s;
+	z-index: 10;
+}
+.activeImg img{
+	width: 200px;
+	height: 150px;
+	margin: 0 auto 10px;
+}
+.activeImg .imgText{
+	/*display: none;*/
+	color: #000;
+	margin-bottom: 5px;
+}
+.activeImg .caseExplain{
+	display: block;
+	width: 70%;
+	margin: 0 auto;
+	font-size: 12px;
+	line-height: 14px;
+	white-space:pre-wrap;
+    overflow: hidden;
+    -webkit-line-clamp: 5;
+    display: -webkit-box;
+    text-align: center;
+    -webkit-box-orient: vertical;
+}
+.BnnerBtn{
+	width: 120px;
+	height: 60px;
+	background-color: green;
+	position: absolute;
+	z-index: 1;
+	right: -60px;
+	top: 415px;
+	display: flex;
+	z-index: 40;
+}
+.imgLeft,.imgRight{
+	width: 50%;
+	background-color: #bacac6;
+	color: #858585;
+	text-align: center;
+	line-height: 60px;
+	font-size: 18px;
+	cursor: default;
+}
+.imgRight{
+	background-color: #bacad2;
+	color: #f2f2f2;
+}
+@media screen and (min-width: 0px) and (max-width: 1060px){
+	.UseCase{
+		padding-left: 32px;
+		padding-right: 47px;
+	}
+	.CaseLeftText{
+		margin-right: 100px;
+	}
+	.BnnerBtn{
+		position: static;
+		margin: 475px auto 0;
+	}
+}
+@media screen and (min-width: 0px) and (max-width: 900px){
+	.UseCase{
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+	.CaseLeftText{
+		margin-right: 0px;
+	}
+}
+@media screen and (min-width: 0px) and (max-width: 800px){
+	.UseCase{
+		padding-left: 5px;
+		padding-right: 5px;
+		flex-direction:column ;
+		padding-top: 10px;
+	}
+	.CaseLeftText{
+		margin-right: 0px;
+		width: 100%;
+		text-align: center;
+		margin-top: 10px;
+	}
+}
+@media screen and (min-width: 0px) and (max-width: 600px){
+	.CaseRiBnner{
+		width: 100%;
+	}
+}

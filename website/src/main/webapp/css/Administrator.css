@@ -1,0 +1,79 @@
+.admTable{
+    width: 100%;
+    /*height: ;*/
+    padding-top: 120px;
+    box-sizing: border-box;
+    background-color: #c0ebd7;
+    padding-bottom: 470px;
+}
+.AmTb{
+	width: 1050px;
+	margin:0 auto;
+	font-size:12px;
+	line-height: 36px;
+	text-align: center;
+	margin-bottom: 30px;
+}
+.AmTb tr{
+	height:36px;
+}
+.AmTb tr td:nth-child(1){
+	width: 99px;
+}
+.AmTb tr td:nth-child(2){
+	width: 480px;
+}
+.AmTb tr td:nth-child(3){
+	width: 111px;
+}
+.AmTb tr td:nth-child(4){
+	width: 162px;
+}
+/*页码盒子*/
+.pageIndex{
+	width: 600px;
+	margin: 0 auto;
+	height: 30px;
+	display: flex;
+}
+.pageNum{
+	width:26px;
+	height:26px;
+	border:1px solid #c2ccd0;
+	border-radius: 5px;
+	margin-right: 8px;
+	font-size:9px;
+	text-align: center;
+	line-height: 26px;
+	color: #c2ccd0;
+	cursor: pointer;
+}
+.pageRow{
+	width:80px;
+	height: 26px;
+	border:1px solid #d9d9d9;
+	color: #656565;
+	outline: none;
+	margin-right: 14px;
+	border-radius: 5px; 
+}
+#jump{
+	width: 45px;
+	height: 26px;
+	border: 1px solid #d9d9d9;
+	border-radius: 5px;
+	outline: none;
+	text-align: center;
+	line-height: 26px;
+	color: #656565;
+
+}
+.jumpTo,.ye{
+	width:30px;
+	line-height: 30px;
+	font-size: 12px;
+	color: #656565;
+}
+.ye{
+	margin-left: 8px;
+}

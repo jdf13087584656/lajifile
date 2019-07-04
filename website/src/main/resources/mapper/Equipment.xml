@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xlkj.website.mapper.EquipmentMapper">
+
+    <!--设备新增 -->
+    <insert id="addEquipment" useGeneratedKeys="true" keyProperty="eid" keyColumn="eid"
+            parameterType="com.xlkj.website.model.EquipmentDto" >
+		INSERT INTO lp_equipment (
+          eid,
+          e_name,
+          e_address,
+          e_state,
+          create_user_id,
+          modify_user_id,
+          create_time,
+          modify_time,
+          memo
+		)
+		VALUES
+		(
+		  #{eid},
+		  #{eName},
+		  #{eAddress},
+		  #{eState},
+		  #{createUserId},
+		  #{modifyUserId},
+		  now(),
+		  #{modifyTime},
+		  #{memo}
+		);
+	</insert>
+
+
+    <!-- 修改设备信息 -->
+    <update id="modifyEquipment" parameterType="com.xlkj.website.model.EquipmentDto">
+        UPDATE lp_equipment
+        <set>
+            <if test="null != eName and '' != eName">
+                e_name = #{eName},
+            </if>
+            <if test="null != eAddress and '' != eAddress">
+                e_address = #{eAddress},
+            </if>
+            <if test="null != eState and '' != eState">
+                e_state = #{eState},
+            </if>
+            <if test="null != addressId and '' != addressId">
+                address_id = #{addressId},
+            </if>
+            <if test="null != memo and '' != memo">
+                memo = #{memo},
+            </if>
+            <if test="null != modifyUserId and '' != modifyUserId">
+                modify_user_id = #{modifyUserId},
+            </if>
+            modify_time = now()
+        </set>
+        WHERE
+        eid = #{eid};
+    </update>
+
+    <!--设备列表 -->
+    <select id="listEquipment" parameterType="com.xlkj.website.model.CommonSearch"
+            resultType="com.xlkj.website.model.EquipmentDto">
+        select
+        le.eid as eId,
+        le.e_name as eName,
+        le.e_address as eAddress,
+        DATE_FORMAT(le.create_time,'%Y/%m/%d %H:%i:%S') as createTime,
+        DATE_FORMAT(le.modify_time,'%Y/%m/%d %H:%i:%S') as modifyTime,
+        le.e_state as eState,
+        le.memo as memo
+        from lp_equipment le
+        where 1=1
+        <if test="keywords != null and keywords != ''">
+            AND (po.po_code LIKE "%"#{keywords}"%" OR ds.deptName LIKE "%"#{keywords}"%"
+            OR dr.deptName LIKE "%"#{keywords}"%")
+        </if>
+        <if test="null != eState and eState != -1">
+            AND le.e_state = #{eState}
+        </if>
+        <if test="startTime != null and startTime != ''">
+            AND DATE_FORMAT(le.create_time,'%Y/%m/%d %H:%i:%S') <![CDATA[>=]]> DATE_FORMAT(#{startTime},'%Y/%m/%d %H:%i:%S')
+        </if>
+        <if test="endTime != null and endTime != ''">
+            AND DATE_FORMAT(le.create_time,'%Y/%m/%d %H:%i:%S') <![CDATA[<=]]>DATE_FORMAT(#{endTime},'%Y/%m/%d %H:%i:%S')
+        </if>
+        order by le.create_time desc
+    </select>
+
+
+</mapper>

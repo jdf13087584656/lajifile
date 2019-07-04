@@ -1,0 +1,745 @@
+*{
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	font-family:"Helvetica","Tahoma","Arial","Microsoft YaHei","微软雅黑","SimSun","宋体","STXihei","华文细黑","Heiti","黑体", sans-serif;
+}
+ul{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+	color: #fff;
+}
+img{
+	display: block;
+}
+/*slideshow*/
+.slideshow{
+	width: 100%;
+	height: 635px;
+	padding-top: 60px;
+}
+.header{
+	width: 100%;
+	height: 60px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-around;
+	padding-left: 100px;
+	padding-right: 120px;
+	box-sizing: border-box;
+	background-color: #88ada6;
+	position: fixed;
+	top: 0;
+	z-index: 999999999;
+	position: relative;
+}
+#hd{
+	position: fixed;
+	z-index: 100;
+	width: 100%;
+}
+.leftTitle{
+	position: absolute;
+	width: 135px;
+	height:201px;
+	background-color: #88ada6;
+	top: 60px;
+	left: 44px;
+	z-index: 60;
+}
+.leftTitle .DisplayLeftText{
+	width: 93%;
+	border-right: none;
+	z-index: 0;
+	padding-left: 45px;
+	margin-top: 20px;
+}
+.logoBox{
+	width: 130px;
+	height: 40px;
+	background-color: #fff;
+	margin-top: 10px;
+	flex-shrink:0;
+}
+.logoBox img{
+	width: 100%;
+	height: 100%;
+}
+
+.MenuBox{
+	padding-left: 260px;
+	margin-top: 10px;
+	/*width: 100%;*/
+}
+.MenuBox::after{
+	content: "";
+	clear: both;
+	visibility: hidden;
+
+}
+
+.MenuBox li{
+	float: left;
+	margin-right: 50px;
+	height: 100%;
+}
+.Chinese,.English{
+	text-align: left; 
+	font-size: 20px;
+	line-height: 20px;
+}
+.Chinese a{
+	color: #56004f;
+	cursor: default;
+}
+.English a{
+	color: #4c221b;
+	cursor: default;
+}
+.Chinese a:hover{
+	color:#eebed0;
+}
+.English a:hover{
+	color:#eebed0;
+}
+/*二级菜单*/
+/*drodDisplay*/
+.drodDisplay,.case,.download{
+	width: 100%;
+	background-color: #88ada6;
+	position: absolute;
+	left: 0px;
+	top: 60px;
+	display: none;
+	z-index: 10;
+}
+.drodDisplayCen{
+	width: 100%;
+	margin: 20px auto 0;
+	display: flex;
+}
+.DisplayLeftText{
+	width: 14%;
+	height: 280px;
+	border-right: 3px solid #fff;
+	margin-right: 77px;
+	padding-left:54px ;
+	box-sizing: border-box;
+}
+.TextC,.TextE{
+	writing-mode: vertical-rl;
+	font-size: 26px;
+	line-height: 26px;
+	letter-spacing:13px;
+	color:#fff;
+	margin-right: 14px;
+	float: left;
+}
+.TextC{
+	margin-top: 18px;
+}
+.TextE{
+	letter-spacing:0;
+	margin-top: 14px;
+	margin-right: 0px;
+}
+.DisplayPicShow{
+	width:86%;
+	padding-right: 140px;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column; 
+	justify-content: space-between;
+}
+.ShowBox{
+	width: 212px;
+}
+.ShowBox img{
+	width: 100%;
+	height: 95px;
+	margin-bottom: 9px;
+}
+.ShowBox p{
+	font-size: 18px;
+	line-height: 36px;
+	font-weight: bold;
+	color:#fff ;
+}
+
+.MenuBox li:nth-child(2):hover .drodDisplay{
+	display: block;
+}
+.caseShow:hover .case{
+	display: block;
+}
+.downloadCase:hover .download{
+	display: block;
+}
+.showRow{
+	display: flex;
+	justify-content: space-around;
+}
+/*userBox*/
+.userBox{
+	width: 40px;
+	height: 40px;
+	margin-top: 10px;
+	position: relative;
+	border: 1px solid #787878;
+	border-radius: 50%;
+	background-image: url(../img/user.png);
+	background-size: 40px 40px;
+
+}
+.userBox img{
+	display: none;
+}
+
+.userBox:hover .userlogin{
+	display: block;
+}
+.userProfile{
+	width: 100%;
+	height: 100%;
+}
+.userlogin{
+	width: 94px;
+	height:82px ;
+	position: absolute;
+	left: -200%;
+	display: none;
+}
+.login,.managePage{
+	display: block;
+	width: 92px;
+	height: 37px;
+	border:1px solid #787878;
+	color: #333333;
+	text-align: center;
+	line-height: 37px;
+	font-size: 12px;
+	background-color: #d7d7d7;
+	cursor: pointer;
+}
+.login:hover{
+	border: 1px solid #000;
+}
+.managePage:hover{
+	border: 1px solid #000;
+}
+/*header响应*/
+@media screen and (min-width: 1020px) and (max-width: 1250px){
+	.MenuBox{
+		padding-left: 100px;
+	}
+	.header{
+		border-bottom: 1px solid #fff;
+	}
+
+}
+
+/*响应后的菜单样式*/
+.twoMenuBox{
+	width: 60px;
+	height: 60px;
+	border-radius: 20px;
+	background-color: red;
+	display: none;
+}
+.MenuList{
+	width: 100%;
+	position: absolute;
+	top: 60px;
+	left: 0;
+	display: none;
+}
+.onceMeun{
+	width: 100%;
+	height: 100%;
+	transition: height 1s;
+}
+.title{
+	width: 100%;
+	background-color: #515151;
+	border-bottom: 1px dashed #fff;
+}
+.title p{
+	width: 100px;
+	line-height: 40px;
+	margin: 0 auto;
+	text-align: center;
+	cursor: pointer;
+}
+.en{
+	display: none;
+}
+.meunShow{
+	height: 0;
+	background-color: #515151;
+	transition: height 1s;
+	overflow:hidden;
+}
+
+
+
+.title:hover .ch{
+	display: none;
+}
+.title:hover .en{
+	display: block;
+}
+.onceMeun:hover .meunShow{
+	height: 380px;
+}
+.twoMenuBox:hover .MenuList{
+	display: block;
+}
+
+.DisplayPicShow p{
+	font-size: 20px;
+	margin-bottom: 35px;
+	font-weight: bold;
+	color: #fff;
+
+}
+
+
+@media screen and (min-width: 1000px) and (max-width: 1060px){
+	.DisplayPicShow{
+		padding-left: 0px;
+	}
+	.DisplayLeftText{
+		margin-right: 20px;
+	}	
+	.DisplayPicShow{
+		padding-right: 50px;
+	}
+}
+@media screen and (min-width: 0px) and (max-width: 1000px){
+	.DisplayPicShow{
+		padding-left: 0px;
+	}
+	.DisplayLeftText{
+		margin-right: 20px;
+	}	
+	.DisplayPicShow{
+		padding-right: 20px;
+		width: 100%;
+	}
+}
+@media screen and (min-width: 0px) and (max-width: 700px){
+	.DisplayLeftText{
+		padding-left: 0;
+		width: 8%;
+	}
+}
+
+@media screen and (min-width: 0px) and (max-width: 600px){
+	.onceMeun:hover .meunShow{
+		height: 600px;
+}
+}
+
+@media screen and (min-width: 0px) and (max-width: 1090px){
+	.MenuBox{
+		display: none;
+	}
+	.twoMenuBox{
+		display: block;
+	}
+	.leftTitle{
+		display: none;
+	}
+	.header{
+		justify-content: space-between;
+		padding-right: 0;
+		padding-left: 0;
+	}
+}
+@media screen and (min-width: 1250px) and (max-width: 1300px){
+	.DisplayPicShow{
+		padding-right: 10px;
+		padding-left: 10px;
+	}
+}
+/*pageBottom*/
+.pageBottom{
+	width: 100%;
+	background-color: #cccccc;
+	padding-left: 180px;
+	padding-right: 180px;
+	box-sizing: border-box;
+	padding-top: 26px; 
+	display: flex;
+}
+.pageBottomKernel{
+	width: 100%;
+	height: 220px;
+}
+.kernelLeft,.kernelRith{
+	width: 100%;
+	padding-right: 145px;
+	box-sizing: border-box;
+}
+.kernelRith{
+	padding-right: 0;
+}
+.kernelLeftTit{
+	font-size: 18px;
+	line-height: 29px;
+	font-weight: 100;
+}
+.kernelLeft p{
+	font-size:12px;
+	line-height: 18px;
+}
+.kernelLeft p a{
+	color: black;
+}
+.kernelLeft p a:hover{
+	color:blue;
+	text-decoration: underline;
+}
+.kernelRigth{
+	font-size: 18px;
+	line-height: 29px;
+	margin-bottom: 25px;
+}
+.icon-weixin,.icon-sina{
+	font-size:42px;
+}
+.icon-sina{
+	margin-right: 90px;
+}
+
+/*foot部分媒体查询*/
+@media screen and (min-width: 1000px) and (max-width: 1200px){
+	.pageBottom{
+		padding-left: 80px;
+		padding-right: 80px;
+	}
+}
+@media screen and (min-width: 800px) and (max-width: 1000px){
+	.pageBottom{
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+	.kernelLeft{
+		padding-right:100px ;
+	}
+}
+@media screen and (min-width: 700px) and (max-width: 800px){
+	.pageBottom{
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+	.kernelLeft{
+		padding-right:100px ;
+	}
+}
+@media screen and (min-width: 500px) and (max-width: 700px){
+	.pageBottom{
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+	.kernelLeft{
+		padding-right:50px ;
+	}
+}
+
+@media screen and (min-width: 0px) and (max-width: 500px){
+	.pageBottom{
+		padding-left: 60px;
+		padding-right: 60px;
+	}
+	.kernelLeft{
+		padding-right:0px;
+		margin-bottom: 20px;
+	}
+	.pageBottom{
+		flex-direction: column; 
+	}
+}
+{
+	width: 100%;
+	padding-right: 44px;
+	padding-left: 44px;
+	box-sizing: border-box;
+}
+/*如果需要两边页面缩进去掉注释*/
+.pageBottomOut,.newBigBoxOut,.copIductionOut,.proPicOut,.prDisOut,.technologyOut,.OutBox{
+	width: 100%;
+	/*padding-left: 44px;
+	padding-right: 44px;
+	box-sizing: border-box;*/
+}
+.hotFile{
+	width: 100%;
+	background-color: #cccccc;
+	position: relative;
+	padding-left: 144px;
+	padding-right: 470px;
+	padding-top: 72px;
+	box-sizing: border-box;
+}
+.serviceTop{
+	position: absolute;
+	right: 45px;
+	top: 25px;	
+	display: flex;
+}
+.serviceTop a{
+	color:#333333;
+	font-weight: bold;
+	text-decoration: underline;
+	margin-right: 10px;
+}
+.copIduction{
+	padding-right:150px ;
+	padding-left:150px ;
+	box-sizing: border-box;
+}
+.swiper-container {
+	width: 100%;
+	height: 100%;
+}
+.CallTe{
+	font-size: 18px;
+	line-height: 20px;
+	color:#333;
+	font-weight: bold;
+}
+.CallTe::before{
+	content: "/";
+	color:#333;
+	font-size: 16px;
+}
+.hotFileTitle{
+	font-size: 48px;
+	font-weight: 100;
+	line-height:68px;
+	width: 100%;
+	border-bottom:1px solid #999999 ;
+}
+/*rightExerciseMe*/
+.rightExerciseMe{
+	position: fixed;
+	z-index: 70;
+	left: 97%;
+	top: 50%;
+	transform: translateY(-50%) translateX(-50%);
+	width:63px;
+	height:211px;
+	background-color: #d7d7d7;
+	padding-top: 15px;
+	padding-left: 8px;
+	padding-right: 12px;
+	box-sizing: border-box;
+	z-index: 999;
+}
+#rightExeTopBox{
+	width: 100%;
+	height: 35px;
+	background-image: url("../img/lianxi.png");
+	margin-bottom: 43px;
+}
+.RightExeText{
+	font-size: 18px;
+	color: #333333;
+	writing-mode: vertical-rl;
+	text-align: center;
+	margin-left: 50%;
+	transform: translateX(-50%);
+	font-weight: bold;
+	letter-spacing:5px;
+}
+/*返回顶层*/
+.pageUp{
+	z-index: 70;
+	width:63px;
+	height: 63px;
+	background-color: transparent;
+	border-radius: 50%;
+	border: 6px solid #272636;
+	position: fixed;
+	top: 100%;
+	left: 100%;
+	transform: translateX(-100%) translateY(-100%);
+	text-align: center;
+	line-height: 63px;
+	font-size: 40px;
+	font-weight: bold;
+	cursor: default;
+}
+/*body遮罩层*/
+.bodyShow{
+	width:100%;
+	height:100%;
+	background-color: rgba(00,00,00,.3);
+	position: fixed;
+	z-index: 99;
+	left: 0;
+	top: 0;
+	display: none;
+	z-index: 99;
+}
+/*提问*/
+.Ask{
+	width:930px;
+	height:490px;
+	background-color: #f2f2f2;
+	position: fixed;
+	left: 50%;
+	top: 55%;
+	transform: translateX(-50%) translateY(-50%);
+	padding-top: 40px;
+	box-sizing: border-box;
+	z-index: 100000;
+	padding-right: 40px;
+	padding-left: 40px;
+	display: flex;
+	flex-direction: column;
+	display: none;
+}
+.ATextRowO,.ATextRowT{
+	width: 100%;
+	font-size: 20px;
+	text-align: center;
+	line-height: 20px;
+	font-weight: bold;
+	margin-bottom: 4px;
+}
+.ATextRowT{
+	font-size: 12px;
+	color: #c6c6c6;
+	margin-bottom: 40px;
+
+}
+.InputOne{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	height: 34px;
+	margin-bottom: 16px;
+}
+.InputOne input{
+	width: 100%;
+	height: 32px;
+	outline: none;
+	border: 1px solid #bcbcbc;
+	font-size: 10px;
+	color: #bcbcbc;
+	text-indent: 10px;
+}
+.InputOne input:nth-child(1){
+	margin-right: 20px;
+}
+.InputTow{
+	margin-bottom: 22px;
+}
+.textDiv{
+	width: 100%;
+	font-size: 10px;
+	color: #bcbcbc;
+	height: 190px;
+	text-indent: 10px;
+	border: 1px solid #bcbcbc;
+	outline: none;
+	font-weight: bold;
+	line-height: 20px;
+	resize:none;
+}
+.subBtn{
+	width: 100%;
+	height: 50px;
+	background-color: #a1a1a1;
+	color: #fff;
+	line-height: 50px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 10px;
+	cursor: pointer;
+}
+
+@media screen and (min-width: 0px) and (max-width: 800px){
+	.copIduction{
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+}
+.swiper-slide img{
+	width: 100%;
+	height: 100%;
+}
+.proPicTopLeft img{
+	width: 100%;
+	height: 100%;
+}
+.barrier{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(00,00,00);
+	opacity: 0;
+	transition: all 1s;
+	box-sizing: border-box;
+}
+.proPic img{
+	width: 100%;
+	height: 100%;
+}
+@media screen and (min-width: 1350px) and (max-width: 4000px){
+	.DisplayPicShow{
+		padding-right: 140px;
+	}
+	.DisplayPicShow .ShowBox:nth-child(4n){
+		margin-left: 0px;
+	}
+	.DisplayPicShow .ShowBox:nth-child(5){
+		margin-left: 90px;
+	}
+
+}
+.contact{
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+}
+.pagebottomText{
+	height: 54px;
+	padding-top: 30px;
+	box-sizing: border-box;
+	background-color:#cccccc ;
+	padding-bottom: 12px;
+	text-align: center;
+	font-size: 12px;
+	color: #656565;
+}
+.QRcode{
+	width: 100px;
+	height: 100px;
+	background-color: red;
+	margin: 0 auto;
+}
+.QRcode img{
+	width: 100%;
+	height: 100%;
+}
+.bnnerSpacer{
+	width: 100%;
+	padding-right: 50px;
+	padding-left: 50px;
+	box-sizing: border-box;
+	background-color: #e0eee8;
+}
+#bnner_titles{
+	width: 600px;
+	height: 180px;
+	position: absolute;
+	left: 550px;
+	top: 90px;
+}

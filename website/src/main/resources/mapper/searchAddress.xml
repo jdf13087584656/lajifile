@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xlkj.website.mapper.OrderFormMapper">
+
+    <!--省份查找 -->
+    <select id="searchProvince" resultType="com.xlkj.website.model.AddressDto">
+        select
+          id,
+          name,
+          code
+        from province pro
+        where 1=1
+        <if test="null != code and code != ''">
+            AND code = #{code}
+        </if>
+        <if test="null != name and name != ''">
+            AND name = #{name}
+        </if>
+        <if test="null != id and id != ''">
+            AND id = #{id}
+        </if>
+    </select>
+
+    <!--市查找 -->
+    <select id="searchCity" resultType="com.xlkj.website.model.AddressDto">
+        select
+        id,
+        name,
+        code,
+        provincecode
+        from city
+        where 1=1
+        <if test="null != code and code != ''">
+            AND code = #{code}
+        </if>
+        <if test="null != name and name != ''">
+            AND name = #{name}
+        </if>
+        <if test="null != id and id != ''">
+            AND id = #{id}
+        </if>
+        <if test="null != provinceCode and provinceCode != ''">
+            AND provincecode = #{provinceCode}
+        </if>
+    </select>
+
+    <!--市查找 -->
+    <select id="searchArea" resultType="com.xlkj.website.model.AddressDto">
+        select
+        id,
+        name,
+        code,
+        citycode
+        from area
+        where 1=1
+        <if test="null != code and code != ''">
+            AND code = #{code}
+        </if>
+        <if test="null != name and name != ''">
+            AND name = #{name}
+        </if>
+        <if test="null != id and id != ''">
+            AND id = #{id}
+        </if>
+        <if test="null != cityCode and cityCode != ''">
+            AND citycode = #{cityCode}
+        </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,217 @@
+.serviceCall{
+	width: 100%;
+	height: 428px;
+	background-color: #fcefe8;
+	padding-top: 125px;
+	position: relative;
+	padding-left: 400px;
+	padding-right: 300px;
+	box-sizing: border-box;
+}
+.serviceTop{
+	position: absolute;
+	right: 45px;
+	top: 25px;	
+	display: flex;
+}
+.serviceTop a{
+	color:#333333;
+	font-weight: bold;
+	text-decoration: underline;
+	margin-right: 10px;
+}
+.CallTe{
+	font-size: 18px;
+	line-height: 20px;
+	color:#333;
+	font-weight: bold;
+}
+.CallTe::before{
+	content: "/";
+	color:#333;
+	font-size: 16px;
+}
+.serviceCallCen{
+	width: 100%;
+	height: 111px;
+	display: flex;
+}
+.serviceCallCenLeft{
+	width: 111px;
+	height: 111px;
+	background-image: url(../img/phone.png);
+	background-size: cover;
+	background-position: -1px 0;
+	border-radius: 15px;
+	margin-right: 60px;
+}
+.serviceCallCenRight{
+	padding-top: 25px;
+
+}
+.serviceCallCenRight p:nth-child(1){
+	font-size: 36px;
+	line-height: 36px;
+	color: #333333;
+	margin-bottom: 28px;
+	font-weight: bold;
+}
+.serviceCallCenRight p:nth-child(2){
+	font-size: 27px;
+	line-height: 27px;
+	text-align: center;
+	font-weight: bold;
+}
+.questionBox .etuiBox{
+	margin-left: 5px;
+}
+.questionBox .etuiBox:nth-child(){
+	margin-left: 0;
+}
+
+@media screen and (min-width: 1080px) and (max-width: 1300px){
+	.serviceCall{
+		padding-left: 300px;
+		padding-right: 208px;
+	}
+}
+@media screen and (min-width: 890px) and (max-width: 1080px){
+	.serviceCall{
+		padding-left: 200px;
+		padding-right: 108px;
+	}
+}
+@media screen and (min-width: 690px) and (max-width: 890px){
+	.serviceCall{
+		padding-left: 100px;
+		padding-right: 8px;
+	}
+}
+@media screen and (min-width: 0px) and (max-width: 690px){
+	.serviceCall{
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	.serviceCallCenLeft{
+		margin-right: 0px;
+	}
+}
+
+/*问题版块*/
+.questionBox{
+	width: 100%;
+	height: 100%;
+	margin-bottom: 25px;
+	padding-left: 44px;
+	padding-right: 44px;
+	box-sizing: border-box;
+	display: flex;
+	background-color:#e3f9fd ;
+}
+.questionBoxLeft{
+	width: 100%;
+	display: flex;
+}
+.etuiBox{
+	width: 100%;
+	height: 292px;
+	position: relative;
+	overflow: hidden;
+
+}
+.etuiDef{
+	width: 100%;
+	height: 100%;
+	background-color:#5d5d5d;
+	transition: all .5s;
+	/**/
+	/*display: none;*/
+}
+.etuiDefText{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translateY(-50%) translateX(-50%);
+}
+
+
+.etuiDefText p:nth-child(1){
+	font-size: 34px;
+	line-height:34px;
+	margin-bottom: 14px;
+	font-weight: bold;
+}
+.etuiDefText p:nth-child(2){
+	font-size: 32px;
+	line-height: 32px;
+	font-weight: bold;
+}
+.quList{
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+	position: absolute;
+	left: 0;
+	top: 100%;
+	transition: all .5s;
+}
+.quListDe{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translateY(-50%) translateX(-50%);
+}
+.quListDe p:nth-child(1){
+	font-size: 34px;
+	line-height:34px;
+	margin-bottom: 14px;
+	font-weight: bold;
+}
+.quListDe p:nth-child(2){
+	font-size: 32px;
+	line-height: 32px;
+	font-weight: bold;
+}
+
+/**/
+.etuiBox:hover .etuiDef{
+	transform: translateY(-100%);
+}
+.etuiBox:hover .quList{
+	top: 0;
+}
+/*问题框响应*/
+@media screen and (min-width: 500px) and (max-width: 1200px){
+	.questionBox{
+		flex-direction: column;
+		margin-bottom: 0px;
+	}
+	.questionBox .etuiBox:nth-child(2n){
+		margin-left: 5px;
+	}
+	.questionBoxLeft{
+		margin-bottom: 10px;
+	}
+	.questionBox .etuiBox{
+		margin-left: 0px;
+	}
+}
+@media screen and (min-width: 0px) and (max-width: 500px){
+	.questionBox{
+		flex-direction: column;
+		margin-bottom: 0px;
+	}
+	.questionBox .etuiBox:nth-child(2n){
+		margin-left: 0px;
+	}
+	.questionBox .etuiBox{
+		margin-bottom: 5px;
+	}
+	.questionBoxLeft{
+		flex-direction:column;
+	}
+	.questionBox .etuiBox{
+		margin-left: 0px;
+	}
+
+}
