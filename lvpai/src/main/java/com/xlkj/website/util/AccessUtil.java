@@ -31,9 +31,6 @@ public class AccessUtil {
         //将json专还成map，方便取值
         String openId = (String)parseObject.get("openid");
         if (openId != null){//有token说明请求正确，返回Map信息
-
-
-
             return parseObject;
         }
         return null;

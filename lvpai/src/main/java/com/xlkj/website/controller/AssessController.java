@@ -23,18 +23,20 @@ public class AssessController {
 
     @ApiOperation(value = "登录请求接口", httpMethod = "POST")
     @RequestMapping(value = "/assess", method = RequestMethod.POST)
-    public ResultVo<UserWithBLOBs> assess(@RequestBody UserWithBLOBs userWithBLOBs) {
-        ResultVo<UserWithBLOBs> resultVo = new ResultVo<>();
+    public ResultVo<String> assess(@RequestBody UserWithBLOBs userWithBLOBs) {
+        ResultVo<String> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("assess is start"));
             //获取信息的地址access_token和openId
             Map parseObject = AccessUtil.getAccessToken(userWithBLOBs);
               if(null != (String)parseObject.get("openid")){
+                  String openId = (String)parseObject.get("openid");
+                  userWithBLOBs.setOpenId(openId);
                   roleService.addRole(userWithBLOBs);
+                  resultVo.setData((String)parseObject.get("openid"));
+              }else {
+                  resultVo.resultFail("授权失败");
               }
-            UserWithBLOBs user = new UserWithBLOBs();
-            user.setOpenId((String)parseObject.get("openid"));
-            resultVo.setData(user);
         }catch (Exception e){
             resultVo.resultFail("网络异常,登录失败");
             logger.error("assess is error", e.getMessage());

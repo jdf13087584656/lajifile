@@ -37,7 +37,7 @@ public class UserWithBLOBs {
     private Integer roleCode;
 
     @ApiModelProperty(value = "手机号", name = "telephone")
-    private Integer telephone;
+    private String telephone;
 
     @ApiModelProperty(value = "性别(1,男.2,女)", name = "gender")
     private Integer gender;

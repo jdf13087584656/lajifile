@@ -19,13 +19,13 @@ public class RoleServiceImpl implements RoleService {
     public ResultVo<Integer> addRole(UserWithBLOBs user) {
         ResultVo<Integer> resultVo = new ResultVo<>();
         Integer add = null;
-        List<UserWithBLOBs> userWithBLOBs = roleMapper.listRole(user.getOpenId());
-        if(userWithBLOBs.size() > 0){
+        UserWithBLOBs userWithBLOBs = roleMapper.listRole(user.getOpenId());
+        if(null != userWithBLOBs){
             add = roleMapper.modifyRole(user);
         }else{
             add = roleMapper.addRole(user);
         }
-        resultVo.resultFlag(resultVo,add,"新增成功","新增失败");
+        resultVo.resultFlag(resultVo,add,"操作成功","操作失败");
         return resultVo;
     }
 
@@ -38,9 +38,9 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public ResultVo<List<UserWithBLOBs>> listRole(String openId) {
-        ResultVo<List<UserWithBLOBs>> resultVo = new ResultVo<>();
-        List<UserWithBLOBs> user = roleMapper.listRole(openId);
+    public ResultVo<UserWithBLOBs> listRole(String openId) {
+        ResultVo<UserWithBLOBs> resultVo = new ResultVo<>();
+        UserWithBLOBs user = roleMapper.listRole(openId);
         resultVo.resultSuccess(user);
         return resultVo;
     }

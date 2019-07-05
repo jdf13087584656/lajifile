@@ -4,7 +4,7 @@
 <mapper namespace="com.xlkj.website.mapper.RoleMapper">
 
     <!--用户新增 -->
-    <insert id="addRole" useGeneratedKeys="true" keyProperty="rid" keyColumn="rid"
+    <insert id="addRole" useGeneratedKeys="true" keyProperty="id" keyColumn="id"
             parameterType="com.xlkj.website.model.UserWithBLOBs" >
 		INSERT INTO lp_role (
 		id,
@@ -78,7 +78,7 @@
 
 
     <!--用户列表 -->
-    <select id="listRole" parameterType="java.lang.Integer" resultType="com.xlkj.website.model.UserWithBLOBs">
+    <select id="listRole" parameterType="java.lang.String" resultType="com.xlkj.website.model.UserWithBLOBs">
         select
         lpr.id as id,
         lpr.open_id as openId,
@@ -92,10 +92,7 @@
         lpr.country as country,
         lpr.province as province
         from lp_role lpr
-        where 1=1
-        <if test="null != openId and '' != openId">
-            and lpr.open_id = #{openId}
-        </if>
+        where lpr.open_id = #{openId}
     </select>
 
     <!--用户列表 -->

@@ -12,7 +12,7 @@ public interface RoleMapper {
 
     Integer modifyRole(UserWithBLOBs user);
 
-    List<UserWithBLOBs> listRole(String openId);
+    UserWithBLOBs listRole(String openId);
 
     List<UserWithBLOBs> listRoles();
 }

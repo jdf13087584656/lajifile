@@ -11,7 +11,7 @@ public interface RoleService {
 
     ResultVo<Integer> modifyRole(UserWithBLOBs user);
 
-    ResultVo<List<UserWithBLOBs>> listRole(String openId);
+    ResultVo<UserWithBLOBs> listRole(String openId);
 
     ResultVo<List<UserWithBLOBs>> listRoles();
 }
