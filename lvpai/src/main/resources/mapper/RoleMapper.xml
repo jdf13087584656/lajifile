@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xlkj.website.mapper.RoleMapper">
+
+    <!--用户新增 -->
+    <insert id="addRole" useGeneratedKeys="true" keyProperty="rid" keyColumn="rid"
+            parameterType="com.xlkj.website.model.UserWithBLOBs" >
+		INSERT INTO lp_role (
+		id,
+		open_id,
+		pwd,
+		avatar_url,
+		role_code,
+		nick_name,
+		telephone,
+		gender,
+		city,
+		country,
+		province,
+        create_time,
+        modify_time
+		)
+		VALUES
+		(
+		  #{id},
+		  #{openId},
+		  #{pwd},
+		  #{avatarUrl},
+		  #{roleCode},
+		  #{nickName},
+		  #{telephone},
+		  #{gender},
+		  #{city},
+		  #{country},
+		  #{province},
+		  now(),
+		  #{modifyTime}
+		);
+	</insert>
+
+    <!-- 用户修改 -->
+    <update id="modifyRole" parameterType="com.xlkj.website.model.UserWithBLOBs">
+        UPDATE lp_role
+        <set>
+            <if test="null != pwd and '' != pwd">
+                pwd = #{pwd},
+            </if>
+            <if test="null != avatarUrl and '' != avatarUrl">
+                avatar_url = #{avatarUrl},
+            </if>
+            <if test="null != roleCode and '' != roleCode">
+                role_code = #{roleCode},
+            </if>
+            <if test="null != nickName and '' != nickName">
+                nick_name = #{nickName},
+            </if>
+            <if test="null != telephone and '' != telephone">
+                telephone = #{telephone},
+            </if>
+            <if test="null != gender and '' != gender">
+                gender = #{gender},
+            </if>
+            <if test="null != city and '' != city">
+                city = #{city},
+            </if>
+            <if test="null != country and '' != country">
+                country = #{country},
+            </if>
+            <if test="null != province and '' != province">
+                province = #{province},
+            </if>
+                modify_time = now()
+        </set>
+        WHERE
+        open_id = #{openId};
+    </update>
+
+
+    <!--用户列表 -->
+    <select id="listRole" parameterType="java.lang.Integer" resultType="com.xlkj.website.model.UserWithBLOBs">
+        select
+        lpr.id as id,
+        lpr.open_id as openId,
+        lpr.pwd as pwd,
+        lpr.avatar_url as avatarUrl,
+        lpr.role_code as roleCode,
+        lpr.nick_name as nickName,
+        lpr.telephone as telephone,
+        lpr.gender as gender,
+        lpr.city as city,
+        lpr.country as country,
+        lpr.province as province
+        from lp_role lpr
+        where 1=1
+        <if test="null != openId and '' != openId">
+            and lpr.open_id = #{openId}
+        </if>
+    </select>
+
+    <!--用户列表 -->
+    <select id="listRoles" parameterType="java.lang.Integer" resultType="com.xlkj.website.model.UserWithBLOBs">
+        select
+        lpr.id as id,
+        lpr.open_id as openId,
+        lpr.pwd as pwd,
+        lpr.avatar_url as avatarUrl,
+        lpr.role_code as roleCode,
+        lpr.nick_name as nickName,
+        lpr.telephone as telephone,
+        lpr.gender as gender,
+        lpr.city as city,
+        lpr.country as country,
+        lpr.province as province
+        from lp_role lpr
+        where 1=1
+    </select>
+
+
+
+
+
+
+</mapper>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xlkj.website.mapper.SearchAddressMapper">
+
+    <!--省份查找 -->
+    <select id="searchProvince" parameterType="com.xlkj.website.model.AddressDto" resultType="com.xlkj.website.model.AddressDto">
+        select
+          id,
+          name,
+          code
+        from province pro
+        where 1=1
+        <if test="null != code and code != ''">
+            AND code = #{code}
+        </if>
+        <if test="null != name and name != ''">
+            AND name = #{name}
+        </if>
+        <if test="null != id and id != ''">
+            AND id = #{id}
+        </if>
+    </select>
+
+    <!--市查找 -->
+    <select id="searchCity" resultType="com.xlkj.website.model.AddressDto">
+        select
+        id,
+        name,
+        code,
+        provincecode
+        from city
+        where 1=1
+        <if test="null != code and code != ''">
+            AND code = #{code}
+        </if>
+        <if test="null != name and name != ''">
+            AND name = #{name}
+        </if>
+        <if test="null != id and id != ''">
+            AND id = #{id}
+        </if>
+        <if test="null != provinceCode and provinceCode != ''">
+            AND provincecode = #{provinceCode}
+        </if>
+    </select>
+
+    <!--市查找 -->
+    <select id="searchArea" resultType="com.xlkj.website.model.AddressDto">
+        select
+        id,
+        name,
+        code,
+        citycode
+        from area
+        where 1=1
+        <if test="null != code and code != ''">
+            AND code = #{code}
+        </if>
+        <if test="null != name and name != ''">
+            AND name = #{name}
+        </if>
+        <if test="null != id and id != ''">
+            AND id = #{id}
+        </if>
+        <if test="null != cityCode and cityCode != ''">
+            AND citycode = #{cityCode}
+        </if>
+    </select>
+
+    <!--地址新增 -->
+    <insert id="addAddress" useGeneratedKeys="true" keyProperty="aid" keyColumn="aid"
+            parameterType="com.xlkj.website.model.AddAddress" >
+		INSERT INTO lp_address (
+          aid,
+          address,
+          role_id,
+          addressee,
+          area_id,
+          city_id,
+          province_id,
+          is_default,
+          create_time,
+          modify_time
+		)
+		VALUES
+		(
+		  #{aid},
+		  #{address},
+		  #{roleId},
+		  #{addressee}
+		  #{areaId},
+		  #{cityId},
+		  #{provinceId},
+		  #{isDefault},
+		  now(),
+		  #{modifyTime}
+		);
+	</insert>
+
+    <!-- 修改地址信息 -->
+    <update id="modifyAddress" parameterType="com.xlkj.website.model.AddAddress">
+        UPDATE lp_address
+        <set>
+            <if test="null != address and '' != address">
+                address = #{address},
+            </if>
+            <if test="null != addressee and '' != addressee">
+                addressee = #{addressee},
+            </if>
+            <if test="null != areaId and '' != areaId">
+                area_id = #{areaId},
+            </if>
+            <if test="null != cityId and '' != cityId">
+                city_id = #{cityId},
+            </if>
+            <if test="null != provinceId and '' != provinceId">
+                province_id = #{provinceId},
+            </if>
+            <if test="null != isDefault and '' != isDefault">
+                is_default = #{isDefault},
+            </if>
+            modify_time = now()
+        </set>
+        WHERE
+        aid = #{aid};
+    </update>
+
+    <!--地址列表 -->
+    <select id="listAddress" parameterType="java.lang.Integer" resultType="com.xlkj.website.model.AddAddress">
+        select
+        lpa.aid as aid,
+        lpa.addressee as addressee,
+        lpa.addressee_tel as addresseeTel,
+        lpa.address as address,
+        pro.name as provincename,
+        cit.name as cityName,
+        ar.name as areaName
+        from lp_address lpa
+        left join lp_role lpr on lpa.role_id=lpr.id
+        left join province pro on lpa.province_id=pro.id
+        left join city cit on lpa.city_id=cit.id
+        left join area ar on lpa.area_id = ar.id
+        where lpa.role_id = #{roleId}
+
+    </select>
+
+</mapper>
