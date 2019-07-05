@@ -68,9 +68,4 @@ public class OrderFormAddDto implements Serializable {
     @ApiModelProperty(value = "垃圾袋编号", name = "rubbishBagCode")
     private String rubbishBagCode;
 
-    @ApiModelProperty(value = "开始时间", name = "startTime")
-    private String startTime;
-
-    @ApiModelProperty(value = "结束时间", name = "endTime")
-    private String endTime;
 }

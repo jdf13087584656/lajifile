@@ -111,7 +111,7 @@
 
 
 	<!--订单列表 -->
-	<select id="listOrderForm" parameterType="com.xlkj.website.model.OrderFormAddDto"
+	<select id="listOrderForm" parameterType="com.xlkj.website.model.SelectOrderDto"
 			resultType="com.xlkj.website.model.OrderFormAddDto">
 		select
 		lo.oid as oId,
@@ -139,8 +139,14 @@
 		<if test="null != rubbishBagCode and rubbishBagCode != ''">
 			AND lo.rubbish_bag_code = #{rubbishBagCode}
 		</if>
-		<if test="null != orderState and orderState != ''">
-			AND lo.order_state = #{orderState}
+		<if test="null != isDeleted and isDeleted != ''">
+			AND lo.is_deleted = #{isDeleted}
+		</if>
+		<if test="orderState !=null and orderState.size>0 ">
+			and lo.order_state in
+			<foreach collection="orderState" item="state" open="(" close=")" separator=",">
+				#{state}
+			</foreach>
 		</if>
 		<if test="startTime != null and startTime != ''">
 			AND DATE_FORMAT(lo.order_create_time,'%Y/%m/%d %H:%i:%S') <![CDATA[>=]]> DATE_FORMAT(#{startTime},'%Y/%m/%d %H:%i:%S')

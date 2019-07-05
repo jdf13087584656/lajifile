@@ -3,6 +3,7 @@ package com.xlkj.website.controller;
 import com.xlkj.website.model.CommonSearch;
 import com.xlkj.website.model.OrderFormAddDto;
 import com.xlkj.website.model.ResultVo;
+import com.xlkj.website.model.SelectOrderDto;
 import com.xlkj.website.service.OrderFormService;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -56,7 +57,7 @@ public class OrderFormController {
 
     @ApiOperation(value = "订单列表接口", httpMethod = "POST")
     @RequestMapping(value = "/listOrderForm", method = RequestMethod.POST)
-    public ResultVo<List<OrderFormAddDto>> listOrderForm(@RequestBody OrderFormAddDto dto) {
+    public ResultVo<List<OrderFormAddDto>> listOrderForm(@RequestBody SelectOrderDto dto) {
         ResultVo<List<OrderFormAddDto>> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("listOrderForm is start"));

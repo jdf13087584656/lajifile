@@ -6,6 +6,7 @@ import com.xlkj.website.mapper.OrderFormMapper;
 import com.xlkj.website.model.CommonSearch;
 import com.xlkj.website.model.OrderFormAddDto;
 import com.xlkj.website.model.ResultVo;
+import com.xlkj.website.model.SelectOrderDto;
 import com.xlkj.website.service.OrderFormService;
 import com.xlkj.website.util.NumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +44,7 @@ public class OrderFormServiceImpl implements OrderFormService {
 
     //订单列表
     @Override
-    public ResultVo<List<OrderFormAddDto>> listOrderForm(OrderFormAddDto dto) {
+    public ResultVo<List<OrderFormAddDto>> listOrderForm(SelectOrderDto dto) {
         ResultVo<List<OrderFormAddDto>> resultVo = new ResultVo<>();
         List<OrderFormAddDto> orders = orderFormMapper.listOrderForm(dto);
         resultVo.resultSuccess(orders);

@@ -1,5 +1,5 @@
 server:
-  port: 10086
+  port: 10010
 
   tomcat:
     max-http-header-size: 8192
@@ -32,9 +32,9 @@ spring:
 #    include: datasource,mybatis
 
   datasource:
-    url: jdbc:mysql://192.168.3.168:3306/xlkj_website?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/xlkj_website?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true&serverTimezone=UTC
     username: root
-    password: root
+    password: Root!!2019
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 

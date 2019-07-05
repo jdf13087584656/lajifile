@@ -1,7 +1,7 @@
 package com.xlkj.website.mapper;
 
-import com.xlkj.website.model.CommonSearch;
 import com.xlkj.website.model.OrderFormAddDto;
+import com.xlkj.website.model.SelectOrderDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -16,6 +16,6 @@ public interface OrderFormMapper {
     Integer modifyOrderForm(OrderFormAddDto dto);
 
     //订单列表
-    List<OrderFormAddDto> listOrderForm(OrderFormAddDto dto);
+    List<OrderFormAddDto> listOrderForm(SelectOrderDto dto);
 
 }
