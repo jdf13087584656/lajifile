@@ -1,7 +1,7 @@
 package com.xlkj.website.service.impl;
 
 import com.xlkj.website.mapper.EquipmentMapper;
-import com.xlkj.website.model.CommonSearch;
+import com.xlkj.website.model.SearchEquDto;
 import com.xlkj.website.model.EquipmentDto;
 import com.xlkj.website.model.ResultVo;
 import com.xlkj.website.service.EquipmentService;
@@ -33,9 +33,9 @@ public class EquipmentServiceImpl implements EquipmentService {
 
     //设备列表
     @Override
-    public ResultVo<EquipmentDto> listEquipment(CommonSearch commonSearch) {
+    public ResultVo<EquipmentDto> listEquipment(SearchEquDto searchEquDto) {
         ResultVo<EquipmentDto> resultVo = new ResultVo<>();
-        equipmentMapper.listEquipment(commonSearch);
+        equipmentMapper.listEquipment(searchEquDto);
         return null;
     }
 }

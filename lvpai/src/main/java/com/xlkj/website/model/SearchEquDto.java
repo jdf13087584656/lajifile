@@ -6,11 +6,10 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class CommonSearch implements Serializable {
+public class SearchEquDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
-
-    @ApiModelProperty(value = "关键词", name = "keyWords")
-    private String keyWords;
+    @ApiModelProperty(value = "设备状态(1正常  2暂停)", name = "eState")
+    private String eState;
 
 }

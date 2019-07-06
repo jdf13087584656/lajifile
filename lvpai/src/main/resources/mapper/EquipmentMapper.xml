@@ -61,7 +61,7 @@
     </update>
 
     <!--设备列表 -->
-    <select id="listEquipment" parameterType="com.xlkj.website.model.CommonSearch"
+    <select id="listEquipment" parameterType="com.xlkj.website.model.SearchEquDto"
             resultType="com.xlkj.website.model.EquipmentDto">
         select
         le.eid as eId,
@@ -73,19 +73,15 @@
         le.memo as memo
         from lp_equipment le
         where 1=1
-        <if test="keywords != null and keywords != ''">
-            AND (po.po_code LIKE "%"#{keywords}"%" OR ds.deptName LIKE "%"#{keywords}"%"
-            OR dr.deptName LIKE "%"#{keywords}"%")
-        </if>
-        <if test="null != eState and eState != -1">
+        <if test="null != eState and eState != ''">
             AND le.e_state = #{eState}
         </if>
-        <if test="startTime != null and startTime != ''">
-            AND DATE_FORMAT(le.create_time,'%Y/%m/%d %H:%i:%S') <![CDATA[>=]]> DATE_FORMAT(#{startTime},'%Y/%m/%d %H:%i:%S')
-        </if>
-        <if test="endTime != null and endTime != ''">
-            AND DATE_FORMAT(le.create_time,'%Y/%m/%d %H:%i:%S') <![CDATA[<=]]>DATE_FORMAT(#{endTime},'%Y/%m/%d %H:%i:%S')
-        </if>
+<!--        <if test="startTime != null and startTime != ''">-->
+<!--            AND DATE_FORMAT(le.create_time,'%Y/%m/%d %H:%i:%S') <![CDATA[>=]]> DATE_FORMAT(#{startTime},'%Y/%m/%d %H:%i:%S')-->
+<!--        </if>-->
+<!--        <if test="endTime != null and endTime != ''">-->
+<!--            AND DATE_FORMAT(le.create_time,'%Y/%m/%d %H:%i:%S') <![CDATA[<=]]>DATE_FORMAT(#{endTime},'%Y/%m/%d %H:%i:%S')-->
+<!--        </if>-->
         order by le.create_time desc
     </select>
 

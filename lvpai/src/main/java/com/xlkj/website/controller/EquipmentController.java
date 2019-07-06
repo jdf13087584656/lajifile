@@ -1,6 +1,6 @@
 package com.xlkj.website.controller;
 
-import com.xlkj.website.model.CommonSearch;
+import com.xlkj.website.model.SearchEquDto;
 import com.xlkj.website.model.EquipmentDto;
 import com.xlkj.website.model.ResultVo;
 import com.xlkj.website.service.EquipmentService;
@@ -54,7 +54,7 @@ public class EquipmentController{
 
     @ApiOperation(value = "设备列表接口", httpMethod = "POST")
     @RequestMapping(value = "/listEquipment", method = RequestMethod.POST)
-    public ResultVo<EquipmentDto> listEquipment(@RequestBody CommonSearch com) {
+    public ResultVo<EquipmentDto> listEquipment(@RequestBody SearchEquDto com) {
         ResultVo<EquipmentDto> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("listEquipment is start"));

@@ -9,8 +9,8 @@ import java.io.Serializable;
 public class EquipmentDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "设备id", name = "eId")
-    private Integer eId;
+    @ApiModelProperty(value = "设备id", name = "eid")
+    private Integer eid;
 
     @ApiModelProperty(value = "设备名称", name = "eName")
     private String eName;
