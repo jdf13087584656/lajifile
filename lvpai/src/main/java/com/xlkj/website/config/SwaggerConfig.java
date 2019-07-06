@@ -47,7 +47,7 @@ public class SwaggerConfig {
 
 		return new ApiInfoBuilder().title("用户权限API接口")
 				.description("swagger用户权限API接口")
-				.termsOfServiceUrl("http://www.zkkjgs.com/")
+				.termsOfServiceUrl("http://www.lp.com/")
 				.version("1.0").build();
 	}
 }

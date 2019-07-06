@@ -36,10 +36,7 @@ public class LoginInterceptorConfigCenter extends WebMvcConfigurerAdapter {
 				"/**/*.jpeg",
 				"/configuration/**",
 				"/**/login/login",
-				"/**/login",
-				"/dept/getDeptByUserid",
-				"/user/getCommonUser",
-				"/login/assess"
+				"/**/login"
 		);
     }
 
