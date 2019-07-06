@@ -3,8 +3,11 @@ package com.xlkj.website.model;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class AddressDto {
+public class AddressDto implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "id", name = "id")
     private Integer id;

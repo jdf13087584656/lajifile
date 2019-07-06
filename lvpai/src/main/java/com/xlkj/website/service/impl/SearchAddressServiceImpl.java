@@ -37,7 +37,7 @@ public class SearchAddressServiceImpl implements SearchAddressService {
     @Override
     public ResultVo<List<AddressDto>> searchArea(AddressDto dto) {
         ResultVo<List<AddressDto>> resultVo = new ResultVo<>();
-        List<AddressDto> areas = searchAddressMapper.searchCity(dto);
+        List<AddressDto> areas = searchAddressMapper.searchArea(dto);
         resultVo.resultSuccess(areas);
         return resultVo;
     }

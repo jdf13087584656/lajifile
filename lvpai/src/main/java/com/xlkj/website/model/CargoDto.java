@@ -3,10 +3,12 @@ package com.xlkj.website.model;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
-public class CargoDto {
+public class CargoDto implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "cid", name = "cid")
     private Integer cid;

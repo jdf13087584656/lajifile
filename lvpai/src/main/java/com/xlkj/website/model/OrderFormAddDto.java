@@ -17,8 +17,8 @@ public class OrderFormAddDto implements Serializable {
     @ApiModelProperty(value = "订单号", name = "orderCode")
     private String orderCode;
 
-    @ApiModelProperty(value = "客户id", name = "clientId")
-    private Integer clientId;
+    @ApiModelProperty(value = "openId", name = "openId")
+    private Integer openId;
 
     @ApiModelProperty(value = "回收员id", name = "receiveId")
     private Integer receiveId;

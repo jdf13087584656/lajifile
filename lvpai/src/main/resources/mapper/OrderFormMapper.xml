@@ -9,7 +9,7 @@
 		INSERT INTO lp_order (
           oid,
           order_code,
-          client_id,
+          open_id,
           receive_id,
           admin_id,
           address_id,
@@ -31,7 +31,7 @@
 		(
 		  #{oid},
 		  #{orderCode},
-		  #{clientId},
+		  #{openId},
 		  #{receiveId},
 		  #{adminId},
 		  #{addressId},
@@ -57,9 +57,6 @@
 	<set>
 		<if test="null != orderCode and '' != orderCode">
 			order_code = #{orderCode},
-		</if>
-		<if test="null != clientId and '' != clientId">
-			client_id = #{clientId},
 		</if>
 		<if test="null != receiveId and '' != receiveId">
 			receive_id = #{receiveId},
@@ -116,7 +113,7 @@
 		select
 		lo.oid as oId,
 		lo.order_code as orderCode,
-		lo.client_id as clientId,
+		lo.open_id as openId,
 		lo.receive_id AS receiveId,
 		lo.admin_id AS adminId,
 		lo.address_id AS addressId,
@@ -141,6 +138,12 @@
 		</if>
 		<if test="null != isDeleted and isDeleted != ''">
 			AND lo.is_deleted = #{isDeleted}
+		</if>
+		<if test="null != receiveId and receiveId != ''">
+			AND lo.receive_id = #{receiveId}
+		</if>
+		<if test="null != openId and openId != ''">
+			AND lo.open_id = #{openId}
 		</if>
 		<if test="orderState !=null and orderState.size>0 ">
 			and lo.order_state in

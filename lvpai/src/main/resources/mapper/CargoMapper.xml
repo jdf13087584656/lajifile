@@ -50,6 +50,35 @@
         where lpc.is_deleted=0
     </select>
 
+    <!--订单详情货物 -->
+    <select id="listOrderDetails" resultType="com.xlkj.website.model.orderDetailsDto">
+        select
+        lc.cargo_name as cargoName,
+        lc.cargo_price as cargoPrice,
+        lod.cargo_weight as cargoWeight
+        from lp_order_details lod
+        left join lp_order lo on lod.oid=lo.oid
+        left join lp_cargo lc on lod.cid=lc.cid
+        where lo.oid={#oid}
+    </select>
+
+    <!--新增订单货物 -->
+    <insert id="addOrderDetails" parameterType="com.xlkj.website.model.orderDetailsDto" >
+		INSERT INTO lp_order_details (
+		did,
+		oid,
+		cid,
+		cargo_weight
+		)
+		VALUES
+		(
+		  #{did},
+		  #{oid},
+		  #{cid},
+		  #{cargoWeight}
+		);
+	</insert>
+
 
 
 
