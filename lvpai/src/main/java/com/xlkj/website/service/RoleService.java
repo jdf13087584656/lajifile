@@ -14,4 +14,7 @@ public interface RoleService {
     ResultVo<UserWithBLOBs> listRole(String openId);
 
     ResultVo<List<UserWithBLOBs>> listRoles();
+
+
+    ResultVo loginAdmin(UserWithBLOBs userWithBLOBs);
 }

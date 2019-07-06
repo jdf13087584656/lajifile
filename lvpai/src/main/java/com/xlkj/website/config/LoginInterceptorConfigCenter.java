@@ -8,10 +8,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 /**
  * 登录拦截配置
- * @author 刘佳	
+ *
  *
  */
-//@Configuration
+@Configuration
 public class LoginInterceptorConfigCenter extends WebMvcConfigurerAdapter {
 
 	@Bean

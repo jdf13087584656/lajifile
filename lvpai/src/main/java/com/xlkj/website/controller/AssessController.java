@@ -1,5 +1,6 @@
 package com.xlkj.website.controller;
 
+import com.xlkj.website.annotation.AuthPass;
 import com.xlkj.website.model.ResultVo;
 import com.xlkj.website.model.UserWithBLOBs;
 import com.xlkj.website.service.RoleService;
@@ -23,6 +24,7 @@ public class AssessController {
 
     @ApiOperation(value = "登录请求接口", httpMethod = "POST")
     @RequestMapping(value = "/assess", method = RequestMethod.POST)
+    @AuthPass
     public ResultVo<String> assess(@RequestBody UserWithBLOBs userWithBLOBs) {
         ResultVo<String> resultVo = new ResultVo<>();
         try {
@@ -37,6 +39,24 @@ public class AssessController {
               }else {
                   resultVo.resultFail("授权失败");
               }
+        }catch (Exception e){
+            resultVo.resultFail("网络异常,登录失败");
+            logger.error("assess is error", e.getMessage());
+        }
+        return resultVo;
+    }
+
+
+
+
+    @ApiOperation(value = "pc管理员登录请求接口", httpMethod = "POST")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @AuthPass
+    public ResultVo<String> adminLogin(@RequestBody UserWithBLOBs userWithBLOBs) {
+        ResultVo<String> resultVo = new ResultVo<>();
+        try {
+            logger.info(String.format("adminLogin is start"));
+            resultVo = roleService.loginAdmin(userWithBLOBs);
         }catch (Exception e){
             resultVo.resultFail("网络异常,登录失败");
             logger.error("assess is error", e.getMessage());

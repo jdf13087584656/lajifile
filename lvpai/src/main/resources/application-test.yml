@@ -33,7 +33,7 @@ spring:
     database: 0
     timeout: 0
     # Redis服务器地址
-    host: 192.168.3.253
+    host: 59.110.225.21
     # Redis服务器连接端口
     port: 6379
     # Redis服务器连接密码（默认为空）
