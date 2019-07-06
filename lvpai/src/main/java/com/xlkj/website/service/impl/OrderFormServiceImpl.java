@@ -25,6 +25,7 @@ public class OrderFormServiceImpl implements OrderFormService {
         String prefix="LP";
         dto.setOrderCode(NumberUtil.getBusinessCode(prefix));
         Integer add = orderFormMapper.addOrderForm(dto);
+        resultVo.setData(dto.getOid());
         resultVo.resultFlag(resultVo,add,"新增成功","新增失败");
         return resultVo;
     }
