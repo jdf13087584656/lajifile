@@ -1,5 +1,6 @@
 package com.xlkj.website.controller;
 
+import com.xlkj.website.annotation.AuthPass;
 import com.xlkj.website.model.AddAddress;
 import com.xlkj.website.model.AddressDto;
 import com.xlkj.website.model.ResultVo;
@@ -27,6 +28,7 @@ public class AddressController {
 
     @ApiOperation(value = "查询省接口", httpMethod = "POST")
     @RequestMapping(value = "/province", method = RequestMethod.POST)
+    @AuthPass
     public ResultVo<List<AddressDto>> province(@RequestBody AddressDto dto) {
         ResultVo<List<AddressDto>> resultVo = new ResultVo<>();
         try {
@@ -41,6 +43,7 @@ public class AddressController {
 
     @ApiOperation(value = "查询市接口", httpMethod = "POST")
     @RequestMapping(value = "/city", method = RequestMethod.POST)
+    @AuthPass
     public ResultVo<List<AddressDto>> city(@RequestBody AddressDto dto) {
         ResultVo<List<AddressDto>> resultVo = new ResultVo<>();
         try {
@@ -55,6 +58,7 @@ public class AddressController {
 
     @ApiOperation(value = "查询县区接口", httpMethod = "POST")
     @RequestMapping(value = "/area", method = RequestMethod.POST)
+    @AuthPass
     public ResultVo<List<AddressDto>> area(@RequestBody AddressDto dto) {
         ResultVo<List<AddressDto>> resultVo = new ResultVo<>();
         try {
@@ -69,6 +73,7 @@ public class AddressController {
 
     @ApiOperation(value = "地址新增接口", httpMethod = "POST")
     @RequestMapping(value = "/addAddress", method = RequestMethod.POST)
+    @AuthPass
     public ResultVo<Integer> addAddress(@RequestBody AddAddress add) {
         ResultVo<Integer> resultVo = new ResultVo<>();
         try {
@@ -83,6 +88,7 @@ public class AddressController {
 
     @ApiOperation(value = "地址修改接口", httpMethod = "POST")
     @RequestMapping(value = "/modifyAddress", method = RequestMethod.POST)
+    @AuthPass
     public ResultVo<Integer> modifyAddress(@RequestBody AddAddress add) {
         ResultVo<Integer> resultVo = new ResultVo<>();
         try {
@@ -97,6 +103,7 @@ public class AddressController {
 
     @ApiOperation(value = "地址列表接口", httpMethod = "GET")
     @RequestMapping(value = "/listAddress", method = RequestMethod.GET)
+    @AuthPass
     public ResultVo<List<AddAddress>> listAddress(@RequestParam Integer roleId) {
         ResultVo<List<AddAddress>> resultVo = new ResultVo<>();
         try {

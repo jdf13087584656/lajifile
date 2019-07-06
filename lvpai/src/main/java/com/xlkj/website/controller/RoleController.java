@@ -1,5 +1,6 @@
 package com.xlkj.website.controller;
 
+import com.xlkj.website.annotation.AuthPass;
 import com.xlkj.website.model.ResultVo;
 import com.xlkj.website.model.UserWithBLOBs;
 import com.xlkj.website.service.RoleService;
@@ -23,6 +24,7 @@ public class RoleController {
 
     @ApiOperation(value = "列表接口", httpMethod = "POST")
     @RequestMapping(value = "/listRoles", method = RequestMethod.POST)
+    @AuthPass
     public ResultVo<List<UserWithBLOBs>> listRoles() {
         ResultVo<List<UserWithBLOBs>> resultVo = new ResultVo<>();
         try {

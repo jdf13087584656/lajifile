@@ -79,6 +79,7 @@
           area_id,
           city_id,
           province_id,
+          is_deleted,
           is_default,
           create_time,
           modify_time
@@ -87,11 +88,12 @@
 		(
 		  #{aid},
 		  #{address},
-		  #{roleId},
-		  #{addressee}
+		  #{openId},
+		  #{addressee},
 		  #{areaId},
 		  #{cityId},
 		  #{provinceId},
+		  #{isDeleted},
 		  #{isDefault},
 		  now(),
 		  #{modifyTime}
@@ -120,6 +122,9 @@
             <if test="null != isDefault and '' != isDefault">
                 is_default = #{isDefault},
             </if>
+            <if test="null != isDeleted and '' != isDeleted">
+                is_deleted = #{isDeleted},
+            </if>
             modify_time = now()
         </set>
         WHERE
@@ -141,7 +146,7 @@
         left join province pro on lpa.province_id=pro.id
         left join city cit on lpa.city_id=cit.id
         left join area ar on lpa.area_id = ar.id
-        where lpa.role_id = #{roleId}
+        where lpa.role_id = #{openId} and lpa.is_deleted = 0
 
     </select>
 

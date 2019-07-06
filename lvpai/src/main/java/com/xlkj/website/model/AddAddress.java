@@ -12,14 +12,14 @@ public class AddAddress implements Serializable {
     @ApiModelProperty(value = "id", name = "aid")
     private Integer aid;
 
-    @ApiModelProperty(value = "用户id", name = "roleId")
-    private Integer roleId;
+    @ApiModelProperty(value = "openId", name = "openId")
+    private String openId;
 
     @ApiModelProperty(value = "收件人姓名", name = "addressee")
     private String addressee;
 
     @ApiModelProperty(value = "收件人电话", name = "addresseeTel")
-    private Integer addresseeTel;
+    private String addresseeTel;
 
     @ApiModelProperty(value = "省id", name = "provinceId")
     private Integer provinceId;
@@ -35,6 +35,9 @@ public class AddAddress implements Serializable {
 
     @ApiModelProperty(value = "是否默认(1,是 0,否)", name = "isDefault")
     private Integer isDefault;
+
+    @ApiModelProperty(value = "是否删除(1,是 0,否)", name = "isDeleted")
+    private Integer isDeleted;
 
     @ApiModelProperty(value = "创建时间", name = "createTime")
     private String createTime;

@@ -1,5 +1,6 @@
 package com.xlkj.website.controller;
 
+import com.xlkj.website.annotation.AuthPass;
 import com.xlkj.website.model.OrderFormAddDto;
 import com.xlkj.website.model.ResultVo;
 import com.xlkj.website.model.SelectOrderDto;
@@ -27,6 +28,7 @@ public class OrderFormController {
 
     @ApiOperation(value = "订单新增接口", httpMethod = "POST")
     @RequestMapping(value = "/addOrderForm", method = RequestMethod.POST)
+    @AuthPass
     public ResultVo<Integer> addOrderForm(@RequestBody OrderFormAddDto dto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
         try {
@@ -41,6 +43,7 @@ public class OrderFormController {
 
     @ApiOperation(value = "订单修改接口", httpMethod = "POST")
     @RequestMapping(value = "/modifyOrderForm", method = RequestMethod.POST)
+    @AuthPass
     public ResultVo<Integer> modifyOrderForm(@RequestBody OrderFormAddDto dto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
         try {
@@ -56,6 +59,7 @@ public class OrderFormController {
 
     @ApiOperation(value = "订单列表接口", httpMethod = "POST")
     @RequestMapping(value = "/listOrderForm", method = RequestMethod.POST)
+    @AuthPass
     public ResultVo<List<OrderFormAddDto>> listOrderForm(@RequestBody SelectOrderDto dto) {
         ResultVo<List<OrderFormAddDto>> resultVo = new ResultVo<>();
         try {

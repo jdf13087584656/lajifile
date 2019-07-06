@@ -1,5 +1,6 @@
 package com.xlkj.website.controller;
 
+import com.xlkj.website.annotation.AuthPass;
 import com.xlkj.website.model.SearchEquDto;
 import com.xlkj.website.model.EquipmentDto;
 import com.xlkj.website.model.ResultVo;
@@ -25,6 +26,7 @@ public class EquipmentController{
 
     @ApiOperation(value = "设备新增接口", httpMethod = "POST")
     @RequestMapping(value = "/addEquipment", method = RequestMethod.POST)
+    @AuthPass
     public ResultVo<Integer> addEquipment(@RequestBody EquipmentDto dto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
         try {
@@ -40,6 +42,7 @@ public class EquipmentController{
 
     @ApiOperation(value = "设备修改接口", httpMethod = "POST")
     @RequestMapping(value = "/modifyEquipment", method = RequestMethod.POST)
+    @AuthPass
     public ResultVo<Integer> modifyEquipment(@RequestBody EquipmentDto dto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
         try {
@@ -54,6 +57,7 @@ public class EquipmentController{
 
     @ApiOperation(value = "设备列表接口", httpMethod = "POST")
     @RequestMapping(value = "/listEquipment", method = RequestMethod.POST)
+    @AuthPass
     public ResultVo<EquipmentDto> listEquipment(@RequestBody SearchEquDto com) {
         ResultVo<EquipmentDto> resultVo = new ResultVo<>();
         try {
