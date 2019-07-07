@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface OrderDetailsService {
 
-    ResultVo<List<BagCargoDto>> listOrderDetails(String bagCode);
+    ResultVo<List<BagCargoDto>> listOrderDetails(Integer oid);
 
     ResultVo<Integer> addOrderDetails(OrderDetailsDto orderDetailsDto);
 }

@@ -15,8 +15,8 @@
 		VALUES
 		(
 		  #{cid},
-		  #{cargo_name},
-		  #{cargo_price},
+		  #{cargoName},
+		  #{cargoPrice},
 		  0
 		);
 	</insert>
@@ -51,9 +51,9 @@
     </select>
 
     <!--订单详情货物 -->
-    <select id="listOrderDetails" resultType="com.xlkj.website.model.BagCargoDto">
+    <select id="listOrderDetails" parameterType="java.lang.Integer" resultType="com.xlkj.website.model.BagCargoDto">
         select
-        lgb.bag_code as bageCode,
+        lgb.bag_code as bagCode,
         lc.cargo_name as cargoName,
         lc.cargo_price as cargoPrice,
         lod.cargo_weight as cargoWeight

@@ -16,7 +16,7 @@ public interface CargoMapper {
 
     List<CargoDto> listCargo();
 
-    List<BagCargoDto> listOrderDetails(String bagCode);
+    List<BagCargoDto> listOrderDetails(Integer oid);
 
     Integer addOrderDetails(OrderDetailsDto orderDetailsDto);
 }

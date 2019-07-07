@@ -18,9 +18,9 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 
     //货物信息列表
     @Override
-    public ResultVo<List<BagCargoDto>> listOrderDetails(String bagCode) {
+    public ResultVo<List<BagCargoDto>> listOrderDetails(Integer oid) {
         ResultVo<List<BagCargoDto>> resultVo = new ResultVo<>();
-        List<BagCargoDto> list = cargoMapper.listOrderDetails(bagCode);
+        List<BagCargoDto> list = cargoMapper.listOrderDetails(oid);
         resultVo.resultSuccess(list);
         return resultVo;
     }
