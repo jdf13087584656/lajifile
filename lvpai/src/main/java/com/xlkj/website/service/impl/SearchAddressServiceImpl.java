@@ -4,6 +4,7 @@ import com.xlkj.website.mapper.SearchAddressMapper;
 import com.xlkj.website.model.AddAddress;
 import com.xlkj.website.model.AddressDto;
 import com.xlkj.website.model.ResultVo;
+import com.xlkj.website.model.SearchAddressDto;
 import com.xlkj.website.service.SearchAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,9 +60,9 @@ public class SearchAddressServiceImpl implements SearchAddressService {
     }
 
     @Override
-    public ResultVo<List<AddAddress>> listAddress(String openId) {
+    public ResultVo<List<AddAddress>> listAddress(SearchAddressDto dto) {
         ResultVo<List<AddAddress>> resultVo = new ResultVo<>();
-        List<AddAddress> lists = searchAddressMapper.listAddress(openId);
+        List<AddAddress> lists = searchAddressMapper.listAddress(dto);
         resultVo.resultSuccess(lists);
         return resultVo;
     }

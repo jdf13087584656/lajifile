@@ -181,7 +181,7 @@
 	</insert>
 
 	<!--订单垃圾袋查询 -->
-	<select id="listGarbageBag" resultType="com.xlkj.website.model.bagCargoDto" >
+	<select id="listGarbageBag" resultType="com.xlkj.website.model.BagCargoDto" >
 		select
 
         from lp_order lo

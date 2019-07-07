@@ -2,6 +2,7 @@ package com.xlkj.website.mapper;
 
 import com.xlkj.website.model.AddAddress;
 import com.xlkj.website.model.AddressDto;
+import com.xlkj.website.model.SearchAddressDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -19,5 +20,5 @@ public interface SearchAddressMapper {
 
     Integer modifyAddress(AddAddress add);
 
-    List<AddAddress> listAddress(String openId);
+    List<AddAddress> listAddress(SearchAddressDto dto);
 }

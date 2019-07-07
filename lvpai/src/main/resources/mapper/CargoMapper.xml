@@ -40,7 +40,7 @@
     </update>
 
     <!--货物列表 -->
-    <select id="listCargo" parameterType="java.lang.Integer" resultType="com.xlkj.website.model.CargoDto">
+    <select id="listCargo"  resultType="com.xlkj.website.model.CargoDto">
         select
         lpc.cid as cid,
         lpc.cargo_name as cargoName,
@@ -51,7 +51,7 @@
     </select>
 
     <!--订单详情货物 -->
-    <select id="listOrderDetails" resultType="com.xlkj.website.model.bagCargoDto">
+    <select id="listOrderDetails" resultType="com.xlkj.website.model.BagCargoDto">
         select
         lgb.bag_code as bageCode,
         lc.cargo_name as cargoName,

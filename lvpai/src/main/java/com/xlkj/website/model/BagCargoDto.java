@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Data
-public class bagCargoDto implements Serializable {
+public class BagCargoDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "垃圾袋编号", name = "bagCode")

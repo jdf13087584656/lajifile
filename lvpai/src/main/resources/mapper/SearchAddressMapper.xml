@@ -76,6 +76,7 @@
           address,
           role_id,
           addressee,
+          addressee_tel,
           area_id,
           city_id,
           province_id,
@@ -90,6 +91,7 @@
 		  #{address},
 		  #{openId},
 		  #{addressee},
+		  #{addresseeTel},
 		  #{areaId},
 		  #{cityId},
 		  #{provinceId},
@@ -132,7 +134,7 @@
     </update>
 
     <!--地址列表 -->
-    <select id="listAddress" parameterType="java.lang.String" resultType="com.xlkj.website.model.AddAddress">
+    <select id="listAddress" parameterType="com.xlkj.website.model.SearchAddressDto" resultType="com.xlkj.website.model.AddAddress">
         select
         lpa.aid as aid,
         lpa.addressee as addressee,
@@ -146,7 +148,13 @@
         left join province pro on lpa.province_id=pro.id
         left join city cit on lpa.city_id=cit.id
         left join area ar on lpa.area_id = ar.id
-        where lpa.role_id = #{openId} and lpa.is_deleted = 0
+        where lpa.is_deleted = 0
+        <if test="null != openId and '' != openId">
+            and lpa.role_id = #{openId}
+        </if>
+        <if test="null != aid and '' != aid">
+            and lpa.aid = #{aid}
+        </if>
     </select>
 
 </mapper>

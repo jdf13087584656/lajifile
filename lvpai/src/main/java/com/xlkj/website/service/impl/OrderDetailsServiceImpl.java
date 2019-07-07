@@ -1,6 +1,7 @@
 package com.xlkj.website.service.impl;
 
 import com.xlkj.website.mapper.CargoMapper;
+import com.xlkj.website.model.BagCargoDto;
 import com.xlkj.website.model.ResultVo;
 import com.xlkj.website.model.OrderDetailsDto;
 import com.xlkj.website.service.OrderDetailsService;
@@ -17,9 +18,9 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 
     //货物信息列表
     @Override
-    public ResultVo<List<OrderDetailsDto>> listOrderDetails(String bagCode) {
-        ResultVo<List<OrderDetailsDto>> resultVo = new ResultVo<>();
-        List<OrderDetailsDto> list = cargoMapper.listOrderDetails(bagCode);
+    public ResultVo<List<BagCargoDto>> listOrderDetails(String bagCode) {
+        ResultVo<List<BagCargoDto>> resultVo = new ResultVo<>();
+        List<BagCargoDto> list = cargoMapper.listOrderDetails(bagCode);
         resultVo.resultSuccess(list);
         return resultVo;
     }

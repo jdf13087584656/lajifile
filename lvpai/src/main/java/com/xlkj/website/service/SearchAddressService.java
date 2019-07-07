@@ -3,6 +3,7 @@ package com.xlkj.website.service;
 import com.xlkj.website.model.AddAddress;
 import com.xlkj.website.model.AddressDto;
 import com.xlkj.website.model.ResultVo;
+import com.xlkj.website.model.SearchAddressDto;
 
 import java.util.List;
 
@@ -18,5 +19,5 @@ public interface SearchAddressService {
 
     ResultVo<Integer> modifyAddress(AddAddress add);
 
-    ResultVo<List<AddAddress>> listAddress(String openId);
+    ResultVo<List<AddAddress>> listAddress(SearchAddressDto dto);
 }

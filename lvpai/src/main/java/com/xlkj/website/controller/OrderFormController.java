@@ -102,4 +102,19 @@ public class OrderFormController {
         }
         return resultVo;
     }
+
+    @ApiOperation(value = "货物详情", httpMethod = "POST")
+    @RequestMapping(value = "/listOrderDetails", method = RequestMethod.POST)
+    @AuthPass
+    public ResultVo<List<BagCargoDto>> listOrderDetails(@RequestBody String bagCode) {
+        ResultVo<List<BagCargoDto>> resultVo = new ResultVo<>();
+        try {
+            logger.info(String.format("listOrderDetails is start"));
+            resultVo = orderDetailsService.listOrderDetails(bagCode);
+        } catch (Exception e) {
+            resultVo.resultFail("系统异常" + e.getMessage());
+            logger.error("listOrderDetails is error", e.getMessage());
+        }
+        return resultVo;
+    }
 }
