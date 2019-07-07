@@ -1,1 +1,9 @@
+
 地址:https://github.com/jdf13087584656/lajifile.git
+账号:root
+密码:xlkjZY123
+ip:59.110.225.21
+
+mysql :
+用户名:root
+密码:Root!!2019
