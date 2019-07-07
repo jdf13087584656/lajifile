@@ -8,11 +8,11 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Data
-public class orderDetailsDto implements Serializable {
+public class OrderDetailsDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "订单id", name = "oid")
-    private Integer oid;
+    @ApiModelProperty(value = "垃圾袋编号", name = "bagCode")
+    private String bagCode;
 
     @ApiModelProperty(value = "货物id", name = "cid")
     private Integer cid;

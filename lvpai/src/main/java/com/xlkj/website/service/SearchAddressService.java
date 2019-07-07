@@ -18,5 +18,5 @@ public interface SearchAddressService {
 
     ResultVo<Integer> modifyAddress(AddAddress add);
 
-    ResultVo<List<AddAddress>> listAddress(Integer roleId);
+    ResultVo<List<AddAddress>> listAddress(String openId);
 }

@@ -19,5 +19,5 @@ public interface SearchAddressMapper {
 
     Integer modifyAddress(AddAddress add);
 
-    List<AddAddress> listAddress(Integer roleId);
+    List<AddAddress> listAddress(String openId);
 }

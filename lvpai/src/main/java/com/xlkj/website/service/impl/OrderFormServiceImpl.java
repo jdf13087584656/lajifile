@@ -1,6 +1,7 @@
 package com.xlkj.website.service.impl;
 
 import com.xlkj.website.mapper.OrderFormMapper;
+import com.xlkj.website.model.GarbageBagDto;
 import com.xlkj.website.model.OrderFormAddDto;
 import com.xlkj.website.model.ResultVo;
 import com.xlkj.website.model.SelectOrderDto;
@@ -46,6 +47,21 @@ public class OrderFormServiceImpl implements OrderFormService {
         ResultVo<List<OrderFormAddDto>> resultVo = new ResultVo<>();
         List<OrderFormAddDto> orders = orderFormMapper.listOrderForm(dto);
         resultVo.resultSuccess(orders);
+        return resultVo;
+    }
+
+    //订单新增垃圾袋
+    @Override
+    public ResultVo<Integer> addGarbageBag(GarbageBagDto dto) {
+        ResultVo<Integer> resultVo = new ResultVo<>();
+        List<String> bagCodes = dto.getBagCodes();
+        if(null != bagCodes && bagCodes.size()>0){
+            for(int i=0;i<bagCodes.size();i++){
+                dto.setBagCode(bagCodes.get(i));
+                Integer add =orderFormMapper.addGarbageBag(dto);
+                resultVo.resultFlag(resultVo,add,"操作成功","操作失败");
+            }
+        }
         return resultVo;
     }
 }

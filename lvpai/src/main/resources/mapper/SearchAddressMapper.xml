@@ -132,7 +132,7 @@
     </update>
 
     <!--地址列表 -->
-    <select id="listAddress" parameterType="java.lang.Integer" resultType="com.xlkj.website.model.AddAddress">
+    <select id="listAddress" parameterType="java.lang.String" resultType="com.xlkj.website.model.AddAddress">
         select
         lpa.aid as aid,
         lpa.addressee as addressee,
@@ -147,7 +147,6 @@
         left join city cit on lpa.city_id=cit.id
         left join area ar on lpa.area_id = ar.id
         where lpa.role_id = #{openId} and lpa.is_deleted = 0
-
     </select>
 
 </mapper>

@@ -59,9 +59,9 @@ public class SearchAddressServiceImpl implements SearchAddressService {
     }
 
     @Override
-    public ResultVo<List<AddAddress>> listAddress(Integer roleId) {
+    public ResultVo<List<AddAddress>> listAddress(String openId) {
         ResultVo<List<AddAddress>> resultVo = new ResultVo<>();
-        List<AddAddress> lists = searchAddressMapper.listAddress(roleId);
+        List<AddAddress> lists = searchAddressMapper.listAddress(openId);
         resultVo.resultSuccess(lists);
         return resultVo;
     }

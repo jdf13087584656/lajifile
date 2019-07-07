@@ -101,14 +101,14 @@ public class AddressController {
         return resultVo;
     }
 
-    @ApiOperation(value = "地址列表接口", httpMethod = "GET")
-    @RequestMapping(value = "/listAddress", method = RequestMethod.GET)
+    @ApiOperation(value = "地址列表接口", httpMethod = "POST")
+    @RequestMapping(value = "/listAddress", method = RequestMethod.POST)
     @AuthPass
-    public ResultVo<List<AddAddress>> listAddress(@RequestParam Integer roleId) {
+    public ResultVo<List<AddAddress>> listAddress(@RequestBody String openId) {
         ResultVo<List<AddAddress>> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("listAddress is start"));
-            resultVo = searchAddressService.listAddress(roleId);
+            resultVo = searchAddressService.listAddress(openId);
         } catch (Exception e) {
             resultVo.resultFail("系统异常" + e.getMessage());
             logger.error("listAddress is error", e.getMessage());
