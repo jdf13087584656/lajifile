@@ -106,11 +106,11 @@ public class OrderFormController {
     @ApiOperation(value = "货物详情", httpMethod = "POST")
     @RequestMapping(value = "/listOrderDetails", method = RequestMethod.POST)
     @AuthPass
-    public ResultVo<List<BagCargoDto>> listOrderDetails(@RequestBody String bagCode) {
+    public ResultVo<List<BagCargoDto>> listOrderDetails(@RequestBody Integer oid) {
         ResultVo<List<BagCargoDto>> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("listOrderDetails is start"));
-            resultVo = orderDetailsService.listOrderDetails(bagCode);
+            resultVo = orderDetailsService.listOrderDetails(oid);
         } catch (Exception e) {
             resultVo.resultFail("系统异常" + e.getMessage());
             logger.error("listOrderDetails is error", e.getMessage());

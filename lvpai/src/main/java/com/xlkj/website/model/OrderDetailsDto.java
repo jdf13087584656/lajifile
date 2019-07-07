@@ -10,6 +10,8 @@ import java.util.List;
 @Data
 public class OrderDetailsDto implements Serializable {
     private static final long serialVersionUID = 1L;
+    @ApiModelProperty(value = "did", name = "did")
+    private Integer did;
 
     @ApiModelProperty(value = "垃圾袋编号", name = "bagCode")
     private String bagCode;
