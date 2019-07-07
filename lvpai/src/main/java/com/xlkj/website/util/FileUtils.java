@@ -1,6 +1,9 @@
 package com.xlkj.website.util;
 
+import com.xlkj.website.mapper.FileInfoMapper;
+import com.xlkj.website.model.FileInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -9,8 +12,10 @@ import java.io.*;
 @Slf4j
 public class FileUtils {
 
+
     public static void save(MultipartFile file, String relativePath, String newFileName) throws IOException {
         save(file.getInputStream(), relativePath, newFileName+getFileSuffix(file,false));
+
     }
 
     public static void save(InputStream in, String relativePath, String newFileName) throws IOException {
@@ -33,6 +38,19 @@ public class FileUtils {
     }
 
     public static File find(String filePath, String fileid) throws IOException {
+        File dir = new File(filePath);
+        if (dir.exists() && dir.isDirectory()) {
+            File file = new File(dir, fileid);
+            if (file.exists() && file.canRead()) {
+                return file;
+            } else {
+                throw new IOException();
+            }
+        } else {
+            throw new FileNotFoundException();
+        }
+    }
+    public static File getFile(String filePath, String fileid) throws IOException {
         File dir = new File(filePath);
         if (dir.exists() && dir.isDirectory()) {
             File file = new File(dir, fileid);

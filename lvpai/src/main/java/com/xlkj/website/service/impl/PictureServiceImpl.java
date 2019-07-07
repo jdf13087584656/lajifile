@@ -1,10 +1,14 @@
 package com.xlkj.website.service.impl;
 
+import com.xlkj.website.mapper.FileInfoMapper;
+import com.xlkj.website.model.FileInfo;
 import com.xlkj.website.model.ResultVo;
 import com.xlkj.website.service.PictureService;
 import com.xlkj.website.util.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -33,12 +37,21 @@ public class PictureServiceImpl implements PictureService {
     private String picture;
     @Value("${system.path.server-address}")
     private String ip;
+    @Autowired
+    FileInfoMapper fileInfoMapper;
     @Override
+    @Transactional
     public ResultVo addPic(MultipartFile multipartFile,String picName) {
 
         ResultVo resultVo = new ResultVo<>();
         try {
             FileUtils.save(multipartFile,basePath+"/"+activity,picName);
+            String fileSuffix = FileUtils.getFileSuffix(multipartFile, false);
+            FileInfo fileInfo = new FileInfo();
+            fileInfo.setFilepath(basePath+"/"+activity+"/"+picName+fileSuffix);
+            fileInfo.setFilename(picName+fileSuffix);
+            fileInfo.setType(1);
+            fileInfoMapper.addFile(fileInfo);
             resultVo.resultSuccess("上传成功");
         } catch (IOException e) {
             e.printStackTrace();
@@ -47,5 +60,10 @@ public class PictureServiceImpl implements PictureService {
 
 
         return resultVo;
+    }
+
+    @Override
+    public ResultVo getPic(String filePath) {
+        return null;
     }
 }

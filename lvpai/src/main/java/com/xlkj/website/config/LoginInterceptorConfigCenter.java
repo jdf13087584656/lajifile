@@ -36,7 +36,8 @@ public class LoginInterceptorConfigCenter extends WebMvcConfigurerAdapter {
 				"/**/*.jpeg",
 				"/configuration/**",
 				"/**/login/login",
-				"/**/login"
+				"/**/login",
+				"/picture/**"
 		);
     }
 

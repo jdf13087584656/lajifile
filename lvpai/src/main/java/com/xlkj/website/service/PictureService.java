@@ -13,4 +13,5 @@ import org.springframework.web.multipart.MultipartFile;
 public interface PictureService {
 
     ResultVo addPic(MultipartFile multipartFile,String picName);
+    ResultVo getPic(String filePath);
 }
