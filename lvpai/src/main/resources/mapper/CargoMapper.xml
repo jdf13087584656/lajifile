@@ -40,7 +40,7 @@
     </update>
 
     <!--货物列表 -->
-    <select id="listCargo" parameterType="java.lang.Integer" resultType="com.xlkj.website.model.CargoDto">
+    <select id="listCargo"  resultType="com.xlkj.website.model.CargoDto">
         select
         lpc.cid as cid,
         lpc.cargo_name as cargoName,
@@ -51,29 +51,31 @@
     </select>
 
     <!--订单详情货物 -->
-    <select id="listOrderDetails" resultType="com.xlkj.website.model.orderDetailsDto">
+    <select id="listOrderDetails" resultType="com.xlkj.website.model.BagCargoDto">
         select
+        lgb.bag_code as bageCode,
         lc.cargo_name as cargoName,
         lc.cargo_price as cargoPrice,
         lod.cargo_weight as cargoWeight
-        from lp_order_details lod
-        left join lp_order lo on lod.oid=lo.oid
+        from lp_order lo
+        left join lp_garbage_bag lgb on lo.oid=lgb.oid
+        left join lp_order_details lod on lgb.bag_code=lod.bag_code
         left join lp_cargo lc on lod.cid=lc.cid
-        where lo.oid={#oid}
+        where lo.oid=#{oid}
     </select>
 
     <!--新增订单货物 -->
-    <insert id="addOrderDetails" parameterType="com.xlkj.website.model.orderDetailsDto" >
+    <insert id="addOrderDetails" parameterType="com.xlkj.website.model.OrderDetailsDto" >
 		INSERT INTO lp_order_details (
 		did,
-		oid,
+		bag_code,
 		cid,
 		cargo_weight
 		)
 		VALUES
 		(
 		  #{did},
-		  #{oid},
+		  #{bagCode},
 		  #{cid},
 		  #{cargoWeight}
 		);

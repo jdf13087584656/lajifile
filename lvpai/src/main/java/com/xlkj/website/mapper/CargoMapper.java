@@ -1,7 +1,8 @@
 package com.xlkj.website.mapper;
 
+import com.xlkj.website.model.BagCargoDto;
 import com.xlkj.website.model.CargoDto;
-import com.xlkj.website.model.orderDetailsDto;
+import com.xlkj.website.model.OrderDetailsDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -13,9 +14,9 @@ public interface CargoMapper {
 
     Integer modifyCargo(CargoDto dto);
 
-    List<CargoDto> listCargo(Integer cid);
+    List<CargoDto> listCargo();
 
-    List<orderDetailsDto> listOrderDetails(Integer oid);
+    List<BagCargoDto> listOrderDetails(String bagCode);
 
-    Integer addOrderDetails(orderDetailsDto orderDetailsDto);
+    Integer addOrderDetails(OrderDetailsDto orderDetailsDto);
 }

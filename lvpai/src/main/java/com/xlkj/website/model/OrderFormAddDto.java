@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 public class OrderFormAddDto implements Serializable {
@@ -65,8 +66,11 @@ public class OrderFormAddDto implements Serializable {
     @ApiModelProperty(value = "审核意见", name = "spMsg")
     private String spMsg;
 
-    @ApiModelProperty(value = "垃圾袋编号", name = "rubbishBagCode")
-    private String rubbishBagCode;
+//    @ApiModelProperty(value = "垃圾袋编号", name = "rubbishBagCodes")
+//    private List<String> rubbishBagCodes;
+
+    @ApiModelProperty(value = "总价", name = "allPrice")
+    private BigDecimal allPrice;
 
     @ApiModelProperty(value = "扣款", name = "deductMoney")
     private BigDecimal deductMoney;

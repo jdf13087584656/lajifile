@@ -4,6 +4,7 @@ import com.xlkj.website.annotation.AuthPass;
 import com.xlkj.website.model.AddAddress;
 import com.xlkj.website.model.AddressDto;
 import com.xlkj.website.model.ResultVo;
+import com.xlkj.website.model.SearchAddressDto;
 import com.xlkj.website.service.SearchAddressService;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -101,14 +102,14 @@ public class AddressController {
         return resultVo;
     }
 
-    @ApiOperation(value = "地址列表接口", httpMethod = "GET")
-    @RequestMapping(value = "/listAddress", method = RequestMethod.GET)
+    @ApiOperation(value = "地址列表接口", httpMethod = "POST")
+    @RequestMapping(value = "/listAddress", method = RequestMethod.POST)
     @AuthPass
-    public ResultVo<List<AddAddress>> listAddress(@RequestParam Integer roleId) {
+    public ResultVo<List<AddAddress>> listAddress(@RequestBody SearchAddressDto dto) {
         ResultVo<List<AddAddress>> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("listAddress is start"));
-            resultVo = searchAddressService.listAddress(roleId);
+            resultVo = searchAddressService.listAddress(dto);
         } catch (Exception e) {
             resultVo.resultFail("系统异常" + e.getMessage());
             logger.error("listAddress is error", e.getMessage());

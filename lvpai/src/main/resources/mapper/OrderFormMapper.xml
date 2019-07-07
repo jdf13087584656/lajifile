@@ -25,7 +25,7 @@
           order_state,
           sp_state,
           sp_msg,
-          rubbish_bag_code,
+          all_price,
           deduct_money,
           deduct_msg
 		)
@@ -49,7 +49,7 @@
 		  1,
 		  1,
 		  #{spMsg},
-		  #{rubbishBagCode},
+		  #{allPrice},
 		  #{deductMoney},
 		  #{deductMsg}
 		);
@@ -98,14 +98,14 @@
 		<if test="null != orderState and '' != orderState">
 			order_state = #{orderState},
 		</if>
+		<if test="null != allPrice and '' != allPrice">
+			all_price = #{allPrice},
+		</if>
 		<if test="null != spState and '' != spState">
 			sp_state = #{spState},
 		</if>
 		<if test="null != spMsg and '' != spMsg">
 			sp_msg = #{spMsg},
-		</if>
-		<if test="null != rubbishBagCode and '' != rubbishBagCode">
-			rubbish_bag_code = #{rubbishBagCode},
 		</if>
 	</set>
 	WHERE
@@ -135,14 +135,11 @@
 		lo.modify_user_id AS modifyUserId,
 		DATE_FORMAT(lo.order_create_time,'%Y/%m/%d %H:%i:%S') as orderCreateTime,
 		DATE_FORMAT(lo.order_modify_time,'%Y/%m/%d %H:%i:%S') as orderModifyTime,
+		lo.all_price as allPrice,
 		lo.order_state as orderState,
-		lo.sp_state as spState,
-		lo.rubbish_bag_code as rubbishBagCode
+		lo.sp_state as spState
 		from lp_order lo
 		where 1=1
-		<if test="null != rubbishBagCode and rubbishBagCode != ''">
-			AND lo.rubbish_bag_code = #{rubbishBagCode}
-		</if>
 		<if test="null != isDeleted and isDeleted != ''">
 			AND lo.is_deleted = #{isDeleted}
 		</if>
@@ -168,13 +165,27 @@
 	</select>
 
 
+	<!--订单新增垃圾袋 -->
+	<insert id="addGarbageBag" parameterType="com.xlkj.website.model.GarbageBagDto" >
+		INSERT INTO lp_garbage_bag (
+		bag_id,
+        oid,
+        bag_code
+		)
+		VALUES
+		(
+		  #{bagId},
+		  #{oid},
+		  #{bagCode}
+		);
+	</insert>
 
+	<!--订单垃圾袋查询 -->
+	<select id="listGarbageBag" resultType="com.xlkj.website.model.BagCargoDto" >
+		select
 
-
-
-
-
-
-
+        from lp_order lo
+        lp_garbage_bag
+	</select>
 
 </mapper>
