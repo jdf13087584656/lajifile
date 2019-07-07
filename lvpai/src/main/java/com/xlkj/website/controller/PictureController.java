@@ -68,8 +68,8 @@ public class PictureController {
     public void getimg( @RequestParam("address") String address, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ResultVo resultVo = new ResultVo<>();
         FileInfo fileByAdr = fileInfoMapper.getFileByAdr(address);
-       // String fileName = fileByAdr.getFilename();
-        String fileName = "123.jpg";
+        String fileName = fileByAdr.getFilename();
+//        String fileName = "123.jpg";
         String downloadUrl = address;
         InputStream inStream = null;
         BufferedInputStream bis = null;

@@ -61,7 +61,13 @@
         left join lp_garbage_bag lgb on lo.oid=lgb.oid
         left join lp_order_details lod on lgb.bag_code=lod.bag_code
         left join lp_cargo lc on lod.cid=lc.cid
-        where lo.oid=#{oid}
+        where 1=1
+        <if test="null != oid and '' != oid">
+            and lo.oid = #{oid}
+        </if>
+        <if test="null != bagCode and '' != bagCode">
+            and lgb.bag_code = #{bagCode}
+        </if>
     </select>
 
     <!--新增订单货物 -->

@@ -15,4 +15,7 @@ public class SearchAddressDto implements Serializable {
 
     @ApiModelProperty(value = "aid", name = "aid")
     private Integer aid;
+
+    @ApiModelProperty(value = "isDefault", name = "isDefault")
+    private Integer isDefault;
 }

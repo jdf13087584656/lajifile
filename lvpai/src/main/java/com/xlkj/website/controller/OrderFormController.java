@@ -30,8 +30,8 @@ public class OrderFormController {
     @ApiOperation(value = "订单新增接口", httpMethod = "POST")
     @RequestMapping(value = "/addOrderForm", method = RequestMethod.POST)
     @AuthPass
-    public ResultVo<Integer> addOrderForm(@RequestBody OrderFormAddDto dto) {
-        ResultVo<Integer> resultVo = new ResultVo<>();
+    public ResultVo<String> addOrderForm(@RequestBody OrderFormAddDto dto) {
+        ResultVo<String> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("addOrderForm is start"));
             resultVo = orderFormService.addOrderForm(dto);
@@ -106,11 +106,11 @@ public class OrderFormController {
     @ApiOperation(value = "货物详情", httpMethod = "POST")
     @RequestMapping(value = "/listOrderDetails", method = RequestMethod.POST)
     @AuthPass
-    public ResultVo<List<BagCargoDto>> listOrderDetails(@RequestBody Integer oid) {
+    public ResultVo<List<BagCargoDto>> listOrderDetails(@RequestBody searchCargoDto dto) {
         ResultVo<List<BagCargoDto>> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("listOrderDetails is start"));
-            resultVo = orderDetailsService.listOrderDetails(oid);
+            resultVo = orderDetailsService.listOrderDetails(dto);
         } catch (Exception e) {
             resultVo.resultFail("系统异常" + e.getMessage());
             logger.error("listOrderDetails is error", e.getMessage());

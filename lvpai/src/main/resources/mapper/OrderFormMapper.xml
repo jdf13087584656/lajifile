@@ -27,7 +27,9 @@
           sp_msg,
           all_price,
           deduct_money,
-          deduct_msg
+          deduct_msg,
+          order_type,
+          memo
 		)
 		VALUES
 		(
@@ -51,7 +53,9 @@
 		  #{spMsg},
 		  #{allPrice},
 		  #{deductMoney},
-		  #{deductMsg}
+		  #{deductMsg},
+		  #{orderType},
+		  #{memo}
 		);
 	</insert>
 
@@ -137,11 +141,18 @@
 		DATE_FORMAT(lo.order_modify_time,'%Y/%m/%d %H:%i:%S') as orderModifyTime,
 		lo.all_price as allPrice,
 		lo.order_state as orderState,
-		lo.sp_state as spState
+		lo.sp_state as spState,
+		lo.order_type as orderType
 		from lp_order lo
 		where 1=1
+		<if test="null != oid and oid != ''">
+			AND lo.oid = #{oid}
+		</if>
 		<if test="null != isDeleted and isDeleted != ''">
 			AND lo.is_deleted = #{isDeleted}
+		</if>
+		<if test="null != orderType and orderType != ''">
+			AND lo.order_type = #{orderType}
 		</if>
 		<if test="null != receiveId and receiveId != ''">
 			AND lo.receive_id = #{receiveId}
@@ -180,12 +191,12 @@
 		);
 	</insert>
 
-	<!--订单垃圾袋查询 -->
-	<select id="listGarbageBag" resultType="com.xlkj.website.model.BagCargoDto" >
-		select
+<!--	&lt;!&ndash;订单垃圾袋查询 &ndash;&gt;-->
+<!--	<select id="listGarbageBag" resultType="com.xlkj.website.model.BagCargoDto" >-->
+<!--		select-->
 
-        from lp_order lo
-        lp_garbage_bag
-	</select>
+<!--        from lp_order lo-->
+<!--        lp_garbage_bag-->
+<!--	</select>-->
 
 </mapper>

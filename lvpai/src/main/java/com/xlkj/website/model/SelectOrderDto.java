@@ -10,8 +10,8 @@ import java.util.List;
 public class SelectOrderDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "垃圾袋编号", name = "rubbishBagCode")
-    private String rubbishBagCode;
+    @ApiModelProperty(value = "订单类型", name = "orderType")
+    private Integer orderType;
 
     @ApiModelProperty(value = "开始时间", name = "startTime")
     private String startTime;
@@ -30,4 +30,7 @@ public class SelectOrderDto implements Serializable {
 
     @ApiModelProperty(value = "openId", name = "openId")
     private String openId;
+
+    @ApiModelProperty(value = "订单id", name = "oid")
+    private Integer oid;
 }

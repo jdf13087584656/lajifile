@@ -54,6 +54,9 @@ public class SearchAddressServiceImpl implements SearchAddressService {
     @Override
     public ResultVo<Integer> modifyAddress(AddAddress add) {
         ResultVo<Integer> resultVo = new ResultVo<>();
+        if(null != add.getIsDefault() && add.getIsDefault() == 1){
+            searchAddressMapper.modifyDefault(add.getOpenId());
+        }
         Integer mod = searchAddressMapper.modifyAddress(add);
         resultVo.resultFlag(resultVo,mod,"修改成功","修改失败");
         return resultVo;

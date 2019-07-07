@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class AddAddress implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "id", name = "aid")
+    @ApiModelProperty(value = "aid", name = "aid")
     private Integer aid;
 
     @ApiModelProperty(value = "openId", name = "openId")

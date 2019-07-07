@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xlkj.website.mapper.HomePageMapper">
+
+    <!-- 待派单 -->
+    <select id="countOrder" resultType="com.xlkj.website.model.HomePageOrderDto" >
+        select
+        sum(case when t.flag='a' then t.a else 0 end) as DSPNumSM,
+        sum(case when t.flag='b' then t.a else 0 end) as DSPNumHSZ,
+        sum(case when t.flag='c' then t.a else 0 end) as YCNum
+        from
+        (select count(oid) as a,'a' as flag from lp_order where order_type=1 and order_state=1
+        union all
+        select count(oid) as b,'b' as flag from lp_order where order_type=2 and order_state=1
+        union all
+        select count( oid ) AS c, 'c' AS flag FROM lp_order WHERE order_state=5
+        )t
+    </select>
+
+    <!-- 用户数量 -->
+    <select id="countUser" parameterType="com.xlkj.website.model.CommonSearchDto" resultType="java.lang.Integer">
+        select count(open_id)
+        from lp_role
+        where 1=1
+        <if test="null != startTime and '' != startTime">
+            and create_time <![CDATA[>=]]> #{startTime}
+        </if>
+        <if test="null != endTime and '' != endTime">
+            and create_time <![CDATA[<=]]> #{endTime}
+        </if>
+    </select>
+
+    <!-- 回收站数量 -->
+    <select id="countEqu" parameterType="com.xlkj.website.model.CommonSearchDto" resultType="java.lang.Integer">
+        select count(eid) from lp_equipment where e_state=1
+    </select>
+
+
+</mapper>

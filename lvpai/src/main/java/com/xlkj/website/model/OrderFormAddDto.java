@@ -19,7 +19,7 @@ public class OrderFormAddDto implements Serializable {
     private String orderCode;
 
     @ApiModelProperty(value = "openId", name = "openId")
-    private Integer openId;
+    private String openId;
 
     @ApiModelProperty(value = "回收员id", name = "receiveId")
     private Integer receiveId;
@@ -77,6 +77,12 @@ public class OrderFormAddDto implements Serializable {
 
     @ApiModelProperty(value = "扣款原因", name = "deductMsg")
     private String deductMsg;
+
+    @ApiModelProperty(value = "订单类型(1,上门订单  2,回收站订单)", name = "orderType")
+    private Integer orderType;
+
+    @ApiModelProperty(value = "备注", name = "memo")
+    private String memo;
 
 
 }

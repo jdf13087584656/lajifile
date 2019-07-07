@@ -20,14 +20,18 @@ public class OrderFormServiceImpl implements OrderFormService {
 
     //订单新增
     @Override
-    public ResultVo<Integer> addOrderForm(OrderFormAddDto dto) {
-        ResultVo<Integer> resultVo = new ResultVo<>();
+    public ResultVo<String> addOrderForm(OrderFormAddDto dto) {
+        ResultVo<String> resultVo = new ResultVo<>();
         //生成订单编码
         String prefix="LP";
         dto.setOrderCode(NumberUtil.getBusinessCode(prefix));
         Integer add = orderFormMapper.addOrderForm(dto);
-        resultVo.setData(dto.getOid());
-        resultVo.resultFlag(resultVo,add,"新增成功","新增失败");
+        if (add > 0){
+            resultVo.resultSuccess("新增成功");
+        }else{
+            resultVo.resultFail("新增失败");
+        }
+        resultVo.setData(dto.getOrderCode());
         return resultVo;
     }
 

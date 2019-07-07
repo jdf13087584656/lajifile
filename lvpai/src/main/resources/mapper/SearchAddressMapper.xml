@@ -133,6 +133,15 @@
         aid = #{aid};
     </update>
 
+    <!-- 修改地址信息 -->
+    <update id="modifyDefault" parameterType="java.lang.String">
+        UPDATE lp_address
+        set
+            is_default = 0
+        WHERE
+        role_id = #{openId};
+    </update>
+
     <!--地址列表 -->
     <select id="listAddress" parameterType="com.xlkj.website.model.SearchAddressDto" resultType="com.xlkj.website.model.AddAddress">
         select
@@ -142,7 +151,8 @@
         lpa.address as address,
         pro.name as provincename,
         cit.name as cityName,
-        ar.name as areaName
+        ar.name as areaName,
+        lpa.is_default as isDefault
         from lp_address lpa
         left join lp_role lpr on lpa.role_id=lpr.id
         left join province pro on lpa.province_id=pro.id
@@ -154,6 +164,9 @@
         </if>
         <if test="null != aid and '' != aid">
             and lpa.aid = #{aid}
+        </if>
+        <if test="null != isDefault and '' != isDefault">
+            and lpa.is_default = #{isDefault}
         </if>
     </select>
 

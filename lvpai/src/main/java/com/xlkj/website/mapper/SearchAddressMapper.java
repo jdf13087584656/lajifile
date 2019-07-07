@@ -20,5 +20,7 @@ public interface SearchAddressMapper {
 
     Integer modifyAddress(AddAddress add);
 
+    Integer modifyDefault(String openId);
+
     List<AddAddress> listAddress(SearchAddressDto dto);
 }
