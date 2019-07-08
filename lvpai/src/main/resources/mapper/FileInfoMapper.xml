@@ -15,7 +15,8 @@
           hurl,
           memo,
           createtime,
-          filename
+          filename,
+          filestate
 		)
 		VALUES
 		(
@@ -23,12 +24,15 @@
 		  #{filepath},
 		  #{type},
 		  #{hurl}, #{memo},now(),
-		  #{filename}
-
+		  #{filename},
+        1
 		);
 	</insert>
     <select id="getFileByAdr" resultType="com.xlkj.website.model.FileInfo">
         select * from fileinfo WHERE filepath=#{filepath};
+    </select>
+    <select id="getPictures" resultType="com.xlkj.website.model.FileInfo">
+        select * from fileinfo WHERE type=#{types};
     </select>
 
 
