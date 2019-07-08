@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/homePage")
 @CrossOrigin
 public class HomePageController {
-    private Logger logger = LoggerFactory.getLogger(OrderFormController.class);
+    private Logger logger = LoggerFactory.getLogger(HomePageController.class);
     @Autowired
     private HomePageService homePageService;
 

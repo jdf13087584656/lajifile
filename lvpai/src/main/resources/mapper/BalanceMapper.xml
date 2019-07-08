@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xlkj.website.mapper.BalanceMapper">
+
+    <!--余额新增 -->
+    <insert id="addBalance" useGeneratedKeys="true" keyProperty="bid" keyColumn="bid"
+            parameterType="com.xlkj.website.model.AddBalanceDto" >
+		INSERT INTO lp_balance (
+		  bid,
+          open_id,
+          balance
+		)
+		VALUES
+		(
+		  #{bid},
+		  #{openId},
+		  0
+		);
+	</insert>
+
+
+    <!--余额查询 -->
+    <select id="searchBalance"  resultType="com.xlkj.website.model.AddBalanceDto">
+        select
+        lb.bid as bid,
+        lb.open_id as openId,
+        lb.balance as balance
+        from lp_balance lb
+        where lb.open_id=#{openId}
+    </select>
+
+
+    <!-- 货物修改 -->
+    <update id="modifyBalance" parameterType="com.xlkj.website.model.AddBalanceDto">
+        UPDATE lp_balance
+        set
+            balance = #{balance},
+        WHERE
+            open_id = #{openId};
+    </update>
+
+</mapper>

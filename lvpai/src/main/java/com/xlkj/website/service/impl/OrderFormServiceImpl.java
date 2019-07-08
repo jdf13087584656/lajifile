@@ -1,10 +1,8 @@
 package com.xlkj.website.service.impl;
 
 import com.xlkj.website.mapper.OrderFormMapper;
-import com.xlkj.website.model.GarbageBagDto;
-import com.xlkj.website.model.OrderFormAddDto;
-import com.xlkj.website.model.ResultVo;
-import com.xlkj.website.model.SelectOrderDto;
+import com.xlkj.website.model.*;
+import com.xlkj.website.service.BalanceService;
 import com.xlkj.website.service.OrderFormService;
 import com.xlkj.website.util.NumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +15,8 @@ public class OrderFormServiceImpl implements OrderFormService {
 
     @Autowired
     private OrderFormMapper orderFormMapper;
+    @Autowired
+    private BalanceService balanceService;
 
     //订单新增
     @Override
@@ -40,6 +40,11 @@ public class OrderFormServiceImpl implements OrderFormService {
     public ResultVo<Integer> modifyOrderForm(OrderFormAddDto dto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
         Integer mod = orderFormMapper.modifyOrderForm(dto);
+        if(mod > 0 && dto.getOrderState() == 4 && null != dto.getAllPrice()){
+            AddBalanceDto addBalanceDto = new AddBalanceDto();
+            addBalanceDto.setChange(dto.getAllPrice());
+            balanceService.modifyBalance(addBalanceDto);
+        }
         resultVo.resultFlag(resultVo,mod,"修改成功","修改失败");
         return resultVo;
     }

@@ -17,7 +17,7 @@ import java.util.List;
 @CrossOrigin
 public class RoleController {
 
-    private Logger logger = LoggerFactory.getLogger(AssessController.class);
+    private Logger logger = LoggerFactory.getLogger(RoleController.class);
 
     @Autowired
     private RoleService roleService;

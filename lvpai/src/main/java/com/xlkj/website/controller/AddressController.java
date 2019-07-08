@@ -23,7 +23,7 @@ import java.util.List;
 @CrossOrigin
 public class AddressController {
 
-    private Logger logger = LoggerFactory.getLogger(OrderFormController.class);
+    private Logger logger = LoggerFactory.getLogger(AddressController.class);
     @Autowired
     private SearchAddressService searchAddressService;
 

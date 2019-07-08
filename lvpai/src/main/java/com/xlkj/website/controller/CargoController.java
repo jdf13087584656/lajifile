@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping(value = "/cargo")
 @CrossOrigin
 public class CargoController {
-    private Logger logger = LoggerFactory.getLogger(OrderFormController.class);
+    private Logger logger = LoggerFactory.getLogger(CargoController.class);
 
     @Autowired
     private CargoService cargoService;

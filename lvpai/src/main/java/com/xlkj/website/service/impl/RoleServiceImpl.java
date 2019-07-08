@@ -1,7 +1,9 @@
 package com.xlkj.website.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.xlkj.website.mapper.BalanceMapper;
 import com.xlkj.website.mapper.RoleMapper;
+import com.xlkj.website.model.AddBalanceDto;
 import com.xlkj.website.model.ResultVo;
 import com.xlkj.website.model.UserWithBLOBs;
 import com.xlkj.website.service.RoleService;
@@ -20,6 +22,8 @@ public class RoleServiceImpl implements RoleService {
     private RoleMapper roleMapper;
     @Autowired
     private RedisUtil redisUtil;
+    @Autowired
+    private BalanceMapper balanceMapper;
 
     //用户新增(如果已存在信息,进行更新操作)
     @Override
@@ -30,6 +34,9 @@ public class RoleServiceImpl implements RoleService {
         if(null != userWithBLOBs){
             add = roleMapper.modifyRole(user);
         }else{
+            AddBalanceDto dto = new AddBalanceDto();
+            dto.setOpenId(user.getOpenId());
+            balanceMapper.addBalance(dto);
             add = roleMapper.addRole(user);
         }
         resultVo.resultFlag(resultVo,add,"操作成功","操作失败");

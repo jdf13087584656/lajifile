@@ -22,7 +22,7 @@ public class EquipmentController{
     @Autowired
     private EquipmentService equipmentService;
 
-    private Logger logger = LoggerFactory.getLogger(OrderFormController.class);
+    private Logger logger = LoggerFactory.getLogger(EquipmentController.class);
 
     @ApiOperation(value = "设备新增接口", httpMethod = "POST")
     @RequestMapping(value = "/addEquipment", method = RequestMethod.POST)
