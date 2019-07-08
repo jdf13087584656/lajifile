@@ -112,14 +112,14 @@
             <if test="null != addressee and '' != addressee">
                 addressee = #{addressee},
             </if>
-            <if test="null != areaId and '' != areaId">
-                area_id = #{areaId},
+            <if test="null != areaCode and '' != areaCode">
+                area_code = #{areaCode},
             </if>
-            <if test="null != cityId and '' != cityId">
-                city_id = #{cityId},
+            <if test="null != cityCode and '' != cityCode">
+                city_code = #{cityCode},
             </if>
-            <if test="null != provinceId and '' != provinceId">
-                province_id = #{provinceId},
+            <if test="null != provinceCode and '' != provinceCode">
+                province_code = #{provinceCode},
             </if>
             <if test="null != isDefault and '' != isDefault">
                 is_default = #{isDefault},
@@ -149,8 +149,11 @@
         lpa.addressee as addressee,
         lpa.addressee_tel as addresseeTel,
         lpa.address as address,
+        pro.code as provinceCode,
         pro.name as provincename,
+        cit.code as cidyCode,
         cit.name as cityName,
+        ar.code as areaCode,
         ar.name as areaName,
         lpa.is_default as isDefault
         from lp_address lpa
