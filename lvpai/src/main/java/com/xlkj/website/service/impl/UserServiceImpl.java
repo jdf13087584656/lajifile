@@ -30,10 +30,11 @@ public class UserServiceImpl implements UserService {
             resultVo.resultFail("账号已存在");
             return resultVo;
         }
-
+        String pwd = Md5Util.MD5Encode(userDto.getPassword(),"UTF-8",false);
+        userDto.setPassword(pwd);
         Integer add = userMapper.addUser(userDto);
         resultVo.resultFlag(resultVo,add,"新增成功","新增失败");
-        return null;
+        return resultVo;
     }
 
     @Override
@@ -60,11 +61,15 @@ public class UserServiceImpl implements UserService {
     public ResultVo loginAdmin(UserDto userDto) {
         ResultVo<Object> resultVo = new ResultVo<>();
         UserDto user = userMapper.searchAccount(userDto.getAccount());
-        if (null==user){
+        if (null == user){
             resultVo.resultFail("无此账号,请联系管理员");
             return resultVo;
         }
-        if (!user.getPassword().equals(Md5Util.MD5Encode(user.getPassword(),"UTF-8",false))){
+        if (2 == user.getType()){
+            resultVo.resultFail("此账号无权限登录");
+            return resultVo;
+        }
+        if (!user.getPassword().equals(Md5Util.MD5Encode(userDto.getPassword(),"UTF-8",false))){
             resultVo.resultFail("密码错误请重试");
             return resultVo;
         }
@@ -78,6 +83,24 @@ public class UserServiceImpl implements UserService {
             return resultVo;
         }
         resultVo.setData(token);
+        resultVo.setSuccess(true);
+        return resultVo;
+    }
+
+    //账号登录
+    @Override
+    public ResultVo<UserDto> loginUser(UserDto userDto) {
+        ResultVo<UserDto> resultVo = new ResultVo<>();
+        UserDto user = userMapper.searchAccount(userDto.getAccount());
+        if (null == user){
+            resultVo.resultFail("无此账号,请联系管理员");
+            return resultVo;
+        }
+        if (!user.getPassword().equals(Md5Util.MD5Encode(userDto.getPassword(),"UTF-8",false))){
+            resultVo.resultFail("密码错误请重试");
+            return resultVo;
+        }
+        resultVo.setData(user);
         resultVo.setSuccess(true);
         return resultVo;
     }

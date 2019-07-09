@@ -26,4 +26,7 @@ public class UserDto implements Serializable {
 
     @ApiModelProperty(value = "类型(1,管理员  2,回收员)", name = "type")
     private Integer type;
+
+    @ApiModelProperty(value = "备注", name = "memo")
+    private String memo;
 }

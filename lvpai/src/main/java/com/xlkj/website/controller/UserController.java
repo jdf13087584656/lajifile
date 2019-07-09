@@ -28,7 +28,6 @@ public class UserController {
 
     @ApiOperation(value = "回收员新增", httpMethod = "POST")
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    @AuthPass
     public ResultVo<Integer> addUser(@RequestBody UserDto dto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
         try {
@@ -43,12 +42,11 @@ public class UserController {
 
     @ApiOperation(value = "回收员修改", httpMethod = "POST")
     @RequestMapping(value = "/modifyUser", method = RequestMethod.POST)
-    @AuthPass
     public ResultVo<Integer> modifyUser(@RequestBody UserDto dto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("modifyUser is start"));
-            resultVo = userService.addUser(dto);
+            resultVo = userService.modifyUser(dto);
         } catch (Exception e) {
             resultVo.resultFail("系统异常" + e.getMessage());
             logger.error("modifyUser is error", e.getMessage());
@@ -58,7 +56,6 @@ public class UserController {
 
     @ApiOperation(value = "回收员列表", httpMethod = "POST")
     @RequestMapping(value = "/listUser", method = RequestMethod.POST)
-    @AuthPass
     public ResultVo<List<UserDto>> listUser(@RequestBody SearchUserDto dto) {
         ResultVo<List<UserDto>> resultVo = new ResultVo<>();
         try {
@@ -82,6 +79,21 @@ public class UserController {
         }catch (Exception e){
             resultVo.resultFail("网络异常,登录失败");
             logger.error("adminLogin is error", e.getMessage());
+        }
+        return resultVo;
+    }
+
+    @ApiOperation(value = "pc管理员登录请求接口", httpMethod = "POST")
+    @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
+    @AuthPass
+    public ResultVo<String> userLogin(@RequestBody UserDto userDto) {
+        ResultVo<String> resultVo = new ResultVo<>();
+        try {
+            logger.info(String.format("userLogin is start"));
+            resultVo = userService.loginUser(userDto);
+        }catch (Exception e){
+            resultVo.resultFail("网络异常,登录失败");
+            logger.error("userLogin is error", e.getMessage());
         }
         return resultVo;
     }

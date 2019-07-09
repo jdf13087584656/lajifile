@@ -14,7 +14,8 @@
             type,
             user_name,
             cell_number,
-            is_deleted
+            is_deleted,
+            memo
         ) values (
             #{uid},
             #{account},
@@ -22,7 +23,8 @@
             #{type},
             #{userName},
             #{cellNumber},
-            0
+            0,
+            #{memo}
         );
     </insert>
 
@@ -43,19 +45,19 @@
                 is_deleted = #{isDeleted}
             </if>
         </set>
-        where uid=#{uid}
+        where uid=#{uid} and type=2
     </update>
 
     <!-- 回收员列表 -->
     <select id="listUser" resultType="com.xlkj.website.model.UserDto">
         select
-          uid,
-          account,
-          password,
-          type,
-          user_name,
-          cell_number,
-          is_deleted
+        uid uid,
+        account account,
+        password password,
+        type type,
+        user_name userName,
+        cell_number cellNumber,
+        is_deleted isDeleted
         from lp_user
         where is_deleted=0 and type=2
         <if test="null != userName and '' != userName">
@@ -66,19 +68,17 @@
     <!-- 回收员列表 -->
     <select id="searchAccount" resultType="com.xlkj.website.model.UserDto">
         select
-        uid,
-        account,
-        password,
-        type,
-        user_name,
-        cell_number,
-        is_deleted
+        uid uid,
+        account account,
+        password password,
+        type type,
+        user_name userName,
+        cell_number cellNumber,
+        is_deleted isDeleted
         from lp_user
-        where is_deleted=0 and type=2
+        where is_deleted=0
             and account = #{account}
     </select>
-
-
 
 
 </mapper>
