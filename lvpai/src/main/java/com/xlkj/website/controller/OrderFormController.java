@@ -106,7 +106,7 @@ public class OrderFormController {
     @ApiOperation(value = "货物详情", httpMethod = "POST")
     @RequestMapping(value = "/listOrderDetails", method = RequestMethod.POST)
     @AuthPass
-    public ResultVo<List<BagCargoDto>> listOrderDetails(@RequestBody searchCargoDto dto) {
+    public ResultVo<List<BagCargoDto>> listOrderDetails(@RequestBody SearchCargoDto dto) {
         ResultVo<List<BagCargoDto>> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("listOrderDetails is start"));

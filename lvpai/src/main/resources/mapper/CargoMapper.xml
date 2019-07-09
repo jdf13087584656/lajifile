@@ -51,7 +51,7 @@
     </select>
 
     <!--订单详情货物 -->
-    <select id="listOrderDetails" parameterType="java.lang.Integer" resultType="com.xlkj.website.model.BagCargoDto">
+    <select id="listOrderDetails" parameterType="com.xlkj.website.model.SearchCargoDto" resultType="com.xlkj.website.model.BagCargoDto">
         select
         lgb.bag_code as bagCode,
         lc.cargo_name as cargoName,

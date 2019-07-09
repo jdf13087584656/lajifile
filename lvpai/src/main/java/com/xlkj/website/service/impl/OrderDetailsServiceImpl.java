@@ -4,7 +4,7 @@ import com.xlkj.website.mapper.CargoMapper;
 import com.xlkj.website.model.BagCargoDto;
 import com.xlkj.website.model.ResultVo;
 import com.xlkj.website.model.OrderDetailsDto;
-import com.xlkj.website.model.searchCargoDto;
+import com.xlkj.website.model.SearchCargoDto;
 import com.xlkj.website.service.OrderDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 
     //货物信息列表
     @Override
-    public ResultVo<List<BagCargoDto>> listOrderDetails(searchCargoDto dto) {
+    public ResultVo<List<BagCargoDto>> listOrderDetails(SearchCargoDto dto) {
         ResultVo<List<BagCargoDto>> resultVo = new ResultVo<>();
         List<BagCargoDto> list = cargoMapper.listOrderDetails(dto);
         resultVo.resultSuccess(list);

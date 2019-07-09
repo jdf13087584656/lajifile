@@ -46,21 +46,4 @@ public class AssessController {
         return resultVo;
     }
 
-
-
-
-    @ApiOperation(value = "pc管理员登录请求接口", httpMethod = "POST")
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    @AuthPass
-    public ResultVo<String> adminLogin(@RequestBody UserWithBLOBs userWithBLOBs) {
-        ResultVo<String> resultVo = new ResultVo<>();
-        try {
-            logger.info(String.format("adminLogin is start"));
-            resultVo = roleService.loginAdmin(userWithBLOBs);
-        }catch (Exception e){
-            resultVo.resultFail("网络异常,登录失败");
-            logger.error("assess is error", e.getMessage());
-        }
-        return resultVo;
-    }
 }

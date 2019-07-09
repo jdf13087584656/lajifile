@@ -18,6 +18,7 @@
           price_evaluation,
           is_deleted,
           order_create_time,
+          order_send_time,
           order_get_time,
           order_finish_time,
           create_user_id,
@@ -44,6 +45,7 @@
 		  #{priceEvaluation},
 		  #{isDeleted},
 		  now(),
+		  #{orderSendTime},
 		  #{orderGetTime},
 		  #{orderFinishTime},
 		  #{createUserId},
@@ -90,6 +92,9 @@
 		<if test="null != isDeleted and '' != isDeleted">
 			is_deleted = #{isDeleted},
 		</if>
+		<if test="null != orderSendTime and '' != orderSendTime">
+			order_send_time = #{orderSendTime},
+		</if>
 		<if test="null != orderGetTime and '' != orderGetTime">
 			order_get_time = #{orderGetTime},
 		</if>
@@ -132,13 +137,12 @@
 		lo.is_account AS isAccount,
 		lo.price_evaluation AS priceEvaluation,
 		lo.is_deleted AS isDeleted,
-		lo.order_modify_time AS orderModifyTime,
+		lo.order_send_time AS orderSendTime,
 		lo.order_get_time AS orderGetTime,
 		lo.order_finish_time AS orderFinishTime,
 		lo.create_user_id AS createUserId,
 		lo.modify_user_id AS modifyUserId,
-		DATE_FORMAT(lo.order_create_time,'%Y/%m/%d %H:%i:%S') as orderCreateTime,
-		DATE_FORMAT(lo.order_modify_time,'%Y/%m/%d %H:%i:%S') as orderModifyTime,
+		lo.order_create_time as orderCreateTime,
 		lo.all_price as allPrice,
 		lo.order_state as orderState,
 		lo.sp_state as spState,

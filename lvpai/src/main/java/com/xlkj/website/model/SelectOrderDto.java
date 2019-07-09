@@ -19,6 +19,12 @@ public class SelectOrderDto implements Serializable {
     @ApiModelProperty(value = "结束时间", name = "endTime")
     private String endTime;
 
+    @ApiModelProperty(value = "当前页码", name = "currentPage")
+    private Integer currentPage = 1;
+
+    @ApiModelProperty(value = "每页数据量", name = "pageSize")
+    private Integer pageSize = 10;
+
     @ApiModelProperty(value = "订单状态(1,正在执行. 2,取消. 3,已完成)", name = "orderState")
     private List<Integer> orderState;
 

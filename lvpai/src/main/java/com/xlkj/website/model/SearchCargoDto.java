@@ -6,7 +6,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class searchCargoDto implements Serializable {
+public class SearchCargoDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "垃圾袋编号", name = "bagCode")

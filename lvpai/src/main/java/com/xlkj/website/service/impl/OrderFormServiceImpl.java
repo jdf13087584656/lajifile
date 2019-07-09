@@ -1,5 +1,7 @@
 package com.xlkj.website.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xlkj.website.mapper.OrderFormMapper;
 import com.xlkj.website.model.*;
 import com.xlkj.website.service.BalanceService;
@@ -40,7 +42,7 @@ public class OrderFormServiceImpl implements OrderFormService {
     public ResultVo<Integer> modifyOrderForm(OrderFormAddDto dto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
         Integer mod = orderFormMapper.modifyOrderForm(dto);
-        if(mod > 0 && dto.getOrderState() == 4 && null != dto.getAllPrice()){
+        if(mod > 0 && null != dto.getAllPrice()){
             AddBalanceDto addBalanceDto = new AddBalanceDto();
             addBalanceDto.setChange(dto.getAllPrice());
             balanceService.modifyBalance(addBalanceDto);
@@ -53,8 +55,11 @@ public class OrderFormServiceImpl implements OrderFormService {
     //订单列表
     @Override
     public ResultVo<List<OrderFormAddDto>> listOrderForm(SelectOrderDto dto) {
+        PageHelper.startPage(dto.getCurrentPage(),dto.getPageSize());
         ResultVo<List<OrderFormAddDto>> resultVo = new ResultVo<>();
         List<OrderFormAddDto> orders = orderFormMapper.listOrderForm(dto);
+        PageInfo<OrderFormAddDto> pageInfo = new PageInfo<>(orders);
+        resultVo.setTotal((int) pageInfo.getTotal());
         resultVo.resultSuccess(orders);
         return resultVo;
     }

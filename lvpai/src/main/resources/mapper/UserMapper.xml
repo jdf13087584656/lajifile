@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xlkj.website.mapper.UserMapper">
+
+    <!--回收员新增 -->
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="uid" keyColumn="uid"
+            parameterType="com.xlkj.website.model.UserDto">
+
+        insert into lp_user(
+            uid,
+            account,
+            password,
+            type,
+            user_name,
+            cell_number,
+            is_deleted
+        ) values (
+            #{uid},
+            #{account},
+            #{password},
+            #{type},
+            #{userName},
+            #{cellNumber},
+            0
+        );
+    </insert>
+
+    <!--回收员修改 -->
+    <update id="modifyUser" parameterType="com.xlkj.website.model.UserDto">
+        update lp_user
+        <set>
+            <if test="null != password and '' != password">
+                password = #{password},
+            </if>
+            <if test="null != userName and '' != userName">
+                user_name = #{userName},
+            </if>
+            <if test="null != cellNumber and '' != cellNumber">
+                cell_number = #{cellNumber},
+            </if>
+            <if test="null != isDeleted and '' != isDeleted">
+                is_deleted = #{isDeleted}
+            </if>
+        </set>
+        where uid=#{uid}
+    </update>
+
+    <!-- 回收员列表 -->
+    <select id="listUser" resultType="com.xlkj.website.model.UserDto">
+        select
+          uid,
+          account,
+          password,
+          type,
+          user_name,
+          cell_number,
+          is_deleted
+        from lp_user
+        where is_deleted=0 and type=2
+        <if test="null != userName and '' != userName">
+            and user_name LIKE "%"#{userName}"%"
+        </if>
+    </select>
+
+    <!-- 回收员列表 -->
+    <select id="searchAccount" resultType="com.xlkj.website.model.UserDto">
+        select
+        uid,
+        account,
+        password,
+        type,
+        user_name,
+        cell_number,
+        is_deleted
+        from lp_user
+        where is_deleted=0 and type=2
+            and account = #{account}
+    </select>
+
+
+
+
+</mapper>

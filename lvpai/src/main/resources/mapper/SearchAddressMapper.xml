@@ -77,9 +77,9 @@
           role_id,
           addressee,
           addressee_tel,
-          area_id,
-          city_id,
-          province_id,
+          area_code,
+          city_code,
+          province_code,
           is_deleted,
           is_default,
           create_time,
@@ -92,9 +92,9 @@
 		  #{openId},
 		  #{addressee},
 		  #{addresseeTel},
-		  #{areaId},
-		  #{cityId},
-		  #{provinceId},
+		  #{areaCode},
+		  #{cityCode},
+		  #{provinceCode},
 		  #{isDeleted},
 		  #{isDefault},
 		  now(),
@@ -158,9 +158,9 @@
         lpa.is_default as isDefault
         from lp_address lpa
         left join lp_role lpr on lpa.role_id=lpr.id
-        left join province pro on lpa.province_id=pro.id
-        left join city cit on lpa.city_id=cit.id
-        left join area ar on lpa.area_id = ar.id
+        left join province pro on lpa.province_code=pro.code
+        left join city cit on lpa.city_code=cit.code
+        left join area ar on lpa.area_code = ar.code
         where lpa.is_deleted = 0
         <if test="null != openId and '' != openId">
             and lpa.role_id = #{openId}

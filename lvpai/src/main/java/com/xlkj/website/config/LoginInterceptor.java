@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 import com.xlkj.website.annotation.AuthPass;
 import com.xlkj.website.model.ResultVo;
-import com.xlkj.website.model.User;
 import com.xlkj.website.model.UserWithBLOBs;
 import com.xlkj.website.util.JSonUtils;
 import com.xlkj.website.util.RedisUtil;
