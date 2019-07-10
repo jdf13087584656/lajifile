@@ -83,9 +83,8 @@ public class UserController {
         return resultVo;
     }
 
-    @ApiOperation(value = "pc管理员登录请求接口", httpMethod = "POST")
+    @ApiOperation(value = "回收员登录请求接口", httpMethod = "POST")
     @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
-    @AuthPass
     public ResultVo<String> userLogin(@RequestBody UserDto userDto) {
         ResultVo<String> resultVo = new ResultVo<>();
         try {
