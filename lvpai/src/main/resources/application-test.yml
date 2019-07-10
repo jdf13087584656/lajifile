@@ -14,14 +14,12 @@ logging:
 #        security: info
 
 system.path:
-  basePath: /data/hse/data/files    # 所有文件根目录
-  subpath: point,picture,voice,app,learning   #子目录
-  point: point
+  basePath: /app/files    # 所有文件根目录
+  activity : activity
   picture: picture
   voice: voice
   app: app
-  learning: learning
-  server-address: 39.104.113.61 #附件下载地址
+  server-address: 59.110.225.21 #附件下载地址
 
 
 
@@ -35,9 +33,9 @@ spring:
     # Redis服务器地址
     host: 127.0.0.1
     # Redis服务器连接端口
-    port: 6379
+    port: 6073
     # Redis服务器连接密码（默认为空）
-    password: 123456
+    password: root!2019!
     # 连接池最大连接数（使用负值表示没有限制）
     pool:
     max-active: 1
