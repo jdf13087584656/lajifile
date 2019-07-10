@@ -56,25 +56,25 @@ public class UserController {
 
     @ApiOperation(value = "回收员列表", httpMethod = "POST")
     @RequestMapping(value = "/listUsers", method = RequestMethod.POST)
-    public ResultVo<List<UserDto>> listUser(@RequestBody SearchUserDto dto) {
+    public ResultVo<List<UserDto>> listUsers(@RequestBody SearchUserDto dto) {
         ResultVo<List<UserDto>> resultVo = new ResultVo<>();
         try {
-            logger.info(String.format("listUser is start"));
+            logger.info(String.format("listUsers is start"));
             resultVo = userService.listUsers(dto);
         } catch (Exception e) {
             resultVo.resultFail("系统异常" + e.getMessage());
-            logger.error("listUser is error", e.getMessage());
+            logger.error("listUsers is error", e.getMessage());
         }
         return resultVo;
     }
 
     @ApiOperation(value = "回收员详情", httpMethod = "POST")
     @RequestMapping(value = "/listUser", method = RequestMethod.POST)
-    public ResultVo<UserDto> listUser(@RequestBody Integer uid) {
-        ResultVo<UserDto> resultVo = new ResultVo<>();
+    public ResultVo<List<UserDto>> listUser(@RequestBody SearchUserDto dto) {
+        ResultVo<List<UserDto>> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("listUser is start"));
-            resultVo = userService.listUser(uid);
+            resultVo = userService.listUser(dto);
         } catch (Exception e) {
             resultVo.resultFail("系统异常" + e.getMessage());
             logger.error("listUser is error", e.getMessage());

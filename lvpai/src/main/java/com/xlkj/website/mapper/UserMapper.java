@@ -14,9 +14,11 @@ public interface UserMapper {
 
     List<UserDto> listUsers(SearchUserDto searchUserDto);
 
-    UserDto listUser(Integer uid);
+    List<UserDto> listUser(SearchUserDto searchUserDto);
 
     Integer quantityCompletion(Integer uid);
+
+    Integer unfinished(Integer uid);
 
     UserDto searchAccount(String account);
 }

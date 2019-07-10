@@ -104,7 +104,7 @@
     </select>
 
     <!--用户列表 -->
-    <select id="listRoles" parameterType="java.lang.Integer" resultType="com.xlkj.website.model.UserWithBLOBs">
+    <select id="listRoles" parameterType="com.xlkj.website.model.SearchUserDto" resultType="com.xlkj.website.model.UserWithBLOBs">
         select
         lpr.id as id,
         lpr.open_id as openId,
@@ -119,6 +119,10 @@
         lpr.province as province
         from lp_role lpr
         where 1=1
+        <if test="null != keywords and '' != keywords">
+            AND lpr.nick_name = #{keywords},
+        </if>
+
     </select>
 
 

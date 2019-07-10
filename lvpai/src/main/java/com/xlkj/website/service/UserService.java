@@ -14,7 +14,7 @@ public interface UserService {
 
     ResultVo<List<UserDto>> listUsers(SearchUserDto searchUserDto);
 
-    ResultVo<UserDto> listUser(Integer uid);
+    ResultVo<List<UserDto>> listUser(SearchUserDto searchUserDto);
 
     ResultVo loginAdmin(UserDto userDto);
 

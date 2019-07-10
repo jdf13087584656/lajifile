@@ -30,6 +30,15 @@ public class UserDto implements Serializable {
     @ApiModelProperty(value = "备注", name = "memo")
     private String memo;
 
+    @ApiModelProperty(value = "是否删除(0 正常   1删除)", name = "isDeleted")
+    private Integer isDeleted;
+
     @ApiModelProperty(value = "回收员已完成数量", name = "quantityCompletion")
     private Integer quantityCompletion;
+
+    @ApiModelProperty(value = "回收员未完成数量", name = "unfinished")
+    private Integer unfinished;
+
+    @ApiModelProperty(value = "创建时间", name = "createTime")
+    private String createTime;
 }

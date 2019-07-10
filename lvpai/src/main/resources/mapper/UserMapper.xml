@@ -15,7 +15,8 @@
             user_name,
             cell_number,
             is_deleted,
-            memo
+            memo,
+            create_time
         ) values (
             #{uid},
             #{account},
@@ -24,7 +25,8 @@
             #{userName},
             #{cellNumber},
             0,
-            #{memo}
+            #{memo},
+            now()
         );
     </insert>
 
@@ -49,7 +51,7 @@
     </update>
 
     <!-- 回收员列表 -->
-    <select id="listUsers" resultType="com.xlkj.website.model.UserDto">
+    <select id="listUsers" parameterType="com.xlkj.website.model.SearchUserDto" resultType="com.xlkj.website.model.UserDto">
         select
         uid uid,
         account account,
@@ -57,27 +59,38 @@
         type type,
         user_name userName,
         cell_number cellNumber,
-        is_deleted isDeleted
+        is_deleted isDeleted,
+        memo memo,
+        create_time createTime
         from lp_user
         where is_deleted=0 and type=2
-        <if test="null != userName and '' != userName">
-            and user_name LIKE "%"#{userName}"%"
+        <if test="null != keywords and '' != keywords">
+            and user_name LIKE "%"#{keywords}"%"
         </if>
+        <if test="null != keywords and '' != keywords">
+            and account LIKE "%"#{keywords}"%"
+        </if>
+        order by create_time desc
     </select>
 
     <!-- 回收员详情 -->
-    <select id="listUser" resultType="com.xlkj.website.model.UserDto">
+    <select id="listUser" parameterType="com.xlkj.website.model.SearchUserDto" resultType="com.xlkj.website.model.UserDto">
         select
-        uid uid,
         account account,
-        password password,
-        type type,
         user_name userName,
         cell_number cellNumber,
-        is_deleted isDeleted
-        from lp_user
-        where is_deleted=0 and type=2
-        and uid = {uid}
+        uuu.a quantityCompletion,
+        mmm.a unfinished
+        from lp_user lu
+        left join(select count(oid) a,receive_id uid from lp_order where order_state=4 group by uid)uuu on uuu.uid=lu.uid
+        left join(select count(oid) a,receive_id uid from lp_order where order_state in (2,3) group by uid)mmm on mmm.uid=lu.uid
+        where lu.is_deleted=0 and lu.type=2
+        <if test="null != keywords and '' != keywords">
+            and user_name LIKE "%"#{keywords}"%"
+        </if>
+        <if test="null != keywords and '' != keywords">
+            and account LIKE "%"#{keywords}"%"
+        </if>
     </select>
 
     <!-- 回收员已完成数量 -->
@@ -85,7 +98,14 @@
         select
         count(oid)
         from lp_order
-        where receive_id = #{uid} and lp.order_state=4
+        where receive_id = #{uid} and order_state=4
+    </select>
+    <!-- 回收员未完成数量 -->
+    <select id="unfinished" resultType="java.lang.Integer">
+        select
+        count(oid)
+        from lp_order
+        where receive_id = #{uid} and order_state in(2,3)
     </select>
 
     <!-- 账号验证 -->

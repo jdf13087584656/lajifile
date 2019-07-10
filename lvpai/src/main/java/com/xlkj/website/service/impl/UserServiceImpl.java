@@ -40,9 +40,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResultVo<Integer> modifyUser(UserDto userDto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
+        if ((null != userDto.getPassword())) {
+            String pwd = Md5Util.MD5Encode(userDto.getPassword(), "UTF-8", false);
+            userDto.setPassword(pwd);
+        }
         Integer mod = userMapper.modifyUser(userDto);
         resultVo.resultFlag(resultVo,mod,"操作成功","操作失败");
-        return null;
+        return resultVo;
     }
 
     @Override
@@ -55,12 +59,14 @@ public class UserServiceImpl implements UserService {
         resultVo.resultSuccess(userDtos);
         return resultVo;
     }
+
     @Override
-    public ResultVo<UserDto> listUser(Integer uid) {
-        ResultVo<UserDto> resultVo = new ResultVo<>();
-        UserDto userDto = userMapper.listUser(uid);
-        Integer num = userMapper.quantityCompletion(uid);
-        userDto.setQuantityCompletion(num);
+    public ResultVo<List<UserDto>> listUser(SearchUserDto searchUserDto) {
+        PageHelper.startPage(searchUserDto.getCurrentPage(),searchUserDto.getPageSize());
+        ResultVo<List<UserDto>> resultVo = new ResultVo<>();
+        List<UserDto> userDto = userMapper.listUser(searchUserDto);
+        PageInfo<UserDto> pageInfo = new PageInfo<>(userDto);
+        resultVo.setTotal((int)pageInfo.getTotal());
         resultVo.resultSuccess(userDto);
         return resultVo;
     }

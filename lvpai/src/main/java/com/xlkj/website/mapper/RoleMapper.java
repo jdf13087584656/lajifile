@@ -1,5 +1,6 @@
 package com.xlkj.website.mapper;
 
+import com.xlkj.website.model.SearchUserDto;
 import com.xlkj.website.model.UserWithBLOBs;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,7 @@ public interface RoleMapper {
 
     UserWithBLOBs listRole(String openId);
 
-    List<UserWithBLOBs> listRoles();
+    List<UserWithBLOBs> listRoles(SearchUserDto searchUserDto);
 
     Integer quantityCompletion(String openId);
 }
