@@ -17,6 +17,10 @@ public class CargoServiceImpl implements CargoService {
     @Override
     public ResultVo<Integer> addCargo(CargoDto dto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
+        if(null != cargoMapper.searchCargo(dto.getCargoName())){
+            resultVo.resultFail("货物名重复");
+            return resultVo;
+        }
         Integer add = cargoMapper.addCargo(dto);
         resultVo.resultFlag(resultVo,add,"添加成功","添加失败");
         return resultVo;

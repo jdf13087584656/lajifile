@@ -17,6 +17,8 @@ public interface CargoMapper {
 
     List<CargoDto> listCargo();
 
+    CargoDto searchCargo(String cargoName);
+
     List<BagCargoDto> listOrderDetails(SearchCargoDto dto);
 
     Integer addOrderDetails(OrderDetailsDto orderDetailsDto);
