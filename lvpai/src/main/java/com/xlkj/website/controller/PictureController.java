@@ -136,13 +136,28 @@ public class PictureController {
             List<FileInfo> pictures = fileInfoMapper.getPictures(types);
             resultVo.resultSuccess(pictures);
         }catch (Exception e){
-            resultVo.resultFail("网络异常,上传失败");
+            resultVo.resultFail("网络异常,修改失败");
             logger.error("getPictures is error", e.getMessage());
         }
+
         return resultVo;
     }
 
 
-
+    @ApiOperation(value = "文件修改接口", httpMethod = "POST")
+    @RequestMapping(value = "/updatePic")
+    @AuthPass
+    public ResultVo updatePic(@RequestBody FileInfo fileInfo) {
+        ResultVo resultVo = new ResultVo<>();
+        try {
+            logger.info(String.format("updatePic is start"));
+            int pictures = fileInfoMapper.updatePic(fileInfo);
+            resultVo.resultFlag(resultVo,pictures,"修改成功","修改失败");
+        }catch (Exception e){
+            resultVo.resultFail("网络异常,修改失败");
+            logger.error("updatePic is error", e.getMessage());
+        }
+        return resultVo;
+    }
 }
 
