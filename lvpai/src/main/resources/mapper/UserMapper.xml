@@ -65,7 +65,7 @@
         </if>
     </select>
 
-    <!-- 回收员列表 -->
+    <!-- 账号验证 -->
     <select id="searchAccount" resultType="com.xlkj.website.model.UserDto">
         select
         uid uid,
