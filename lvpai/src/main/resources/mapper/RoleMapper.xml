@@ -90,8 +90,10 @@
         lpr.gender as gender,
         lpr.city as city,
         lpr.country as country,
-        lpr.province as province
+        lpr.province as province,
+        lb.balance as balance
         from lp_role lpr
+        left join lp_balance lb on lpr.open_id=lb.open_id
         where lpr.open_id = #{openId}
     </select>
 
@@ -100,7 +102,7 @@
         select
         count(oid)
         from lp_order
-        where open_id = #{openId} and lp.order_state=4
+        where open_id = #{openId} and order_state=4
     </select>
 
     <!--用户列表 -->

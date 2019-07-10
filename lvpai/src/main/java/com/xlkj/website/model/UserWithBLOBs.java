@@ -3,6 +3,8 @@ package com.xlkj.website.model;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 public class UserWithBLOBs {
 
@@ -59,5 +61,8 @@ public class UserWithBLOBs {
 
     @ApiModelProperty(value = "用户已完成数量", name = "quantityCompletion")
     private Integer quantityCompletion;
+
+    @ApiModelProperty(value = "余额", name = "balance")
+    private BigDecimal balance;
 
 }

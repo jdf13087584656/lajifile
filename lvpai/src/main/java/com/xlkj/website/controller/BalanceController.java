@@ -40,7 +40,7 @@ public class BalanceController {
     @ApiOperation(value = "余额查询", httpMethod = "POST")
     @RequestMapping(value = "/searchBalance", method = RequestMethod.POST)
     @AuthPass
-    public ResultVo<AddBalanceDto> searchBalance(@RequestBody String openId) {
+    public ResultVo<AddBalanceDto> searchBalance(@RequestParam String openId) {
         ResultVo<AddBalanceDto> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("searchBalance is start"));
