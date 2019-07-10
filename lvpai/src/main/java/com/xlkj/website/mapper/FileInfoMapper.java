@@ -21,4 +21,6 @@ public interface FileInfoMapper {
 
 
   List<FileInfo> getPictures(Integer types);
+
+  int updatePic(FileInfo fileInfo);
 }

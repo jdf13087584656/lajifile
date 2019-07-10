@@ -28,6 +28,31 @@
         1
 		);
 	</insert>
+    <update id="updatePic" parameterType="com.xlkj.website.model.FileInfo">
+    update fileinfo
+        <set>
+        <if test="null != filepath and '' != filepath">
+            filepath = #{filepath},
+        </if>
+        <if test="null != memo and '' != memo">
+            memo = #{memo},
+        </if>
+        <if test="null != type">
+            e_state = #{eState},
+        </if>
+        <if test="null != hurl and '' != hurl">
+            hurl = #{hurl},
+        </if>
+        <if test="null != filename and '' != filename">
+            memo = #{memo},
+        </if>
+        <if test="null != filestate">
+            filestate = #{filestate},
+        </if>
+        fileid = #{fileid}
+    </set>
+
+    </update>
     <select id="getFileByAdr" resultType="com.xlkj.website.model.FileInfo">
         select * from fileinfo WHERE filepath=#{filepath};
     </select>
