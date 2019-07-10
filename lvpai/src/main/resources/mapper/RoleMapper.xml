@@ -95,6 +95,14 @@
         where lpr.open_id = #{openId}
     </select>
 
+    <!--完成数量-->
+    <select id="quantityCompletion" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select
+        count(oid)
+        from lp_order
+        where open_id = #{openId} and lp.order_state=4
+    </select>
+
     <!--用户列表 -->
     <select id="listRoles" parameterType="java.lang.Integer" resultType="com.xlkj.website.model.UserWithBLOBs">
         select

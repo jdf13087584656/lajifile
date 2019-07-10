@@ -12,7 +12,9 @@ public interface UserService {
 
     ResultVo<Integer> modifyUser(UserDto userDto);
 
-    ResultVo<List<UserDto>> listUser(SearchUserDto searchUserDto);
+    ResultVo<List<UserDto>> listUsers(SearchUserDto searchUserDto);
+
+    ResultVo<UserDto> listUser(Integer uid);
 
     ResultVo loginAdmin(UserDto userDto);
 

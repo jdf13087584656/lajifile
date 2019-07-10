@@ -48,10 +48,13 @@ public class RoleServiceImpl implements RoleService {
     }
 
 
+    //用户信息详情
     @Override
     public ResultVo<UserWithBLOBs> listRole(String openId) {
         ResultVo<UserWithBLOBs> resultVo = new ResultVo<>();
         UserWithBLOBs user = roleMapper.listRole(openId);
+        Integer quantityCompletion = roleMapper.quantityCompletion(openId);
+        user.setQuantityCompletion(quantityCompletion);
         resultVo.resultSuccess(user);
         return resultVo;
     }

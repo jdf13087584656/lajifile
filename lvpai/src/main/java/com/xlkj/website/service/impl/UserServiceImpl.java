@@ -46,13 +46,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResultVo<List<UserDto>> listUser(SearchUserDto searchUserDto) {
+    public ResultVo<List<UserDto>> listUsers(SearchUserDto searchUserDto) {
         PageHelper.startPage(searchUserDto.getCurrentPage(),searchUserDto.getPageSize());
         ResultVo<List<UserDto>> resultVo = new ResultVo<>();
-        List<UserDto> userDtos = userMapper.listUser(searchUserDto);
+        List<UserDto> userDtos = userMapper.listUsers(searchUserDto);
         PageInfo<UserDto> pageInfo = new PageInfo<>(userDtos);
         resultVo.setTotal((int)pageInfo.getTotal());
         resultVo.resultSuccess(userDtos);
+        return resultVo;
+    }
+    @Override
+    public ResultVo<UserDto> listUser(Integer uid) {
+        ResultVo<UserDto> resultVo = new ResultVo<>();
+        UserDto userDto = userMapper.listUser(uid);
+        Integer num = userMapper.quantityCompletion(uid);
+        userDto.setQuantityCompletion(num);
+        resultVo.resultSuccess(userDto);
         return resultVo;
     }
 

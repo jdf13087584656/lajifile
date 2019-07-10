@@ -17,4 +17,6 @@ public interface RoleMapper {
     UserWithBLOBs listRole(String openId);
 
     List<UserWithBLOBs> listRoles();
+
+    Integer quantityCompletion(String openId);
 }

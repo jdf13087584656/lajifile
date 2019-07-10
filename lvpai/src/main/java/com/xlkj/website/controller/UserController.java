@@ -22,7 +22,7 @@ import java.util.List;
 @CrossOrigin
 public class UserController {
 
-    private Logger logger = LoggerFactory.getLogger(AddressController.class);
+    private Logger logger = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserService userService;
 
@@ -55,12 +55,26 @@ public class UserController {
     }
 
     @ApiOperation(value = "回收员列表", httpMethod = "POST")
-    @RequestMapping(value = "/listUser", method = RequestMethod.POST)
+    @RequestMapping(value = "/listUsers", method = RequestMethod.POST)
     public ResultVo<List<UserDto>> listUser(@RequestBody SearchUserDto dto) {
         ResultVo<List<UserDto>> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("listUser is start"));
-            resultVo = userService.listUser(dto);
+            resultVo = userService.listUsers(dto);
+        } catch (Exception e) {
+            resultVo.resultFail("系统异常" + e.getMessage());
+            logger.error("listUser is error", e.getMessage());
+        }
+        return resultVo;
+    }
+
+    @ApiOperation(value = "回收员详情", httpMethod = "POST")
+    @RequestMapping(value = "/listUser", method = RequestMethod.POST)
+    public ResultVo<UserDto> listUser(@RequestBody Integer uid) {
+        ResultVo<UserDto> resultVo = new ResultVo<>();
+        try {
+            logger.info(String.format("listUser is start"));
+            resultVo = userService.listUser(uid);
         } catch (Exception e) {
             resultVo.resultFail("系统异常" + e.getMessage());
             logger.error("listUser is error", e.getMessage());

@@ -29,4 +29,7 @@ public class UserDto implements Serializable {
 
     @ApiModelProperty(value = "备注", name = "memo")
     private String memo;
+
+    @ApiModelProperty(value = "回收员已完成数量", name = "quantityCompletion")
+    private Integer quantityCompletion;
 }

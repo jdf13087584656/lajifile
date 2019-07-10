@@ -57,4 +57,7 @@ public class UserWithBLOBs {
     @ApiModelProperty(value = "修改时间", name = "modifyTime")
     private String modifyTime;
 
+    @ApiModelProperty(value = "用户已完成数量", name = "quantityCompletion")
+    private Integer quantityCompletion;
+
 }

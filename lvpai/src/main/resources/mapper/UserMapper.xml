@@ -49,7 +49,7 @@
     </update>
 
     <!-- 回收员列表 -->
-    <select id="listUser" resultType="com.xlkj.website.model.UserDto">
+    <select id="listUsers" resultType="com.xlkj.website.model.UserDto">
         select
         uid uid,
         account account,
@@ -63,6 +63,29 @@
         <if test="null != userName and '' != userName">
             and user_name LIKE "%"#{userName}"%"
         </if>
+    </select>
+
+    <!-- 回收员详情 -->
+    <select id="listUser" resultType="com.xlkj.website.model.UserDto">
+        select
+        uid uid,
+        account account,
+        password password,
+        type type,
+        user_name userName,
+        cell_number cellNumber,
+        is_deleted isDeleted
+        from lp_user
+        where is_deleted=0 and type=2
+        and uid = {uid}
+    </select>
+
+    <!-- 回收员已完成数量 -->
+    <select id="quantityCompletion" resultType="java.lang.Integer">
+        select
+        count(oid)
+        from lp_order
+        where receive_id = #{uid} and lp.order_state=4
     </select>
 
     <!-- 账号验证 -->
