@@ -44,14 +44,14 @@
             hurl = #{hurl},
         </if>
         <if test="null != filename and '' != filename">
-            memo = #{memo},
+            filename = #{filename},
         </if>
         <if test="null != filestate">
             filestate = #{filestate},
         </if>
-        fileid = #{fileid}
-    </set>
 
+    </set>
+    where   fileid = #{fileid}
     </update>
     <select id="getFileByAdr" resultType="com.xlkj.website.model.FileInfo">
         select * from fileinfo WHERE filepath=#{filepath};
