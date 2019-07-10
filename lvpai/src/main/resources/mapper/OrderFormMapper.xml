@@ -131,7 +131,9 @@
 		lo.order_code as orderCode,
 		lo.open_id as openId,
 		lo.receive_id AS receiveId,
+		lu.user_name as userName,
 		lo.admin_id AS adminId,
+		lu2.user_name as adminName,
 		lo.address_id AS addressId,
 		lo.appointment_time AS appointmentTime,
 		lo.is_account AS isAccount,
@@ -146,8 +148,17 @@
 		lo.all_price as allPrice,
 		lo.order_state as orderState,
 		lo.sp_state as spState,
-		lo.order_type as orderType
+		lo.order_type as orderType,
+		ar.name as areaName,
+		pro.name as provinceName,
+		cit.name as cityName
 		from lp_order lo
+		left join lp_user lu on lo.receive_id=lu.uid
+		left join lp_user lu2 on lo.admin_id=lu2.uid
+		left join lp_address la on lo.address_id=la.aid
+		left join area ar on la.area_code=ar.code
+		left join province pro on la.province_code=pro.code
+		left join city cit on la.city_code=cit.code
 		where 1=1
 		<if test="null != oid and oid != ''">
 			AND lo.oid = #{oid}
@@ -158,8 +169,8 @@
 		<if test="null != orderType and orderType != ''">
 			AND lo.order_type = #{orderType}
 		</if>
-		<if test="null != receiveId and receiveId != ''">
-			AND lo.receive_id = #{receiveId}
+		<if test="null != uid and uid != ''">
+			AND lo.receive_id = #{uid}
 		</if>
 		<if test="null != openId and openId != ''">
 			AND lo.open_id = #{openId}

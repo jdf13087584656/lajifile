@@ -31,8 +31,8 @@ public class SelectOrderDto implements Serializable {
     @ApiModelProperty(value = "删除标志(1,正常. 2,已删除)", name = "isDeleted")
     private Integer isDeleted;
 
-    @ApiModelProperty(value = "回收员Id", name = "receiveId")
-    private Integer receiveId;
+    @ApiModelProperty(value = "回收员Id", name = "uid")
+    private Integer uid;
 
     @ApiModelProperty(value = "openId", name = "openId")
     private String openId;
