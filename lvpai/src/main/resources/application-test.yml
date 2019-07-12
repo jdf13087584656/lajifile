@@ -1,5 +1,9 @@
 server:
   port: 10010
+  ssl:
+      key-store: classpath:2164218_lala-lucky.xyz.pfx
+      key-store-password: T4ErrlVq
+      keyStoreType: PKCS12
 
   tomcat:
     max-http-header-size: 8192
