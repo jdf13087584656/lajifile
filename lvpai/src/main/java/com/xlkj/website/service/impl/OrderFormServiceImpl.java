@@ -10,6 +10,7 @@ import com.xlkj.website.util.NumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -41,12 +42,27 @@ public class OrderFormServiceImpl implements OrderFormService {
     @Override
     public ResultVo<Integer> modifyOrderForm(OrderFormAddDto dto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
-        Integer mod = orderFormMapper.modifyOrderForm(dto);
-        if(mod > 0 && null != dto.getAllPrice()){
-            AddBalanceDto addBalanceDto = new AddBalanceDto();
-            addBalanceDto.setChange(dto.getAllPrice());
-            balanceService.modifyBalance(addBalanceDto);
+        BigDecimal a = new BigDecimal(0);
+        Integer mod;
+        //当传入oids不为null时,仅为管理员派单操作
+        if(null != dto.getOids() && dto.getOids().size() > 0){
+            for(int i=0;i<dto.getOids().size();i++){
+                dto.setOid(dto.getOids().get(i));
+                mod = orderFormMapper.modifyOrderForm(dto);
+                resultVo.resultFlag(resultVo,mod,"修改成功","修改失败");
+            }
+            return resultVo;
         }
+        //正常修改操作
+        mod = orderFormMapper.modifyOrderForm(dto);
+//        //如果有传入订单价格,执行修改余额操作
+//        if(mod > 0 && null != dto.getAllPrice()){
+//            AddBalanceDto addBalanceDto = new AddBalanceDto();
+//            addBalanceDto.setChange(dto.getAllPrice());
+//            if(null != addBalanceDto.getChange()){
+//                balanceService.modifyBalance(addBalanceDto);
+//            }
+//        }
         resultVo.resultFlag(resultVo,mod,"修改成功","修改失败");
         return resultVo;
     }

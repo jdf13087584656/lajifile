@@ -67,4 +67,34 @@ public class BalanceController {
         return resultVo;
     }
 
+    @ApiOperation(value = "生成秘钥", httpMethod = "POST")
+    @RequestMapping(value = "/secretKey", method = RequestMethod.POST)
+    @AuthPass
+    public ResultVo<String> secretKey(@RequestParam String stime) {
+        ResultVo<String> resultVo = new ResultVo<>();
+        try {
+            logger.info(String.format("secretKey is start"));
+            resultVo = balanceService.secretKey(stime);
+        } catch (Exception e) {
+            resultVo.resultFail("系统异常" + e.getMessage());
+            logger.error("secretKey is error", e.getMessage());
+        }
+        return resultVo;
+    }
+
+    @ApiOperation(value = "查询秘钥", httpMethod = "POST")
+    @RequestMapping(value = "/searchSecretKey", method = RequestMethod.POST)
+    @AuthPass
+    public ResultVo<Integer> searchSecretKey(@RequestParam String stime,@RequestParam String secretKey) {
+        ResultVo<Integer> resultVo = new ResultVo<>();
+        try {
+            logger.info(String.format("searchSecretKey is start"));
+            resultVo = balanceService.searchSecretKey(stime,secretKey);
+        } catch (Exception e) {
+            resultVo.resultFail("系统异常" + e.getMessage());
+            logger.error("searchSecretKey is error", e.getMessage());
+        }
+        return resultVo;
+    }
+
 }

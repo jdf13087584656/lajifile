@@ -31,7 +31,7 @@
     </select>
 
 
-    <!-- 货物修改 -->
+    <!-- 余额修改 -->
     <update id="modifyBalance" parameterType="com.xlkj.website.model.AddBalanceDto">
         UPDATE lp_balance
         set
@@ -39,5 +39,30 @@
         WHERE
             open_id = #{openId};
     </update>
+
+    <!--秘钥新增 -->
+    <insert id="secretKey">
+		INSERT INTO secret_key (
+		  secret_id,
+		  stime,
+		  secret_key
+		)
+		VALUES
+		(
+		  null,
+		  #{stime},
+		  #{secretKey}
+		);
+	</insert>
+
+    <!--秘钥查询 -->
+    <select id="searchSecretKey"  resultType="java.lang.Integer">
+        select
+        COUNT(secret_id)
+        from secret_key
+        where stime = #{stime} and secret_key=#{secretKey}
+    </select>
+
+
 
 </mapper>

@@ -10,4 +10,8 @@ public interface BalanceService {
     ResultVo<AddBalanceDto> searchBalance(String openId);
 
     ResultVo<Integer> modifyBalance(AddBalanceDto dto);
+
+    ResultVo<String> secretKey(String time);
+
+    ResultVo<Integer> searchSecretKey(String stime,String secretKey);
 }

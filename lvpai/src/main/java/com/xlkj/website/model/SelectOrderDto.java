@@ -39,4 +39,7 @@ public class SelectOrderDto implements Serializable {
 
     @ApiModelProperty(value = "订单id", name = "oid")
     private Integer oid;
+
+    @ApiModelProperty(value = "关键字", name = "keywords")
+    private String keywords;
 }

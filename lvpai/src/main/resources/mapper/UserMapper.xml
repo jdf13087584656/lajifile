@@ -65,10 +65,7 @@
         from lp_user
         where is_deleted=0 and type=2
         <if test="null != keywords and '' != keywords">
-            and user_name LIKE "%"#{keywords}"%"
-        </if>
-        <if test="null != keywords and '' != keywords">
-            and account LIKE "%"#{keywords}"%"
+            and (user_name LIKE "%"#{keywords}"%" or account LIKE "%"#{keywords}"%")
         </if>
         order by create_time desc
     </select>
@@ -76,9 +73,10 @@
     <!-- 回收员详情 -->
     <select id="listUser" parameterType="com.xlkj.website.model.SearchUserDto" resultType="com.xlkj.website.model.UserDto">
         select
-        account account,
-        user_name userName,
-        cell_number cellNumber,
+        lu.uid uid,
+        lu.account account,
+        lu.user_name userName,
+        lu.cell_number cellNumber,
         uuu.a quantityCompletion,
         mmm.a unfinished
         from lp_user lu

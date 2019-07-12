@@ -11,6 +11,7 @@ import com.xlkj.website.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -80,7 +81,7 @@ public class UserServiceImpl implements UserService {
             resultVo.resultFail("无此账号,请联系管理员");
             return resultVo;
         }
-        if (2 == user.getType()){
+        if (1 != user.getType()){
             resultVo.resultFail("此账号无权限登录");
             return resultVo;
         }
@@ -97,7 +98,9 @@ public class UserServiceImpl implements UserService {
             resultVo.resultFail("网络异常,请联系管理员");
             return resultVo;
         }
-        resultVo.setData(token);
+        HashMap<String,Integer> map = new HashMap<>();
+        map.put(token,user.getUid());
+        resultVo.setData(map);
         resultVo.setSuccess(true);
         return resultVo;
     }

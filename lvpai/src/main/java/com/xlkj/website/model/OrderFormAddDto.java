@@ -15,6 +15,9 @@ public class OrderFormAddDto implements Serializable {
     @ApiModelProperty(value = "订单id,修改时传", name = "oid")
     private Integer oid;
 
+    @ApiModelProperty(value = "订单id,修改时传", name = "oids")
+    private List<Integer> oids;
+
     @ApiModelProperty(value = "订单号", name = "orderCode")
     private String orderCode;
 
@@ -31,7 +34,7 @@ public class OrderFormAddDto implements Serializable {
     private Integer adminId;
 
     @ApiModelProperty(value = "管理员姓名", name = "adminName")
-    private Integer adminName;
+    private String adminName;
 
     @ApiModelProperty(value = "地址id", name = "addressId")
     private Integer addressId;
@@ -66,13 +69,13 @@ public class OrderFormAddDto implements Serializable {
     @ApiModelProperty(value = "修改人id", name = "modifyUserId")
     private Integer modifyUserId;
 
-    @ApiModelProperty(value = "订单状态(1,草稿 2,正在执行, 3,已揽件, 4,完成, 5,异常)", name = "orderState")
+    @ApiModelProperty(value = "订单状态(1,草稿 2,正在执行, 3,已揽件, 4,完成, 5,异常 6,驳回)", name = "orderState")
     private Integer orderState;
 
     @ApiModelProperty(value = "审核状态(1,草稿 2,待审核 3,审核通过 4,审核驳回)", name = "spState")
     private Integer spState;
 
-    @ApiModelProperty(value = "审核意见", name = "spMsg")
+    @ApiModelProperty(value = "驳回意见", name = "spMsg")
     private String spMsg;
 
 //    @ApiModelProperty(value = "垃圾袋编号", name = "rubbishBagCodes")
@@ -101,5 +104,14 @@ public class OrderFormAddDto implements Serializable {
 
     @ApiModelProperty(value = "县区名", name = "areaName")
     private String areaName;
+
+    @ApiModelProperty(value = "订单客户名", name = "addressee")
+    private String addressee;
+
+    @ApiModelProperty(value = "订单详细地址", name = "address")
+    private String address;
+
+    @ApiModelProperty(value = "订单电话", name = "addresseeTel")
+    private String addresseeTel;
 
 }

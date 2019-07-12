@@ -2,6 +2,7 @@ package com.xlkj.website.mapper;
 
 import com.xlkj.website.model.AddBalanceDto;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface BalanceMapper {
@@ -10,4 +11,8 @@ public interface BalanceMapper {
     AddBalanceDto searchBalance(String openId);
 
     Integer modifyBalance(AddBalanceDto dto);
+
+    Integer secretKey(@Param("stime") String stime,@Param("secretKey") String secretKey);
+
+    Integer searchSecretKey(@Param("stime") String stime,@Param("secretKey") String secretKey);
 }

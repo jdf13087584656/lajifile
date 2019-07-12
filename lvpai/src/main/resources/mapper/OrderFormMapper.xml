@@ -135,6 +135,9 @@
 		lo.admin_id AS adminId,
 		lu2.user_name as adminName,
 		lo.address_id AS addressId,
+		la.addressee as addressee,
+		la.address as address,
+		la.addressee_tel as addresseeTel,
 		lo.appointment_time AS appointmentTime,
 		lo.is_account AS isAccount,
 		lo.price_evaluation AS priceEvaluation,
@@ -165,6 +168,9 @@
 		</if>
 		<if test="null != isDeleted and isDeleted != ''">
 			AND lo.is_deleted = #{isDeleted}
+		</if>
+		<if test="null != keywords and keywords != ''">
+			AND (la.addressee like "%"#{keywords}"%" or ar.name like "%"#{keywords}"%")
 		</if>
 		<if test="null != orderType and orderType != ''">
 			AND lo.order_type = #{orderType}
