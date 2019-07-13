@@ -57,7 +57,7 @@
         select * from fileinfo WHERE filepath=#{filepath};
     </select>
     <select id="getPictures" resultType="com.xlkj.website.model.FileInfo">
-        select * from fileinfo WHERE type=#{types};
+        select * from fileinfo WHERE type=#{types} and filestate=1;
     </select>
 
 

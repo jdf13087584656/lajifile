@@ -1,5 +1,6 @@
 package com.xlkj.website.service;
 
+import com.xlkj.website.model.PictureDto;
 import com.xlkj.website.model.ResultVo;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,6 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface PictureService {
 
-    ResultVo addPic(MultipartFile multipartFile,String picName);
+    ResultVo addPic(PictureDto pictureDto,MultipartFile multipartFile);
     ResultVo getPic(String filePath);
 }

@@ -115,7 +115,9 @@
         type type,
         user_name userName,
         cell_number cellNumber,
-        is_deleted isDeleted
+        is_deleted isDeleted,
+        create_time createTime,
+        memo memo
         from lp_user
         where is_deleted=0
             and account = #{account}

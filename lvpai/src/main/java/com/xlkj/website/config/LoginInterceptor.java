@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 import com.xlkj.website.annotation.AuthPass;
 import com.xlkj.website.model.ResultVo;
+import com.xlkj.website.model.UserDto;
 import com.xlkj.website.model.UserWithBLOBs;
 import com.xlkj.website.util.JSonUtils;
 import com.xlkj.website.util.RedisUtil;
@@ -29,8 +30,9 @@ public class LoginInterceptor implements HandlerInterceptor {
     /*
      * 方法请求前拦截url是否需要权限认证 token 不再 或者获取用户失败  表示没有权限
      */
+
     @Autowired
-    private RedisUtil redisDao;
+    private RedisDao redis;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
@@ -64,7 +66,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        String s1 = JSON.toJSONString(redisDao.get(token));
+        String s1 = JSON.toJSONString(redis.getValue(token));
 
         if (null==s1 || s1.equals("")) {
         	response.setStatus(403);
@@ -75,7 +77,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             out.println(new Gson().toJson(result));
             return false;
 		}
-        UserWithBLOBs user = JSonUtils.readValue(s1, UserWithBLOBs.class);
+        UserDto user = JSonUtils.readValue(s1, UserDto.class);
         logger.info("where null==user result = " + (null == user) + " if true then user is null else user is not null!");
         if (user == null) {
             response.setStatus(403);

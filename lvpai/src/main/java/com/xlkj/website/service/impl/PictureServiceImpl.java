@@ -2,6 +2,7 @@ package com.xlkj.website.service.impl;
 
 import com.xlkj.website.mapper.FileInfoMapper;
 import com.xlkj.website.model.FileInfo;
+import com.xlkj.website.model.PictureDto;
 import com.xlkj.website.model.ResultVo;
 import com.xlkj.website.service.PictureService;
 import com.xlkj.website.util.FileUtils;
@@ -41,16 +42,16 @@ public class PictureServiceImpl implements PictureService {
     FileInfoMapper fileInfoMapper;
     @Override
     @Transactional
-    public ResultVo addPic(MultipartFile multipartFile,String picName) {
+    public ResultVo addPic(PictureDto pictureDto,MultipartFile multipartFile) {
 
         ResultVo resultVo = new ResultVo<>();
         try {
-            FileUtils.save(multipartFile,basePath+"/"+activity,picName);
+            FileUtils.save(multipartFile,basePath+"/"+activity,pictureDto.getPicName());
             String fileSuffix = FileUtils.getFileSuffix(multipartFile, false);
             FileInfo fileInfo = new FileInfo();
-            fileInfo.setFilepath(basePath+"/"+activity+"/"+picName+fileSuffix);
-            fileInfo.setFilename(picName+fileSuffix);
-            fileInfo.setType(1);
+            fileInfo.setFilepath(basePath+"/"+activity+"/"+pictureDto.getPicName()+fileSuffix);
+            fileInfo.setFilename(pictureDto.getPicName()+fileSuffix);
+            fileInfo.setType(pictureDto.getType());
             fileInfoMapper.addFile(fileInfo);
             resultVo.resultSuccess("上传成功");
         } catch (IOException e) {

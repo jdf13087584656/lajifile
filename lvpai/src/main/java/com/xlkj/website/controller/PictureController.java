@@ -1,11 +1,14 @@
 package com.xlkj.website.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.xlkj.website.annotation.AuthPass;
 import com.xlkj.website.mapper.FileInfoMapper;
 import com.xlkj.website.model.FileInfo;
+import com.xlkj.website.model.PictureDto;
 import com.xlkj.website.model.ResultVo;
 import com.xlkj.website.service.PictureService;
 import io.swagger.annotations.ApiOperation;
+import javafx.application.Application;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +40,11 @@ public class PictureController {
     @ApiOperation(value = "首页图片新增接口", httpMethod = "POST")
     @RequestMapping(value = "/addPicture", method = RequestMethod.POST)
     @AuthPass
-    public ResultVo addPic(@RequestParam("file")MultipartFile multipartFile,@RequestParam("picName")String picName) {
+    public ResultVo addPic(@RequestBody PictureDto pictureDto,@RequestParam("file") MultipartFile multipartFile) {
         ResultVo resultVo = new ResultVo<>();
         try {
             logger.info(String.format("addPicture is start"));
-            resultVo = pictureService.addPic(multipartFile,picName);
+            resultVo = pictureService.addPic(pictureDto,multipartFile);
         }catch (Exception e){
             resultVo.resultFail("网络异常,上传失败");
             logger.error("addPicture is error", e.getMessage());

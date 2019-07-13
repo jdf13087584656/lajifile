@@ -1,11 +1,14 @@
 package com.xlkj.website.service.impl;
 
+import com.alibaba.druid.support.json.JSONUtils;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.xlkj.website.config.RedisDao;
 import com.xlkj.website.mapper.UserMapper;
 import com.xlkj.website.model.*;
 import com.xlkj.website.service.UserService;
+import com.xlkj.website.util.JSonUtils;
 import com.xlkj.website.util.Md5Util;
 import com.xlkj.website.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +24,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private  UserMapper userMapper;
     @Autowired
-    private RedisUtil redisUtil;
+    private RedisDao redis;
 
     @Override
     public ResultVo<Integer> addUser(UserDto userDto) {
@@ -91,13 +94,13 @@ public class UserServiceImpl implements UserService {
         }
         //到这一步说明登陆成功了,保存token和用户信息
         String token = UUID.randomUUID().toString().replace("-", "")+user.getUid();
-        Object json = JSON.toJSON(user);
-        Long time= Long.valueOf(30);
-        boolean set = redisUtil.set(token, json, time);
-        if (!set) {
-            resultVo.resultFail("网络异常,请联系管理员");
-            return resultVo;
-        }
+        //Long time= Long.valueOf(30);
+
+        redis.setKey(token, JSonUtils.toJSon(user));
+//        if (!set) {
+//            resultVo.resultFail("网络异常,请联系管理员");
+//            return resultVo;
+//        }
         HashMap<String,Integer> map = new HashMap<>();
         map.put(token,user.getUid());
         resultVo.setData(map);
