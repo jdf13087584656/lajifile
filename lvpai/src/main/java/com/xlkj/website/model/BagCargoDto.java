@@ -22,4 +22,25 @@ public class BagCargoDto implements Serializable {
     @ApiModelProperty(value = "货物重量", name = "cargoWeight")
     private BigDecimal cargoWeight;
 
+    @ApiModelProperty(value = "订单号", name = "orderCode")
+    private String orderCode;
+
+    @ApiModelProperty(value = "省名", name = "provinceName")
+    private String provinceName;
+
+    @ApiModelProperty(value = "市名", name = "cityName")
+    private String cityName;
+
+    @ApiModelProperty(value = "县区名", name = "areaName")
+    private String areaName;
+
+    @ApiModelProperty(value = "用户姓名", name = "addressee")
+    private String addressee;
+
+    @ApiModelProperty(value = "用户电话", name = "addresseeTel")
+    private String addresseeTel;
+
+    @ApiModelProperty(value = "详细住址", name = "address")
+    private String address;
+
 }

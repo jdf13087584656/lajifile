@@ -73,25 +73,25 @@ public class OrderFormController {
         return resultVo;
     }
 
-    @ApiOperation(value = "订单增垃圾袋接口", httpMethod = "POST")
-    @RequestMapping(value = "/addGarbageBag", method = RequestMethod.POST)
-    @AuthPass
-    public ResultVo<Integer> addGarbageBag(@RequestBody GarbageBagDto dto) {
-        ResultVo<Integer> resultVo = new ResultVo<>();
-        try {
-            logger.info(String.format("addGarbageBag is start"));
-            resultVo = orderFormService.addGarbageBag(dto);
-        } catch (Exception e) {
-            resultVo.resultFail("系统异常" + e.getMessage());
-            logger.error("addGarbageBag is error", e.getMessage());
-        }
-        return resultVo;
-    }
+//    @ApiOperation(value = "订单增垃圾袋接口", httpMethod = "POST")
+//    @RequestMapping(value = "/addGarbageBag", method = RequestMethod.POST)
+//    @AuthPass
+//    public ResultVo<Integer> addGarbageBag(@RequestBody GarbageBagDto dto) {
+//        ResultVo<Integer> resultVo = new ResultVo<>();
+//        try {
+//            logger.info(String.format("addGarbageBag is start"));
+//            resultVo = orderFormService.addGarbageBag(dto);
+//        } catch (Exception e) {
+//            resultVo.resultFail("系统异常" + e.getMessage());
+//            logger.error("addGarbageBag is error", e.getMessage());
+//        }
+//        return resultVo;
+//    }
 
-    @ApiOperation(value = "垃圾袋内新增货物接口", httpMethod = "POST")
+    @ApiOperation(value = "订单内垃圾袋新增货物接口", httpMethod = "POST")
     @RequestMapping(value = "/addOrderDetails", method = RequestMethod.POST)
     @AuthPass
-    public ResultVo<Integer> addOrderDetails(@RequestBody OrderDetailsDto dto) {
+    public ResultVo<Integer> addOrderDetails(@RequestBody List<OrderDetailsDto> dto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("addOrderDetails is start"));

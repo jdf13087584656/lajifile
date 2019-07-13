@@ -1,10 +1,8 @@
 package com.xlkj.website.service.impl;
 
 import com.xlkj.website.mapper.CargoMapper;
-import com.xlkj.website.model.BagCargoDto;
-import com.xlkj.website.model.ResultVo;
-import com.xlkj.website.model.OrderDetailsDto;
-import com.xlkj.website.model.SearchCargoDto;
+import com.xlkj.website.mapper.OrderFormMapper;
+import com.xlkj.website.model.*;
 import com.xlkj.website.service.OrderDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +14,8 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 
     @Autowired
     private CargoMapper cargoMapper;
+    @Autowired
+    private OrderFormMapper orderFormMapper;
 
     //货物信息列表
     @Override
@@ -28,16 +28,29 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 
     //新增订单货物信息
     @Override
-    public ResultVo<Integer> addOrderDetails(OrderDetailsDto orderDetailsDto) {
+    public ResultVo<Integer> addOrderDetails(List<OrderDetailsDto> orderDetailsDto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
-        List<Integer> cids = orderDetailsDto.getCids();
-        List<BigDecimal> cargoWeights = orderDetailsDto.getCargoWeights();
-        if(cids != null && cids.size() > 0){
-            for(int i=0;i<cids.size();i++){
-                orderDetailsDto.setCid(cids.get(i));
-                orderDetailsDto.setCargoWeight(cargoWeights.get(i));
-                Integer add =cargoMapper.addOrderDetails(orderDetailsDto);
-                resultVo.resultFlag(resultVo,add,"操作成功","操作失败");
+        //垃圾袋对象
+        GarbageBagDto bagDto = new GarbageBagDto();
+        //当前订单id
+        for(int i=0;i<orderDetailsDto.size();i++){
+            //订单新增垃圾袋操作
+            bagDto.setOid(orderDetailsDto.get(0).getOid());
+            bagDto.setBagCode(orderDetailsDto.get(i).getBagCode());
+            Integer add =orderFormMapper.addGarbageBag(bagDto);
+            resultVo.resultFlag(resultVo,add,"订单垃圾袋新增成功","订单垃圾袋新增失败");
+
+            //当前垃圾袋内货物详情增加
+            //货物详情集合(单价,质量)
+            List<cargoQuality> cargoQualitiess = orderDetailsDto.get(i).getCargoQuality();
+            if(null != cargoQualitiess && cargoQualitiess.size()>0){
+                for(int ii=0;ii<cargoQualitiess.size();ii++){
+                    //货物id
+                    orderDetailsDto.get(i).setCid(cargoQualitiess.get(ii).getCid());
+                    orderDetailsDto.get(i).setCargoWeight(cargoQualitiess.get(ii).getCargoWeight());
+                    add = cargoMapper.addOrderDetails(orderDetailsDto.get(i));
+                    resultVo.resultFlag(resultVo,add,"订单详情添加成功","订单详情添加成功");
+                }
             }
         }
         return resultVo;

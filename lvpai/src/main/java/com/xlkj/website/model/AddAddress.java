@@ -15,10 +15,10 @@ public class AddAddress implements Serializable {
     @ApiModelProperty(value = "openId", name = "openId")
     private String openId;
 
-    @ApiModelProperty(value = "收件人姓名", name = "addressee")
+    @ApiModelProperty(value = "用户姓名", name = "addressee")
     private String addressee;
 
-    @ApiModelProperty(value = "收件人电话", name = "addresseeTel")
+    @ApiModelProperty(value = "用户电话", name = "addresseeTel")
     private String addresseeTel;
 
     @ApiModelProperty(value = "省code", name = "provinceCode")
