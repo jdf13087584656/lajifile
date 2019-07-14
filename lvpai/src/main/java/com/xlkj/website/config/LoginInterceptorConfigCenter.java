@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  *
  *
  */
-@Configuration
+//@Configuration
 public class LoginInterceptorConfigCenter extends WebMvcConfigurerAdapter {
 
 	@Bean

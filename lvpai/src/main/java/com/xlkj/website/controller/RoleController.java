@@ -32,22 +32,38 @@ public class RoleController {
             logger.info(String.format("listRoles is start"));
             resultVo = roleService.listRoles(searchUserDto);
         }catch (Exception e){
-            resultVo.resultFail("系统异常,登录失败");
+            resultVo.resultFail("系统异常"+e.getMessage());
             logger.error("listRoles is error", e.getMessage());
         }
         return resultVo;
     }
 
+    @ApiOperation(value = "用户信息修改接口", httpMethod = "POST")
+    @RequestMapping(value = "/modifyRole", method = RequestMethod.POST)
+    @AuthPass
+    public ResultVo<Integer> modifyRole(@RequestParam UserWithBLOBs user) {
+        ResultVo<Integer> resultVo = new ResultVo<>();
+        try {
+            logger.info(String.format("modifyRole is start"));
+            resultVo = roleService.modifyRole(user);
+        }catch (Exception e){
+            resultVo.resultFail("系统异常"+e.getMessage());
+            logger.error("modifyRole is error", e.getMessage());
+        }
+        return resultVo;
+    }
+
+
     @ApiOperation(value = "用户详情接口", httpMethod = "POST")
     @RequestMapping(value = "/listRole", method = RequestMethod.POST)
     @AuthPass
-    public ResultVo<UserWithBLOBs> listRole(@RequestParam String openId) {
+    public ResultVo<UserWithBLOBs> listRole(@RequestBody String openId) {
         ResultVo<UserWithBLOBs> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("listRole is start"));
             resultVo = roleService.listRole(openId);
         }catch (Exception e){
-            resultVo.resultFail("系统异常,登录失败");
+            resultVo.resultFail("系统异常"+e.getMessage());
             logger.error("listRole is error", e.getMessage());
         }
         return resultVo;

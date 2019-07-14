@@ -1,5 +1,7 @@
 package com.xlkj.website.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xlkj.website.mapper.CargoMapper;
 import com.xlkj.website.mapper.OrderFormMapper;
 import com.xlkj.website.model.*;
@@ -20,8 +22,11 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     //货物信息列表
     @Override
     public ResultVo<List<BagCargoDto>> listOrderDetails(SearchCargoDto dto) {
+        PageHelper.startPage(dto.getCurrentPage(),dto.getPageSize());
         ResultVo<List<BagCargoDto>> resultVo = new ResultVo<>();
         List<BagCargoDto> list = cargoMapper.listOrderDetails(dto);
+        PageInfo<BagCargoDto> pageInfo = new PageInfo<>(list);
+        resultVo.setTotal((int)pageInfo.getTotal());
         resultVo.resultSuccess(list);
         return resultVo;
     }
@@ -32,6 +37,11 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
         ResultVo<Integer> resultVo = new ResultVo<>();
         //垃圾袋对象
         GarbageBagDto bagDto = new GarbageBagDto();
+        OrderFormAddDto dto = new OrderFormAddDto();
+        //将订单状态改为已揽件
+        dto.setOrderState(3);
+        dto.setOid(orderDetailsDto.get(0).getOid());
+        orderFormMapper.modifyOrderForm(dto);
         //当前订单id
         for(int i=0;i<orderDetailsDto.size();i++){
             //订单新增垃圾袋操作

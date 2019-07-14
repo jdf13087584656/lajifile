@@ -89,7 +89,7 @@ public class OrderFormController {
 //    }
 
     @ApiOperation(value = "订单内垃圾袋新增货物接口", httpMethod = "POST")
-    @RequestMapping(value = "/addOrderDetails", method = RequestMethod.POST)
+    @RequestMapping(value = "/addOrderDetails")
     @AuthPass
     public ResultVo<Integer> addOrderDetails(@RequestBody List<OrderDetailsDto> dto) {
         ResultVo<Integer> resultVo = new ResultVo<>();

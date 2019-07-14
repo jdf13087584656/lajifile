@@ -12,6 +12,7 @@
           open_id,
           receive_id,
           admin_id,
+          eid,
           address_id,
           appointment_time,
           is_account,
@@ -39,6 +40,7 @@
 		  #{openId},
 		  #{receiveId},
 		  #{adminId},
+		  #{eid}
 		  #{addressId},
 		  #{appointmentTime},
 		  #{isAccount},
@@ -69,7 +71,7 @@
 			order_code = #{orderCode},
 		</if>
 		<if test="null != deductMoney and '' != deductMoney">
-			ddeduct_money = #{deductMoney},
+			deduct_money = #{deductMoney},
 		</if>
 		<if test="null != receiveId and '' != receiveId">
 			receive_id = #{receiveId},
@@ -131,12 +133,14 @@
 		lo.order_code as orderCode,
 		lo.open_id as openId,
 		lo.receive_id AS receiveId,
-		lu.user_name as userName,
+		(case when order_type=1 then lu.user_name
+		      when order_type=2 then lr.role_name ELSE '' END) as userName,
 		lo.admin_id AS adminId,
 		lu2.user_name as adminName,
 		lo.address_id AS addressId,
 		la.addressee as addressee,
-		la.address as address,
+		(case when order_type=1 then la.address
+		      when order_type=2 then le.e_address ELSE '' END) as address,
 		la.addressee_tel as addresseeTel,
 		lo.appointment_time AS appointmentTime,
 		lo.is_account AS isAccount,
@@ -158,10 +162,12 @@
 		from lp_order lo
 		left join lp_user lu on lo.receive_id=lu.uid
 		left join lp_user lu2 on lo.admin_id=lu2.uid
+		left join lp_role lr on lo.open_id=lr.open_id
 		left join lp_address la on lo.address_id=la.aid
 		left join area ar on la.area_code=ar.code
 		left join province pro on la.province_code=pro.code
 		left join city cit on la.city_code=cit.code
+		left join lp_equipment le on le.eid=lo.eid
 		where 1=1
 		<if test="null != oid and oid != ''">
 			AND lo.oid = #{oid}

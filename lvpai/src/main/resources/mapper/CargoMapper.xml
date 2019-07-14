@@ -52,7 +52,7 @@
     </select>
 
     <!--货物列表 -->
-    <select id="listCargo"  resultType="com.xlkj.website.model.CargoDto">
+    <select id="listCargo" parameterType="com.xlkj.website.model.GetCargoDto" resultType="com.xlkj.website.model.CargoDto">
         select
         lpc.cid as cid,
         lpc.cargo_name as cargoName,
@@ -60,6 +60,10 @@
         lpc.is_deleted as isDeleted
         from lp_cargo lpc
         where lpc.is_deleted=0
+        <if test="null != keywords and '' != keywords">
+            and lpc.cargo_name = #{keywords}
+        </if>
+
     </select>
 
     <!--订单详情货物 -->

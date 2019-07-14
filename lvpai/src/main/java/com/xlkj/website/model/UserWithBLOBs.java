@@ -35,8 +35,8 @@ public class UserWithBLOBs {
     @ApiModelProperty(value = "头像", name = "avatarUrl")
     private String avatarUrl;
 
-    @ApiModelProperty(value = "传入角色编码(1,管理员.2,回收员.3,客户)", name = "roleCode")
-    private Integer roleCode;
+    @ApiModelProperty(value = "客户姓名", name = "roleName")
+    private String roleName;
 
     @ApiModelProperty(value = "手机号", name = "telephone")
     private String telephone;

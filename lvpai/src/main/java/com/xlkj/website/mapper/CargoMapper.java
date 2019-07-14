@@ -1,9 +1,6 @@
 package com.xlkj.website.mapper;
 
-import com.xlkj.website.model.BagCargoDto;
-import com.xlkj.website.model.CargoDto;
-import com.xlkj.website.model.OrderDetailsDto;
-import com.xlkj.website.model.SearchCargoDto;
+import com.xlkj.website.model.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -15,7 +12,7 @@ public interface CargoMapper {
 
     Integer modifyCargo(CargoDto dto);
 
-    List<CargoDto> listCargo();
+    List<CargoDto> listCargo(GetCargoDto dto);
 
     CargoDto searchCargo(String cargoName);
 

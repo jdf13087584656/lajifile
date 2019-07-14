@@ -9,9 +9,8 @@
 		INSERT INTO lp_role (
 		id,
 		open_id,
-		pwd,
 		avatar_url,
-		role_code,
+		role_name,
 		nick_name,
 		telephone,
 		gender,
@@ -25,9 +24,8 @@
 		(
 		  #{id},
 		  #{openId},
-		  #{pwd},
 		  #{avatarUrl},
-		  #{roleCode},
+		  #{roleName},
 		  #{nickName},
 		  #{telephone},
 		  #{gender},
@@ -43,14 +41,11 @@
     <update id="modifyRole" parameterType="com.xlkj.website.model.UserWithBLOBs">
         UPDATE lp_role
         <set>
-            <if test="null != pwd and '' != pwd">
-                pwd = #{pwd},
-            </if>
             <if test="null != avatarUrl and '' != avatarUrl">
                 avatar_url = #{avatarUrl},
             </if>
-            <if test="null != roleCode and '' != roleCode">
-                role_code = #{roleCode},
+            <if test="null != roleName and '' != roleName">
+                role_name = #{roleName},
             </if>
             <if test="null != nickName and '' != nickName">
                 nick_name = #{nickName},
@@ -82,9 +77,8 @@
         select
         lpr.id as id,
         lpr.open_id as openId,
-        lpr.pwd as pwd,
         lpr.avatar_url as avatarUrl,
-        lpr.role_code as roleCode,
+        lpr.role_name as roleName,
         lpr.nick_name as nickName,
         lpr.telephone as telephone,
         lpr.gender as gender,
@@ -110,9 +104,8 @@
         select
         lpr.id as id,
         lpr.open_id as openId,
-        lpr.pwd as pwd,
         lpr.avatar_url as avatarUrl,
-        lpr.role_code as roleCode,
+        lpr.role_name as roleName,
         lpr.nick_name as nickName,
         lpr.telephone as telephone,
         lpr.gender as gender,
@@ -122,7 +115,7 @@
         from lp_role lpr
         where 1=1
         <if test="null != keywords and '' != keywords">
-            AND lpr.nick_name = #{keywords},
+            AND lpr.nick_name = #{keywords} or lpr.role_name = #{keywords}
         </if>
 
     </select>

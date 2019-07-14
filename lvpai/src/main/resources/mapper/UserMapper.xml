@@ -47,22 +47,26 @@
                 is_deleted = #{isDeleted}
             </if>
         </set>
-        where uid=#{uid} and type=2
+        where uid=#{uid}
     </update>
 
     <!-- 回收员列表 -->
     <select id="listUsers" parameterType="com.xlkj.website.model.SearchUserDto" resultType="com.xlkj.website.model.UserDto">
         select
-        uid uid,
-        account account,
-        password password,
-        type type,
-        user_name userName,
-        cell_number cellNumber,
-        is_deleted isDeleted,
-        memo memo,
-        create_time createTime
-        from lp_user
+        lu.uid uid,
+        lu.account account,
+        lu.password password,
+        lu.type type,
+        lu.user_name userName,
+        lu.cell_number cellNumber,
+        lu.is_deleted isDeleted,
+        lu.memo memo,
+        lu.create_time createTime,
+        uuu.a quantityCompletion,
+        mmm.a unfinished
+        from lp_user lu
+        left join(select count(oid) a,receive_id uid from lp_order where order_state=4 group by uid)uuu on uuu.uid=lu.uid
+        left join(select count(oid) a,receive_id uid from lp_order where order_state in (2,3) group by uid)mmm on mmm.uid=lu.uid
         where is_deleted=0 and type=2
         <if test="null != keywords and '' != keywords">
             and (user_name LIKE "%"#{keywords}"%" or account LIKE "%"#{keywords}"%")
@@ -83,12 +87,7 @@
         left join(select count(oid) a,receive_id uid from lp_order where order_state=4 group by uid)uuu on uuu.uid=lu.uid
         left join(select count(oid) a,receive_id uid from lp_order where order_state in (2,3) group by uid)mmm on mmm.uid=lu.uid
         where lu.is_deleted=0 and lu.type=2
-        <if test="null != keywords and '' != keywords">
-            and user_name LIKE "%"#{keywords}"%"
-        </if>
-        <if test="null != keywords and '' != keywords">
-            and account LIKE "%"#{keywords}"%"
-        </if>
+            and lu.uid=#{uid}
     </select>
 
     <!-- 回收员已完成数量 -->

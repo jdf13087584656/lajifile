@@ -1,8 +1,9 @@
 package com.xlkj.website.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.xlkj.website.mapper.CargoMapper;
-import com.xlkj.website.model.CargoDto;
-import com.xlkj.website.model.ResultVo;
+import com.xlkj.website.model.*;
 import com.xlkj.website.service.CargoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,9 +36,12 @@ public class CargoServiceImpl implements CargoService {
     }
 
     @Override
-    public ResultVo<List<CargoDto>> listCargo() {
+    public ResultVo<List<CargoDto>> listCargo(GetCargoDto dto) {
+        PageHelper.startPage(dto.getCurrentPage(),dto.getPageSize());
         ResultVo<List<CargoDto>> resultVo = new ResultVo<>();
-        List<CargoDto> list = cargoMapper.listCargo();
+        List<CargoDto> list = cargoMapper.listCargo(dto);
+        PageInfo<CargoDto> pageInfo = new PageInfo<>(list);
+        resultVo.setTotal((int)pageInfo.getTotal());
         resultVo.resultSuccess(list);
         return resultVo;
     }

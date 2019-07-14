@@ -38,14 +38,14 @@ public class RoleServiceImpl implements RoleService {
         return resultVo;
     }
 
-//    //用户信息更新
-//    @Override
-//    public ResultVo<Integer> modifyRole(UserWithBLOBs user) {
-//        ResultVo<Integer> resultVo = new ResultVo<>();
-//        Integer add = roleMapper.modifyRole(user);
-//        resultVo.resultFlag(resultVo,add,"修改成功","修改失败");
-//        return resultVo;
-//    }
+    //用户信息更新
+    @Override
+    public ResultVo<Integer> modifyRole(UserWithBLOBs user) {
+        ResultVo<Integer> resultVo = new ResultVo<>();
+        Integer mod = roleMapper.modifyRole(user);
+        resultVo.resultFlag(resultVo,mod,"修改成功","修改失败");
+        return resultVo;
+    }
 
 
     //用户信息详情
