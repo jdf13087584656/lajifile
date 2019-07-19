@@ -19,29 +19,29 @@ public class SearchAddressServiceImpl implements SearchAddressService {
 
 
 
-    @Override
-    public ResultVo<List<AddressDto>> searchProvince(AddressDto dto) {
-        ResultVo<List<AddressDto>> resultVo = new ResultVo<>();
-        List<AddressDto> provinces = searchAddressMapper.searchProvince(dto);
-        resultVo.resultSuccess(provinces);
-        return resultVo;
-    }
-
-    @Override
-    public ResultVo<List<AddressDto>> searchCity(AddressDto dto) {
-        ResultVo<List<AddressDto>> resultVo = new ResultVo<>();
-        List<AddressDto> cites = searchAddressMapper.searchCity(dto);
-        resultVo.resultSuccess(cites);
-        return resultVo;
-    }
-
-    @Override
-    public ResultVo<List<AddressDto>> searchArea(AddressDto dto) {
-        ResultVo<List<AddressDto>> resultVo = new ResultVo<>();
-        List<AddressDto> areas = searchAddressMapper.searchArea(dto);
-        resultVo.resultSuccess(areas);
-        return resultVo;
-    }
+//    @Override
+//    public ResultVo<List<AddressDto>> searchProvince(AddressDto dto) {
+//        ResultVo<List<AddressDto>> resultVo = new ResultVo<>();
+//        List<AddressDto> provinces = searchAddressMapper.searchProvince(dto);
+//        resultVo.resultSuccess(provinces);
+//        return resultVo;
+//    }
+//
+//    @Override
+//    public ResultVo<List<AddressDto>> searchCity(AddressDto dto) {
+//        ResultVo<List<AddressDto>> resultVo = new ResultVo<>();
+//        List<AddressDto> cites = searchAddressMapper.searchCity(dto);
+//        resultVo.resultSuccess(cites);
+//        return resultVo;
+//    }
+//
+//    @Override
+//    public ResultVo<List<AddressDto>> searchArea(AddressDto dto) {
+//        ResultVo<List<AddressDto>> resultVo = new ResultVo<>();
+//        List<AddressDto> areas = searchAddressMapper.searchArea(dto);
+//        resultVo.resultSuccess(areas);
+//        return resultVo;
+//    }
 
     @Override
     public ResultVo<Integer> addAddress(AddAddress add) {

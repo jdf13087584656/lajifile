@@ -21,15 +21,6 @@ public class AddAddress implements Serializable {
     @ApiModelProperty(value = "用户电话", name = "addresseeTel")
     private String addresseeTel;
 
-    @ApiModelProperty(value = "省code", name = "provinceCode")
-    private Integer provinceCode;
-
-    @ApiModelProperty(value = "市code", name = "cityCode")
-    private Integer cityCode;
-
-    @ApiModelProperty(value = "县区code", name = "areaCode")
-    private Integer areaCode;
-
     @ApiModelProperty(value = "详细住址", name = "address")
     private String address;
 

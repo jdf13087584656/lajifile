@@ -27,50 +27,50 @@ public class AddressController {
     @Autowired
     private SearchAddressService searchAddressService;
 
-    @ApiOperation(value = "查询省接口", httpMethod = "POST")
-    @RequestMapping(value = "/province", method = RequestMethod.POST)
-    @AuthPass
-    public ResultVo<List<AddressDto>> province(@RequestBody AddressDto dto) {
-        ResultVo<List<AddressDto>> resultVo = new ResultVo<>();
-        try {
-            logger.info(String.format("province is start"));
-            resultVo = searchAddressService.searchProvince(dto);
-        } catch (Exception e) {
-            resultVo.resultFail("系统异常" + e.getMessage());
-            logger.error("province is error", e.getMessage());
-        }
-        return resultVo;
-    }
-
-    @ApiOperation(value = "查询市接口", httpMethod = "POST")
-    @RequestMapping(value = "/city", method = RequestMethod.POST)
-    @AuthPass
-    public ResultVo<List<AddressDto>> city(@RequestBody AddressDto dto) {
-        ResultVo<List<AddressDto>> resultVo = new ResultVo<>();
-        try {
-            logger.info(String.format("city is start"));
-            resultVo = searchAddressService.searchCity(dto);
-        } catch (Exception e) {
-            resultVo.resultFail("系统异常" + e.getMessage());
-            logger.error("city is error", e.getMessage());
-        }
-        return resultVo;
-    }
-
-    @ApiOperation(value = "查询县区接口", httpMethod = "POST")
-    @RequestMapping(value = "/area", method = RequestMethod.POST)
-    @AuthPass
-    public ResultVo<List<AddressDto>> area(@RequestBody AddressDto dto) {
-        ResultVo<List<AddressDto>> resultVo = new ResultVo<>();
-        try {
-            logger.info(String.format("area is start"));
-            resultVo = searchAddressService.searchArea(dto);
-        } catch (Exception e) {
-            resultVo.resultFail("系统异常" + e.getMessage());
-            logger.error("area is error", e.getMessage());
-        }
-        return resultVo;
-    }
+//    @ApiOperation(value = "查询省接口", httpMethod = "POST")
+//    @RequestMapping(value = "/province", method = RequestMethod.POST)
+//    @AuthPass
+//    public ResultVo<List<AddressDto>> province(@RequestBody AddressDto dto) {
+//        ResultVo<List<AddressDto>> resultVo = new ResultVo<>();
+//        try {
+//            logger.info(String.format("province is start"));
+//            resultVo = searchAddressService.searchProvince(dto);
+//        } catch (Exception e) {
+//            resultVo.resultFail("系统异常" + e.getMessage());
+//            logger.error("province is error", e.getMessage());
+//        }
+//        return resultVo;
+//    }
+//
+//    @ApiOperation(value = "查询市接口", httpMethod = "POST")
+//    @RequestMapping(value = "/city", method = RequestMethod.POST)
+//    @AuthPass
+//    public ResultVo<List<AddressDto>> city(@RequestBody AddressDto dto) {
+//        ResultVo<List<AddressDto>> resultVo = new ResultVo<>();
+//        try {
+//            logger.info(String.format("city is start"));
+//            resultVo = searchAddressService.searchCity(dto);
+//        } catch (Exception e) {
+//            resultVo.resultFail("系统异常" + e.getMessage());
+//            logger.error("city is error", e.getMessage());
+//        }
+//        return resultVo;
+//    }
+//
+//    @ApiOperation(value = "查询县区接口", httpMethod = "POST")
+//    @RequestMapping(value = "/area", method = RequestMethod.POST)
+//    @AuthPass
+//    public ResultVo<List<AddressDto>> area(@RequestBody AddressDto dto) {
+//        ResultVo<List<AddressDto>> resultVo = new ResultVo<>();
+//        try {
+//            logger.info(String.format("area is start"));
+//            resultVo = searchAddressService.searchArea(dto);
+//        } catch (Exception e) {
+//            resultVo.resultFail("系统异常" + e.getMessage());
+//            logger.error("area is error", e.getMessage());
+//        }
+//        return resultVo;
+//    }
 
     @ApiOperation(value = "地址新增接口", httpMethod = "POST")
     @RequestMapping(value = "/addAddress", method = RequestMethod.POST)

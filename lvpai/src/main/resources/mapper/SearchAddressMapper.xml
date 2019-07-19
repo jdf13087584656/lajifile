@@ -3,70 +3,70 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xlkj.website.mapper.SearchAddressMapper">
 
-    <!--省份查找 -->
-    <select id="searchProvince" parameterType="com.xlkj.website.model.AddressDto" resultType="com.xlkj.website.model.AddressDto">
-        select
-          id,
-          name,
-          code
-        from province pro
-        where 1=1
-        <if test="null != code and code != ''">
-            AND code = #{code}
-        </if>
-        <if test="null != name and name != ''">
-            AND name = #{name}
-        </if>
-        <if test="null != id and id != ''">
-            AND id = #{id}
-        </if>
-    </select>
+<!--    &lt;!&ndash;省份查找 &ndash;&gt;-->
+<!--    <select id="searchProvince" parameterType="com.xlkj.website.model.AddressDto" resultType="com.xlkj.website.model.AddressDto">-->
+<!--        select-->
+<!--          id,-->
+<!--          name,-->
+<!--          code-->
+<!--        from province pro-->
+<!--        where 1=1-->
+<!--        <if test="null != code and code != ''">-->
+<!--            AND code = #{code}-->
+<!--        </if>-->
+<!--        <if test="null != name and name != ''">-->
+<!--            AND name = #{name}-->
+<!--        </if>-->
+<!--        <if test="null != id and id != ''">-->
+<!--            AND id = #{id}-->
+<!--        </if>-->
+<!--    </select>-->
 
-    <!--市查找 -->
-    <select id="searchCity" resultType="com.xlkj.website.model.AddressDto">
-        select
-        id,
-        name,
-        code,
-        provincecode
-        from city
-        where 1=1
-        <if test="null != code and code != ''">
-            AND code = #{code}
-        </if>
-        <if test="null != name and name != ''">
-            AND name = #{name}
-        </if>
-        <if test="null != id and id != ''">
-            AND id = #{id}
-        </if>
-        <if test="null != provinceCode and provinceCode != ''">
-            AND provincecode = #{provinceCode}
-        </if>
-    </select>
+<!--    &lt;!&ndash;市查找 &ndash;&gt;-->
+<!--    <select id="searchCity" resultType="com.xlkj.website.model.AddressDto">-->
+<!--        select-->
+<!--        id,-->
+<!--        name,-->
+<!--        code,-->
+<!--        provincecode-->
+<!--        from city-->
+<!--        where 1=1-->
+<!--        <if test="null != code and code != ''">-->
+<!--            AND code = #{code}-->
+<!--        </if>-->
+<!--        <if test="null != name and name != ''">-->
+<!--            AND name = #{name}-->
+<!--        </if>-->
+<!--        <if test="null != id and id != ''">-->
+<!--            AND id = #{id}-->
+<!--        </if>-->
+<!--        <if test="null != provinceCode and provinceCode != ''">-->
+<!--            AND provincecode = #{provinceCode}-->
+<!--        </if>-->
+<!--    </select>-->
 
-    <!--市查找 -->
-    <select id="searchArea" resultType="com.xlkj.website.model.AddressDto">
-        select
-        id,
-        name,
-        code,
-        citycode
-        from area
-        where 1=1
-        <if test="null != code and code != ''">
-            AND code = #{code}
-        </if>
-        <if test="null != name and name != ''">
-            AND name = #{name}
-        </if>
-        <if test="null != id and id != ''">
-            AND id = #{id}
-        </if>
-        <if test="null != cityCode and cityCode != ''">
-            AND citycode = #{cityCode}
-        </if>
-    </select>
+<!--    &lt;!&ndash;市查找 &ndash;&gt;-->
+<!--    <select id="searchArea" resultType="com.xlkj.website.model.AddressDto">-->
+<!--        select-->
+<!--        id,-->
+<!--        name,-->
+<!--        code,-->
+<!--        citycode-->
+<!--        from area-->
+<!--        where 1=1-->
+<!--        <if test="null != code and code != ''">-->
+<!--            AND code = #{code}-->
+<!--        </if>-->
+<!--        <if test="null != name and name != ''">-->
+<!--            AND name = #{name}-->
+<!--        </if>-->
+<!--        <if test="null != id and id != ''">-->
+<!--            AND id = #{id}-->
+<!--        </if>-->
+<!--        <if test="null != cityCode and cityCode != ''">-->
+<!--            AND citycode = #{cityCode}-->
+<!--        </if>-->
+<!--    </select>-->
 
     <!--地址新增 -->
     <insert id="addAddress" useGeneratedKeys="true" keyProperty="aid" keyColumn="aid"
@@ -77,9 +77,9 @@
           role_id,
           addressee,
           addressee_tel,
-          area_code,
-          city_code,
-          province_code,
+          area_name,
+          city_name,
+          province_name,
           is_deleted,
           is_default,
           create_time,
@@ -92,9 +92,9 @@
 		  #{openId},
 		  #{addressee},
 		  #{addresseeTel},
-		  #{areaCode},
-		  #{cityCode},
-		  #{provinceCode},
+		  #{areaName},
+		  #{cityName},
+		  #{provinceName},
 		  #{isDeleted},
 		  #{isDefault},
 		  now(),
@@ -112,14 +112,14 @@
             <if test="null != addressee and '' != addressee">
                 addressee = #{addressee},
             </if>
-            <if test="null != areaCode and '' != areaCode">
-                area_code = #{areaCode},
+            <if test="null != areaName and '' != areaName">
+                area_name = #{areaName},
             </if>
-            <if test="null != cityCode and '' != cityCode">
-                city_code = #{cityCode},
+            <if test="null != cityName and '' != cityName">
+                city_name = #{cityName},
             </if>
-            <if test="null != provinceCode and '' != provinceCode">
-                province_code = #{provinceCode},
+            <if test="null != provinceName and '' != provinceName">
+                province_name = #{provinceName},
             </if>
             <if test="null != isDefault and '' != isDefault">
                 is_default = #{isDefault},
@@ -149,22 +149,13 @@
         lpa.addressee as addressee,
         lpa.addressee_tel as addresseeTel,
         lpa.address as address,
-        pro.code as provinceCode,
-        pro.name as provincename,
-        cit.code as cidyCode,
-        cit.name as cityName,
-        ar.code as areaCode,
-        ar.name as areaName,
+        lpa.province_name as provinceName,
+        lpa.city_name as cityName,
+        lpa.area_name as areaName,
         lpa.is_default as isDefault
         from lp_address lpa
-        left join lp_role lpr on lpa.role_id=lpr.id
-        left join province pro on lpa.province_code=pro.code
-        left join city cit on lpa.city_code=cit.code
-        left join area ar on lpa.area_code = ar.code
         where lpa.is_deleted = 0
-        <if test="null != openId and '' != openId">
-            and lpa.role_id = #{openId}
-        </if>
+        and lpa.role_id = #{openId}
         <if test="null != aid and '' != aid">
             and lpa.aid = #{aid}
         </if>

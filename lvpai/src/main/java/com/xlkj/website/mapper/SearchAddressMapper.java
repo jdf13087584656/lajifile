@@ -10,11 +10,11 @@ import java.util.List;
 @Mapper
 public interface SearchAddressMapper {
 
-    List<AddressDto> searchProvince(AddressDto dto);
-
-    List<AddressDto> searchCity(AddressDto dto);
-
-    List<AddressDto> searchArea(AddressDto dto);
+//    List<AddressDto> searchProvince(AddressDto dto);
+//
+//    List<AddressDto> searchCity(AddressDto dto);
+//
+//    List<AddressDto> searchArea(AddressDto dto);
 
     Integer addAddress(AddAddress add);
 

@@ -40,7 +40,7 @@
 		  #{openId},
 		  #{receiveId},
 		  #{adminId},
-		  #{eid}
+		  #{eid},
 		  #{addressId},
 		  #{appointmentTime},
 		  #{isAccount},

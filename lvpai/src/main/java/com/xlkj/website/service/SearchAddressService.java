@@ -9,11 +9,11 @@ import java.util.List;
 
 public interface SearchAddressService {
 
-    ResultVo<List<AddressDto>> searchProvince(AddressDto dto);
-
-    ResultVo<List<AddressDto>> searchCity(AddressDto dto);
-
-    ResultVo<List<AddressDto>> searchArea(AddressDto dto);
+//    ResultVo<List<AddressDto>> searchProvince(AddressDto dto);
+//
+//    ResultVo<List<AddressDto>> searchCity(AddressDto dto);
+//
+//    ResultVo<List<AddressDto>> searchArea(AddressDto dto);
 
     ResultVo<Integer> addAddress(AddAddress add);
 
