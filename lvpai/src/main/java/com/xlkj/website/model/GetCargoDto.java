@@ -17,4 +17,7 @@ public class GetCargoDto implements Serializable {
 
     @ApiModelProperty(value = "关键字", name = "keywords")
     private String keywords;
+
+    @ApiModelProperty(value = "货物类型(1,个人 2,商家)", name = "cargoType")
+    private Integer cargoType;
 }

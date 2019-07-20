@@ -4,6 +4,7 @@ import com.xlkj.website.annotation.AuthPass;
 import com.xlkj.website.model.*;
 import com.xlkj.website.service.OrderDetailsService;
 import com.xlkj.website.service.OrderFormService;
+import com.xlkj.website.util.CommonControllerUtils;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/orderForm")
 @CrossOrigin
-public class OrderFormController {
+public class OrderFormController  extends CommonControllerUtils {
     @Autowired
     private OrderFormService orderFormService;
     @Autowired
@@ -34,6 +35,7 @@ public class OrderFormController {
         ResultVo<String> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("addOrderForm is start"));
+            dto.setCreateUserId(getUserId());
             resultVo = orderFormService.addOrderForm(dto);
         } catch (Exception e) {
             resultVo.resultFail("系统异常" + e.getMessage());
@@ -49,6 +51,7 @@ public class OrderFormController {
         ResultVo<Integer> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("modifyOrderForm is start"));
+            dto.setModifyUserId(getUserId());
             resultVo = orderFormService.modifyOrderForm(dto);
         } catch (Exception e) {
             resultVo.resultFail("系统异常" + e.getMessage());
@@ -73,25 +76,40 @@ public class OrderFormController {
         return resultVo;
     }
 
-//    @ApiOperation(value = "订单增垃圾袋接口", httpMethod = "POST")
-//    @RequestMapping(value = "/addGarbageBag", method = RequestMethod.POST)
-//    @AuthPass
-//    public ResultVo<Integer> addGarbageBag(@RequestBody GarbageBagDto dto) {
-//        ResultVo<Integer> resultVo = new ResultVo<>();
-//        try {
-//            logger.info(String.format("addGarbageBag is start"));
-//            resultVo = orderFormService.addGarbageBag(dto);
-//        } catch (Exception e) {
-//            resultVo.resultFail("系统异常" + e.getMessage());
-//            logger.error("addGarbageBag is error", e.getMessage());
-//        }
-//        return resultVo;
-//    }
+    @ApiOperation(value = "二维码查看详情接口", httpMethod = "POST")
+    @RequestMapping(value = "/OrderFormDetails", method = RequestMethod.POST)
+    @AuthPass
+    public ResultVo<OrderFormAddDto> OrderFormDetails(@RequestParam("code") String code) {
+        ResultVo<OrderFormAddDto> resultVo = new ResultVo<>();
+        try {
+            logger.info(String.format("OrderFormDetails is start"));
+            resultVo = orderFormService.OrderFormDetails(code);
+        } catch (Exception e) {
+            resultVo.resultFail("系统异常" + e.getMessage());
+            logger.error("OrderFormDetails is error", e.getMessage());
+        }
+        return resultVo;
+    }
+
+    @ApiOperation(value = "订单增垃圾袋接口(绑定袋上二维码)", httpMethod = "POST")
+    @RequestMapping(value = "/addGarbageBag", method = RequestMethod.POST)
+    @AuthPass
+    public ResultVo<Integer> addGarbageBag(@RequestBody GarbageBagDto dto) {
+        ResultVo<Integer> resultVo = new ResultVo<>();
+        try {
+            logger.info(String.format("addGarbageBag is start"));
+            resultVo = orderFormService.addGarbageBag(dto);
+        } catch (Exception e) {
+            resultVo.resultFail("系统异常" + e.getMessage());
+            logger.error("addGarbageBag is error", e.getMessage());
+        }
+        return resultVo;
+    }
 
     @ApiOperation(value = "订单内垃圾袋新增货物接口", httpMethod = "POST")
     @RequestMapping(value = "/addOrderDetails")
     @AuthPass
-    public ResultVo<Integer> addOrderDetails(@RequestBody List<OrderDetailsDto> dto) {
+    public ResultVo<Integer> addOrderDetails(@RequestBody OrderDetailsDto dto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("addOrderDetails is start"));

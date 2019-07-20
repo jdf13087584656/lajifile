@@ -80,6 +80,15 @@ public class OrderFormServiceImpl implements OrderFormService {
         return resultVo;
     }
 
+    //二维码查看详情接口
+    @Override
+    public ResultVo<OrderFormAddDto> OrderFormDetails(String code) {
+        ResultVo<OrderFormAddDto> resultVo = new ResultVo<>();
+        OrderFormAddDto order = orderFormMapper.OrderFormDetails(code);
+        resultVo.resultSuccess(order);
+        return resultVo;
+    }
+
     //订单新增垃圾袋
     @Override
     public ResultVo<Integer> addGarbageBag(GarbageBagDto dto) {

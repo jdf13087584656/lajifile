@@ -21,4 +21,7 @@ public class CargoDto implements Serializable {
 
     @ApiModelProperty(value = "状态(0,正常 1,删除)", name = "isDeleted")
     private Integer isDeleted;
+
+    @ApiModelProperty(value = "货物类型(1,个人 2,商家)", name = "cargoType")
+    private Integer cargoType;
 }

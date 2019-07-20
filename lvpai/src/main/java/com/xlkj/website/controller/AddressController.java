@@ -6,6 +6,7 @@ import com.xlkj.website.model.AddressDto;
 import com.xlkj.website.model.ResultVo;
 import com.xlkj.website.model.SearchAddressDto;
 import com.xlkj.website.service.SearchAddressService;
+import com.xlkj.website.util.CommonControllerUtils;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +17,7 @@ import java.util.List;
 
 /**
  *
- * @Description: 省市区
+ * @Description: 地址
  */
 @RestController
 @RequestMapping(value = "/search")

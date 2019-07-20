@@ -33,36 +33,35 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 
     //新增订单货物信息
     @Override
-    public ResultVo<Integer> addOrderDetails(List<OrderDetailsDto> orderDetailsDto) {
+    public ResultVo<Integer> addOrderDetails(OrderDetailsDto orderDetailsDto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
         //垃圾袋对象
         GarbageBagDto bagDto = new GarbageBagDto();
         OrderFormAddDto dto = new OrderFormAddDto();
         //将订单状态改为已揽件
         dto.setOrderState(3);
-        dto.setOid(orderDetailsDto.get(0).getOid());
+        dto.setOid(orderDetailsDto.getOid());
         orderFormMapper.modifyOrderForm(dto);
-        //当前订单id
-        for(int i=0;i<orderDetailsDto.size();i++){
-            //订单新增垃圾袋操作
-            bagDto.setOid(orderDetailsDto.get(0).getOid());
-            bagDto.setBagCode(orderDetailsDto.get(i).getBagCode());
-            Integer add =orderFormMapper.addGarbageBag(bagDto);
-            resultVo.resultFlag(resultVo,add,"订单垃圾袋新增成功","订单垃圾袋新增失败");
 
-            //当前垃圾袋内货物详情增加
-            //货物详情集合(单价,质量)
-            List<cargoQuality> cargoQualitiess = orderDetailsDto.get(i).getCargoQuality();
-            if(null != cargoQualitiess && cargoQualitiess.size()>0){
-                for(int ii=0;ii<cargoQualitiess.size();ii++){
-                    //货物id
-                    orderDetailsDto.get(i).setCid(cargoQualitiess.get(ii).getCid());
-                    orderDetailsDto.get(i).setCargoWeight(cargoQualitiess.get(ii).getCargoWeight());
-                    add = cargoMapper.addOrderDetails(orderDetailsDto.get(i));
-                    resultVo.resultFlag(resultVo,add,"订单详情添加成功","订单详情添加成功");
+        //订单新增垃圾袋操作
+        bagDto.setOid(orderDetailsDto.getOid());
+        bagDto.setBagCode(orderDetailsDto.getBagCode());
+        Integer add =orderFormMapper.addGarbageBag(bagDto);
+        resultVo.resultFlag(resultVo,add,"订单垃圾袋新增成功","订单垃圾袋新增失败");
+
+        //当前垃圾袋内货物详情增加
+        //货物详情集合(单价,质量)
+        List<cargoQuality> cargoQualities = orderDetailsDto.getCargoQuality();
+        if(null != cargoQualities && cargoQualities.size()>0){
+            for(int i=0;i<cargoQualities.size();i++){
+                //货物id
+                orderDetailsDto.setCid(cargoQualities.get(i).getCid());
+                orderDetailsDto.setCargoWeight(cargoQualities.get(i).getCargoWeight());
+                add = cargoMapper.addOrderDetails(orderDetailsDto);
+                resultVo.resultFlag(resultVo,add,"订单详情添加成功","订单详情添加成功");
                 }
             }
-        }
+//        }
         return resultVo;
     }
 }

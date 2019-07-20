@@ -162,6 +162,7 @@
         <if test="null != isDefault and '' != isDefault">
             and lpa.is_default = #{isDefault}
         </if>
+        order by lpa.create_time desc
     </select>
 
 </mapper>

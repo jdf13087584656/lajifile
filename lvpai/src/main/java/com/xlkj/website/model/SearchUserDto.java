@@ -18,6 +18,9 @@ public class SearchUserDto implements Serializable {
     @ApiModelProperty(value = "关键字", name = "keywords")
     private String keywords;
 
+    @ApiModelProperty(value = "类型(2,回收  3,验收)", name = "type")
+    private Integer type;
+
     @ApiModelProperty(value = "回收员id", name = "uid")
     private Integer uid;
 

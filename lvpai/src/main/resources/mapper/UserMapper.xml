@@ -67,7 +67,7 @@
         from lp_user lu
         left join(select count(oid) a,receive_id uid from lp_order where order_state=4 group by uid)uuu on uuu.uid=lu.uid
         left join(select count(oid) a,receive_id uid from lp_order where order_state in (2,3) group by uid)mmm on mmm.uid=lu.uid
-        where is_deleted=0 and type=2
+        where is_deleted=0 and type = #{type}
         <if test="null != keywords and '' != keywords">
             and (user_name LIKE "%"#{keywords}"%" or account LIKE "%"#{keywords}"%")
         </if>
@@ -86,7 +86,7 @@
         from lp_user lu
         left join(select count(oid) a,receive_id uid from lp_order where order_state=4 group by uid)uuu on uuu.uid=lu.uid
         left join(select count(oid) a,receive_id uid from lp_order where order_state in (2,3) group by uid)mmm on mmm.uid=lu.uid
-        where lu.is_deleted=0 and lu.type=2
+        where lu.is_deleted=0
             and lu.uid=#{uid}
     </select>
 
@@ -118,8 +118,7 @@
         create_time createTime,
         memo memo
         from lp_user
-        where is_deleted=0
-            and account = #{account}
+        where is_deleted=0 and account = #{account} and type=#{type}
     </select>
 
 

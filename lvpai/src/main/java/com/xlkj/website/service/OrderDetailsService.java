@@ -12,5 +12,5 @@ public interface OrderDetailsService {
     ResultVo<List<BagCargoDto>> listOrderDetails(SearchCargoDto dto);
 
     //新增货物信息详情
-    ResultVo<Integer> addOrderDetails(List<OrderDetailsDto> orderDetailsDto);
+    ResultVo<Integer> addOrderDetails(OrderDetailsDto orderDetailsDto);
 }

@@ -10,6 +10,7 @@
           cid,
           cargo_name,
           cargo_price,
+          cargo_type,
           is_deleted
 		)
 		VALUES
@@ -17,6 +18,7 @@
 		  #{cid},
 		  #{cargoName},
 		  #{cargoPrice},
+		  #{cargoType}
 		  0
 		);
 	</insert>
@@ -63,31 +65,30 @@
         <if test="null != keywords and '' != keywords">
             and lpc.cargo_name = #{keywords}
         </if>
-
+        <if test="null != cargoType and '' != cargoType">
+            and lpc.cargo_type = #{cargoType}
+        </if>
     </select>
 
     <!--订单详情货物 -->
     <select id="listOrderDetails" parameterType="com.xlkj.website.model.SearchCargoDto" resultType="com.xlkj.website.model.BagCargoDto">
         select
-        lgb.bag_code as bagCode,
-        lc.cargo_name as cargoName,
-        lc.cargo_price as cargoPrice,
-        lod.cargo_weight as cargoWeight,
-        lo.order_code as orderCode,
-        pro.name as provinceName,
-        cit.name as cityName,
-        ar.name as areaName,
-        la.address as address,
-        la.addressee as addressee,
-        la.addressee_tel as addresseeTel
+            lgb.bag_code as bagCode,
+            lc.cargo_name as cargoName,
+            lc.cargo_price as cargoPrice,
+            lod.cargo_weight as cargoWeight,
+            lo.order_code as orderCode,
+            la.area_name as areaName,
+            la.city_name as cityName,
+            la.province_name as provinceName,
+            la.address as address,
+            la.addressee as addressee,
+            la.addressee_tel as addresseeTel
         from lp_order lo
         left join lp_address la on lo.address_id=la.aid
         left join lp_garbage_bag lgb on lo.oid=lgb.oid
         left join lp_order_details lod on lgb.bag_code=lod.bag_code
         left join lp_cargo lc on lod.cid=lc.cid
-        left join province pro on pro.code=la.province_code
-        left join city cit on cit.code=la.city_code
-        left join area ar on ar.code=la.area_code
         where 1=1
         <if test="null != oid and '' != oid">
             and lo.oid = #{oid}
