@@ -18,7 +18,7 @@
 		  #{cid},
 		  #{cargoName},
 		  #{cargoPrice},
-		  #{cargoType}
+		  #{cargoType},
 		  0
 		);
 	</insert>
@@ -29,6 +29,9 @@
         <set>
             <if test="null != cargoName and '' != cargoName">
                 cargo_name = #{cargoName},
+            </if>
+            <if test="null != cargoType and '' != cargoType">
+                cargo_type = #{cargoType},
             </if>
             <if test="null != cargoPrice and '' != cargoPrice">
                 cargo_price = #{cargoPrice},
@@ -59,6 +62,7 @@
         lpc.cid as cid,
         lpc.cargo_name as cargoName,
         lpc.cargo_price as cargoPrice,
+        lpc.cargo_type as cargoType,
         lpc.is_deleted as isDeleted
         from lp_cargo lpc
         where lpc.is_deleted=0

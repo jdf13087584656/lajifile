@@ -18,6 +18,8 @@ public interface UserService {
 
     ResultVo loginAdmin(UserDto userDto);
 
-    ResultVo loginUser(UserDto userDto);
+    ResultVo loginUserhs(UserDto userDto);
+
+    ResultVo loginUserys(UserDto userDto);
 }
 

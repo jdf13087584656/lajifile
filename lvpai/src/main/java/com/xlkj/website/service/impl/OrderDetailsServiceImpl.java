@@ -42,12 +42,14 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
         dto.setOrderState(3);
         dto.setOid(orderDetailsDto.getOid());
         orderFormMapper.modifyOrderForm(dto);
-
-        //订单新增垃圾袋操作
-        bagDto.setOid(orderDetailsDto.getOid());
-        bagDto.setBagCode(orderDetailsDto.getBagCode());
-        Integer add =orderFormMapper.addGarbageBag(bagDto);
-        resultVo.resultFlag(resultVo,add,"订单垃圾袋新增成功","订单垃圾袋新增失败");
+        Integer add = null;
+        if(null == orderFormMapper.OrderFormDetails(orderDetailsDto.getBagCode())){
+            //订单新增垃圾袋操作
+            bagDto.setOid(orderDetailsDto.getOid());
+            bagDto.setBagCode(orderDetailsDto.getBagCode());
+            add =orderFormMapper.addGarbageBag(bagDto);
+            resultVo.resultFlag(resultVo,add,"订单垃圾袋新增成功","订单垃圾袋新增失败");
+        }
 
         //当前垃圾袋内货物详情增加
         //货物详情集合(单价,质量)

@@ -3,6 +3,7 @@ package com.xlkj.website.mapper;
 import com.xlkj.website.model.SearchUserDto;
 import com.xlkj.website.model.UserDto;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 @Mapper
@@ -20,5 +21,5 @@ public interface UserMapper {
 
     Integer unfinished(Integer uid);
 
-    UserDto searchAccount(String account);
+    UserDto searchAccount(UserDto userDto);
 }

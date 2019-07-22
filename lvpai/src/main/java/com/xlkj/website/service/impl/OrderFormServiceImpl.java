@@ -96,9 +96,15 @@ public class OrderFormServiceImpl implements OrderFormService {
         List<String> bagCodes = dto.getBagCodes();
         if(null != bagCodes && bagCodes.size()>0){
             for(int i=0;i<bagCodes.size();i++){
-                dto.setBagCode(bagCodes.get(i));
-                Integer add =orderFormMapper.addGarbageBag(dto);
-                resultVo.resultFlag(resultVo,add,"操作成功","操作失败");
+                if(null == orderFormMapper.OrderFormDetails(dto.getBagCodes().get(i))){
+                    dto.setBagCode(bagCodes.get(i));
+                    //订单新增垃圾袋操作
+                    Integer add =orderFormMapper.addGarbageBag(dto);
+                    resultVo.resultFlag(resultVo,add,"订单垃圾袋新增成功","订单垃圾袋新增失败");
+                }else{
+                    resultVo.resultFail("此二维码已绑定其它订单");
+                    return resultVo;
+                }
             }
         }
         return resultVo;

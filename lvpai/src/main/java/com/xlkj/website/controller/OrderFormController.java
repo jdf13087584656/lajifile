@@ -35,7 +35,7 @@ public class OrderFormController  extends CommonControllerUtils {
         ResultVo<String> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("addOrderForm is start"));
-            dto.setCreateUserId(getUserId());
+            //dto.setCreateUserId(getUserId());
             resultVo = orderFormService.addOrderForm(dto);
         } catch (Exception e) {
             resultVo.resultFail("系统异常" + e.getMessage());
@@ -51,7 +51,7 @@ public class OrderFormController  extends CommonControllerUtils {
         ResultVo<Integer> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("modifyOrderForm is start"));
-            dto.setModifyUserId(getUserId());
+//            dto.setModifyUserId(getUserId());
             resultVo = orderFormService.modifyOrderForm(dto);
         } catch (Exception e) {
             resultVo.resultFail("系统异常" + e.getMessage());
@@ -79,7 +79,7 @@ public class OrderFormController  extends CommonControllerUtils {
     @ApiOperation(value = "二维码查看详情接口", httpMethod = "POST")
     @RequestMapping(value = "/OrderFormDetails", method = RequestMethod.POST)
     @AuthPass
-    public ResultVo<OrderFormAddDto> OrderFormDetails(@RequestParam("code") String code) {
+    public ResultVo<OrderFormAddDto> OrderFormDetails(@RequestBody String code) {
         ResultVo<OrderFormAddDto> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("OrderFormDetails is start"));

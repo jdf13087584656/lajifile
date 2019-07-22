@@ -98,15 +98,29 @@ public class UserController {
     }
 
     @ApiOperation(value = "回收员登录请求接口", httpMethod = "POST")
-    @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
-    public ResultVo<String> userLogin(@RequestBody UserDto userDto) {
+    @RequestMapping(value = "/userLoginhs", method = RequestMethod.POST)
+    public ResultVo<String> userLoginhs(@RequestBody UserDto userDto) {
         ResultVo<String> resultVo = new ResultVo<>();
         try {
-            logger.info(String.format("userLogin is start"));
-            resultVo = userService.loginUser(userDto);
+            logger.info(String.format("userLoginhs is start"));
+            resultVo = userService.loginUserhs(userDto);
         }catch (Exception e){
             resultVo.resultFail("网络异常,登录失败");
-            logger.error("userLogin is error", e.getMessage());
+            logger.error("userLoginhs is error", e.getMessage());
+        }
+        return resultVo;
+    }
+
+    @ApiOperation(value = "回收员登录请求接口", httpMethod = "POST")
+    @RequestMapping(value = "/userLoginys", method = RequestMethod.POST)
+    public ResultVo<String> userLoginys(@RequestBody UserDto userDto) {
+        ResultVo<String> resultVo = new ResultVo<>();
+        try {
+            logger.info(String.format("userLoginys is start"));
+            resultVo = userService.loginUserys(userDto);
+        }catch (Exception e){
+            resultVo.resultFail("网络异常,登录失败");
+            logger.error("userLoginys is error", e.getMessage());
         }
         return resultVo;
     }

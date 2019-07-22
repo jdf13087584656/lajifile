@@ -1,7 +1,6 @@
 package com.xlkj.website.mapper;
 
 import com.xlkj.website.model.GarbageBagDto;
-import com.xlkj.website.model.GetOrderDto;
 import com.xlkj.website.model.OrderFormAddDto;
 import com.xlkj.website.model.SelectOrderDto;
 import org.apache.ibatis.annotations.Mapper;

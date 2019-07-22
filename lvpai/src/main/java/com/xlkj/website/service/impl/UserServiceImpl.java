@@ -11,6 +11,7 @@ import com.xlkj.website.util.Md5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -27,7 +28,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResultVo<Integer> addUser(UserDto userDto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
-        UserDto user = userMapper.searchAccount(userDto.getAccount());
+        UserDto user = userMapper.searchAccount(userDto);
         if(null != user){
             resultVo.resultFail("账号已存在");
             return resultVo;
@@ -80,7 +81,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResultVo loginAdmin(UserDto userDto) {
         ResultVo<Object> resultVo = new ResultVo<>();
-        UserDto user = userMapper.searchAccount(userDto.getAccount());
+        UserDto user = userMapper.searchAccount(userDto);
         if (null == user){
             resultVo.resultFail("无此账号,请联系管理员");
             return resultVo;
@@ -111,14 +112,47 @@ public class UserServiceImpl implements UserService {
 
     //账号登录
     @Override
-    public ResultVo loginUser(UserDto userDto) {
+    public ResultVo loginUserhs(UserDto userDto) {
         ResultVo<Object> resultVo = new ResultVo<>();
-        UserDto user = userMapper.searchAccount(userDto.getAccount());
+        UserDto user = userMapper.searchAccount(userDto);
         if (null == user){
             resultVo.resultFail("无此账号,请联系管理员");
             return resultVo;
         }
-        if (2 != user.getType() || 3 != user.getType()){
+        if (2 != user.getType()){
+            resultVo.resultFail("此账号无权限登录");
+            return resultVo;
+        }
+        if (!user.getPassword().equals(Md5Util.MD5Encode(userDto.getPassword(),"UTF-8",false))){
+            resultVo.resultFail("密码错误请重试");
+            return resultVo;
+        }
+        //到这一步说明登陆成功了,保存token和用户信息
+        String token = UUID.randomUUID().toString().replace("-", "")+user.getUid();
+        //Long time= Long.valueOf(30);
+
+        redis.setKey(token, JSonUtils.toJSon(user));
+//        if (!set) {
+//            resultVo.resultFail("网络异常,请联系管理员");
+//            return resultVo;
+//        }
+        HashMap<String,Integer> map = new HashMap<>();
+        map.put(token,user.getUid());
+        resultVo.setData(map);
+        resultVo.setSuccess(true);
+        return resultVo;
+    }
+
+    //账号登录
+    @Override
+    public ResultVo loginUserys(UserDto userDto) {
+        ResultVo<Object> resultVo = new ResultVo<>();
+        UserDto user = userMapper.searchAccount(userDto);
+        if (null == user){
+            resultVo.resultFail("无此账号,请联系管理员");
+            return resultVo;
+        }
+        if (3 != user.getType()){
             resultVo.resultFail("此账号无权限登录");
             return resultVo;
         }
