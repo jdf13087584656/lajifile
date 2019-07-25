@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 public class CargoDto implements Serializable {
@@ -24,4 +25,13 @@ public class CargoDto implements Serializable {
 
     @ApiModelProperty(value = "货物类型(1,个人 2,商家)", name = "cargoType")
     private Integer cargoType;
+
+    @ApiModelProperty(value = "父id", name = "pid")
+    private Integer pid;
+
+    @ApiModelProperty(value = "图标", name = "icon")
+    private String icon;
+
+    @ApiModelProperty("递归下属集合")
+    private List<CargoDto> children;
 }

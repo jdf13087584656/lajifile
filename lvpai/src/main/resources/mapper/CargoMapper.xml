@@ -11,7 +11,9 @@
           cargo_name,
           cargo_price,
           cargo_type,
-          is_deleted
+          is_deleted,
+          pid,
+          icon
 		)
 		VALUES
 		(
@@ -19,9 +21,38 @@
 		  #{cargoName},
 		  #{cargoPrice},
 		  #{cargoType},
-		  0
+		  0,
+		  #{pid},
+		  #{icon}
 		);
 	</insert>
+
+    <!--货物父集 -->
+    <select id="listCargo" parameterType="com.xlkj.website.model.GetCargoDto" resultType="com.xlkj.website.model.CargoDto">
+        select
+        lpc.cid as cid,
+        lpc.cargo_name as cargoName,
+        lpc.cargo_price as cargoPrice,
+        lpc.cargo_type as cargoType,
+        lpc.is_deleted as isDeleted,
+        lpc.icon as icon
+        from lp_cargo lpc
+        where lpc.is_deleted=0 and pid is null
+    </select>
+
+    <!--货物子集 -->
+    <select id="kidCargo" parameterType="com.xlkj.website.model.GetCargoDto" resultType="com.xlkj.website.model.CargoDto">
+        select
+        lpc.cid as cid,
+        lpc.cargo_name as cargoName,
+        lpc.cargo_price as cargoPrice,
+        lpc.cargo_type as cargoType,
+        lpc.is_deleted as isDeleted,
+        lpc.icon as icon
+        from lp_cargo lpc
+        where lpc.is_deleted=0 and lpc.pid = #{id}
+    </select>
+
 
     <!-- 货物修改 -->
     <update id="modifyCargo" parameterType="com.xlkj.website.model.CargoDto">
@@ -38,6 +69,9 @@
             </if>
             <if test="null != isDeleted and '' != isDeleted">
                 is_deleted = #{isDeleted}
+            </if>
+            <if test="null != icon and '' != icon">
+                icon = #{icon}
             </if>
         </set>
         WHERE
@@ -56,23 +90,7 @@
         and cargo_name = #{cargoName}
     </select>
 
-    <!--货物列表 -->
-    <select id="listCargo" parameterType="com.xlkj.website.model.GetCargoDto" resultType="com.xlkj.website.model.CargoDto">
-        select
-        lpc.cid as cid,
-        lpc.cargo_name as cargoName,
-        lpc.cargo_price as cargoPrice,
-        lpc.cargo_type as cargoType,
-        lpc.is_deleted as isDeleted
-        from lp_cargo lpc
-        where lpc.is_deleted=0
-        <if test="null != keywords and '' != keywords">
-            and lpc.cargo_name = #{keywords}
-        </if>
-        <if test="null != cargoType and '' != cargoType">
-            and lpc.cargo_type = #{cargoType}
-        </if>
-    </select>
+
 
     <!--订单详情货物 -->
     <select id="listOrderDetails" parameterType="com.xlkj.website.model.SearchCargoDto" resultType="com.xlkj.website.model.BagCargoDto">

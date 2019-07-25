@@ -57,11 +57,11 @@ public class CargoController {
     @ApiOperation(value = "货物基础信息列表接口", httpMethod = "POST")
     @RequestMapping(value = "/listCargo", method = RequestMethod.POST)
     @AuthPass
-    public ResultVo<List<CargoDto>> listCargo(@RequestBody GetCargoDto dto) {
+    public ResultVo<List<CargoDto>> listCargo() {
         ResultVo<List<CargoDto>> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("listCargo is start"));
-            resultVo = cargoService.listCargo(dto);
+            resultVo = cargoService.listCargo();
         } catch (Exception e) {
             resultVo.resultFail("系统异常" + e.getMessage());
             logger.error("listCargo is error", e.getMessage());

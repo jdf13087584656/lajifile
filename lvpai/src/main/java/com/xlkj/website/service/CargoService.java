@@ -12,5 +12,5 @@ public interface CargoService {
 
     ResultVo<Integer> modifyCargo(CargoDto dto);
 
-    ResultVo<List<CargoDto>> listCargo(GetCargoDto dto);
+    ResultVo<List<CargoDto>> listCargo();
 }

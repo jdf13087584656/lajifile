@@ -12,11 +12,14 @@ public interface CargoMapper {
 
     Integer modifyCargo(CargoDto dto);
 
-    List<CargoDto> listCargo(GetCargoDto dto);
+    List<CargoDto> kidCargo(Integer pid);
+
+    List<CargoDto> listCargo();
 
     CargoDto searchCargo(String cargoName);
 
     List<BagCargoDto> listOrderDetails(SearchCargoDto dto);
 
     Integer addOrderDetails(OrderDetailsDto orderDetailsDto);
+
 }
