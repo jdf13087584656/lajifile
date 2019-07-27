@@ -37,15 +37,17 @@ public class CargoServiceImpl implements CargoService {
 
 
     @Override
-    public ResultVo<List<CargoDto>> listCargo() {
+    public ResultVo<List<CargoDto>> listCargo(Integer pid) {
         ResultVo<List<CargoDto>> resultVo = new ResultVo<>();
-        // 查询所有的一级目录 pid为 null
-        List<CargoDto> childrenList = cargoMapper.listCargo();
-        for (CargoDto dto : childrenList) {
-            // 递归查询 一级目录下的 所有子菜单
-            List<CargoDto> basisTypeChildList = getBasisTypeChildList(dto.getCid());
-            // 将查询的子菜单封装到children
-            dto.setChildren(basisTypeChildList);
+        // 查询所有的一级目录 pid为 -1
+        List<CargoDto> childrenList = cargoMapper.listCargo(pid);
+        if (-1 != pid ){
+            for (CargoDto dto : childrenList) {
+                // 递归查询 一级目录下的 所有子菜单
+                List<CargoDto> basisTypeChildList = cargoMapper.listCargo(dto.getCid());
+                // 将查询的子菜单封装到children
+                dto.setChildren(basisTypeChildList);
+            }
         }
         resultVo.resultSuccess(childrenList);
         return resultVo;
@@ -61,7 +63,7 @@ public class CargoServiceImpl implements CargoService {
         if (childrenList != null && childrenList.size() > 0) {
             // 获得每一子菜单
             for (CargoDto cargoDto : childrenList) {
-                List<CargoDto> basisTypeChildList = this.getBasisTypeChildList(cargoDto.getCid());
+                List<CargoDto> basisTypeChildList = cargoMapper.listCargo(cargoDto.getCid());
                 // 将查询出的子集合封装到模型对象中
                 cargoDto.setChildren(basisTypeChildList);
             }

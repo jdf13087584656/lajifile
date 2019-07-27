@@ -14,7 +14,7 @@ public interface CargoMapper {
 
     List<CargoDto> kidCargo(Integer pid);
 
-    List<CargoDto> listCargo();
+    List<CargoDto> listCargo(Integer pid);
 
     CargoDto searchCargo(String cargoName);
 
