@@ -1,6 +1,7 @@
 package com.xlkj.website.controller;
 
 import com.xlkj.website.annotation.AuthPass;
+import com.xlkj.website.mapper.CargoMapper;
 import com.xlkj.website.model.*;
 import com.xlkj.website.service.CargoService;
 import io.swagger.annotations.ApiOperation;
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -23,6 +25,8 @@ public class CargoController {
 
     @Autowired
     private CargoService cargoService;
+    @Autowired
+    private CargoMapper cargoMapper;
 
     @ApiOperation(value = "货物基础信息新增接口", httpMethod = "POST")
     @RequestMapping(value = "/addCargo", method = RequestMethod.POST)
@@ -57,14 +61,29 @@ public class CargoController {
     @ApiOperation(value = "货物基础信息列表接口", httpMethod = "POST")
     @RequestMapping(value = "/listCargo", method = RequestMethod.POST)
     @AuthPass
-    public ResultVo<List<CargoDto>> listCargo(@RequestBody Integer pid) {
+    public ResultVo<List<CargoDto>> listCargo(@RequestBody GetCargoDto dto) {
         ResultVo<List<CargoDto>> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("listCargo is start"));
-            resultVo = cargoService.listCargo(pid);
+            resultVo = cargoService.listCargo(dto);
         } catch (Exception e) {
             resultVo.resultFail("系统异常" + e.getMessage());
             logger.error("listCargo is error", e.getMessage());
+        }
+        return resultVo;
+    }
+
+    @ApiOperation(value = "货物基础信息接口(通过货物名)", httpMethod = "POST")
+    @RequestMapping(value = "/searchCargo", method = RequestMethod.POST)
+    @AuthPass
+    public ResultVo<CargoDto> searchCargo(@RequestBody String cargoName) {
+        ResultVo<CargoDto> resultVo = new ResultVo<>();
+        try {
+            logger.info(String.format("searchCargo is start"));
+            resultVo = cargoService.searchCargo(cargoName);
+        } catch (Exception e) {
+            resultVo.resultFail("系统异常" + e.getMessage());
+            logger.error("searchCargo is error", e.getMessage());
         }
         return resultVo;
     }

@@ -43,4 +43,16 @@ public class BagCargoDto implements Serializable {
     @ApiModelProperty(value = "详细住址", name = "address")
     private String address;
 
+    @ApiModelProperty(value = "订单生成时间", name = "orderCreateTime")
+    private String orderCreateTime;
+
+    @ApiModelProperty(value = "订单派单时间", name = "orderSendTime")
+    private String orderSendTime;
+
+    @ApiModelProperty(value = "取件时间", name = "orderGetTime")
+    private String orderGetTime;
+
+    @ApiModelProperty(value = "完成时间", name = "orderFinishTime")
+    private String orderFinishTime;
+
 }

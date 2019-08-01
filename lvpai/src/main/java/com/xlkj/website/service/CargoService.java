@@ -12,5 +12,7 @@ public interface CargoService {
 
     ResultVo<Integer> modifyCargo(CargoDto dto);
 
-    ResultVo<List<CargoDto>> listCargo(Integer pid);
+    ResultVo<List<CargoDto>> listCargo(GetCargoDto dto);
+
+    ResultVo<CargoDto> searchCargo(String cargoName);
 }

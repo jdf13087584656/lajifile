@@ -6,6 +6,7 @@ import com.xlkj.website.mapper.OrderFormMapper;
 import com.xlkj.website.model.*;
 import com.xlkj.website.service.BalanceService;
 import com.xlkj.website.service.OrderFormService;
+import com.xlkj.website.util.DateUtil;
 import com.xlkj.website.util.NumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,18 @@ public class OrderFormServiceImpl implements OrderFormService {
     @Override
     public ResultVo<Integer> modifyOrderForm(OrderFormAddDto dto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
+        //派单时间
+        if(dto.getOrderState()==2){
+            dto.setOrderSendTime(DateUtil.getStringDate());
+        }
+        //揽件时间
+        if(dto.getOrderState()==3){
+            dto.setOrderGetTime(DateUtil.getStringDate());
+        }
+        //完成时间
+        if(dto.getOrderState()==4){
+            dto.setOrderFinishTime(DateUtil.getStringDate());
+        }
         BigDecimal a = new BigDecimal(0);
         Integer mod;
         //当传入oids不为null时,仅为管理员派单操作

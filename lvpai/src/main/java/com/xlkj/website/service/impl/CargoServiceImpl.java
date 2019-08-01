@@ -37,37 +37,47 @@ public class CargoServiceImpl implements CargoService {
 
 
     @Override
-    public ResultVo<List<CargoDto>> listCargo(Integer pid) {
+    public ResultVo<List<CargoDto>> listCargo(GetCargoDto dto) {
         ResultVo<List<CargoDto>> resultVo = new ResultVo<>();
         // 查询所有的一级目录 pid为 -1
-        List<CargoDto> childrenList = cargoMapper.listCargo(pid);
-        if (-1 != pid ){
-            for (CargoDto dto : childrenList) {
+        List<CargoDto> childrenList = cargoMapper.listCargo(dto);
+        GetCargoDto getCargoDto = new GetCargoDto();
+        if (-1 != dto.getPid()){
+            for (CargoDto dtoo : childrenList) {
                 // 递归查询 一级目录下的 所有子菜单
-                List<CargoDto> basisTypeChildList = cargoMapper.listCargo(dto.getCid());
+                getCargoDto.setPid(dtoo.getCid());
+                List<CargoDto> basisTypeChildList = cargoMapper.listCargo(getCargoDto);
                 // 将查询的子菜单封装到children
-                dto.setChildren(basisTypeChildList);
+                dtoo.setChildren(basisTypeChildList);
             }
         }
         resultVo.resultSuccess(childrenList);
         return resultVo;
     }
 
-    /**
-     * 递归查询:根据父id查询所有子集
-     */
-    private List<CargoDto> getBasisTypeChildList(Integer pId) {
-        // 当前pid下的所有子菜单
-        List<CargoDto> childrenList = cargoMapper.kidCargo(pId);
-        // 子菜单集合不为0，进行递归查询,子菜单为0时递归结束
-        if (childrenList != null && childrenList.size() > 0) {
-            // 获得每一子菜单
-            for (CargoDto cargoDto : childrenList) {
-                List<CargoDto> basisTypeChildList = cargoMapper.listCargo(cargoDto.getCid());
-                // 将查询出的子集合封装到模型对象中
-                cargoDto.setChildren(basisTypeChildList);
-            }
-        }
-        return childrenList;
+    @Override
+    public ResultVo<CargoDto> searchCargo(String cargoName) {
+        ResultVo<CargoDto> resultVo = new ResultVo<>();
+        CargoDto cargoDto = cargoMapper.searchCargo(cargoName);
+        resultVo.resultSuccess(cargoDto);
+        return resultVo;
     }
+
+//    /**
+//     * 递归查询:根据父id查询所有子集
+//     */
+//    private List<CargoDto> getBasisTypeChildList(Integer pId) {
+//        // 当前pid下的所有子菜单
+//        List<CargoDto> childrenList = cargoMapper.kidCargo(pId);
+//        // 子菜单集合不为0，进行递归查询,子菜单为0时递归结束
+//        if (childrenList != null && childrenList.size() > 0) {
+//            // 获得每一子菜单
+//            for (CargoDto cargoDto : childrenList) {
+//                List<CargoDto> basisTypeChildList = cargoMapper.listCargo(cargoDto.getCid());
+//                // 将查询出的子集合封装到模型对象中
+//                cargoDto.setChildren(basisTypeChildList);
+//            }
+//        }
+//        return childrenList;
+//    }
 }

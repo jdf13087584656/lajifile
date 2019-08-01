@@ -28,7 +28,7 @@
 	</insert>
 
     <!--货物父集 -->
-    <select id="listCargo" parameterType="java.lang.Integer" resultType="com.xlkj.website.model.CargoDto">
+    <select id="listCargo" parameterType="com.xlkj.website.model.GetCargoDto" resultType="com.xlkj.website.model.CargoDto">
         select
         lpc.cid as cid,
         lpc.cargo_name as cargoName,
@@ -38,6 +38,13 @@
         lpc.icon as icon
         from lp_cargo lpc
         where lpc.is_deleted=0 and pid =#{pid}
+        <if test="null != keywords and '' != keywords">
+            and lpc.cargo_name like CONCAT('%',#{keywords},'%')
+        </if>
+        <if test="null != cargoType and '' != cargoType">
+            and lpc.cargo_type = #{cargoType}
+        </if>
+
     </select>
 
     <!--货物子集 -->
@@ -105,7 +112,11 @@
             la.province_name as provinceName,
             la.address as address,
             la.addressee as addressee,
-            la.addressee_tel as addresseeTel
+            la.addressee_tel as addresseeTel,
+            lo.order_send_time as orderSendTime,
+            lo.order_create_time as orderCreateTime,
+            lo.order_get_time as orderGetTime,
+            lo.order_finish_time as orderFinishTime
         from lp_order lo
         left join lp_address la on lo.address_id=la.aid
         left join lp_garbage_bag lgb on lo.oid=lgb.oid

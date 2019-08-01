@@ -78,7 +78,7 @@ public class OrderFormAddDto implements Serializable {
     @ApiModelProperty(value = "修改人id", name = "modifyUserId")
     private Integer modifyUserId;
 
-    @ApiModelProperty(value = "订单状态(1,草稿 2,正在执行, 3,已揽件, 4,完成, 5,异常 6,驳回)", name = "orderState")
+    @ApiModelProperty(value = "订单状态(1,创建 2,派单, 3,已揽件, 4,完成, 5,异常 6,驳回)", name = "orderState")
     private Integer orderState;
 
     @ApiModelProperty(value = "审核状态(1,草稿 2,待审核 3,审核通过 4,审核驳回)", name = "spState")
