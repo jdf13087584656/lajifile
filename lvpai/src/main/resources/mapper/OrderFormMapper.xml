@@ -78,9 +78,6 @@
 		<if test="null != receiveId and '' != receiveId">
 			receive_id = #{receiveId},
 		</if>
-		<if test="null != checkId and '' != checkId">
-			receive_id = #{checkId},
-		</if>
 		<if test="null != adminId and '' != adminId">
 			admin_id = #{adminId},
 		</if>
