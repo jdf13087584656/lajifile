@@ -35,7 +35,7 @@ public class QRCodeController  {
     @ApiOperation("动态生成二维码")
     @RequestMapping(value = {"/createQRCode"}, method = {RequestMethod.GET})
     @AuthPass
-    public String createQRCode(@RequestParam(required = true) @ApiParam("dispatchId") String openId, HttpServletRequest request, HttpServletResponse response) {
+    public String createQRCode(@RequestParam(required = true) @ApiParam("openId") String openId, HttpServletRequest request, HttpServletResponse response) {
         try {
             //二维码中包含的信息
             String content = new sun.misc.BASE64Encoder().encode((openId).getBytes("UTF-8"));//数据进行base64加密
