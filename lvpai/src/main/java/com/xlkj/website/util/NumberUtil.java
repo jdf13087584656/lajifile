@@ -46,7 +46,7 @@ public class NumberUtil {
     * @return
     */
    public static String getBusinessCode(String prefix){
-	   return prefix + Constants.COMPANY_SIMPLE_NAME_STR + DateUtil.getStringAllDateS();
+	   return prefix + DateUtil.getStringAllDateS();
    }
 
 }

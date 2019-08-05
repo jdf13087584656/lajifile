@@ -112,7 +112,7 @@ public class DateUtil {
      * @return返回字符串格式 yyyyMMddHHmmssSSS
      */
     public static String getStringAllDateS() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
         String dateString = formatter.format(new Date());
         return dateString.substring(2);
     }

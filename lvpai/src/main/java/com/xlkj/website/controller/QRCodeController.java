@@ -3,6 +3,7 @@ package com.xlkj.website.controller;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
@@ -13,12 +14,20 @@ import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
+import sun.misc.BASE64Encoder;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
+
+import static com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage;
 
 /**
  * Created by wangshuo on 2018/11/16.
@@ -36,39 +45,29 @@ public class QRCodeController  {
     @RequestMapping(value = {"/createQRCode"}, method = {RequestMethod.GET})
     @AuthPass
     public String createQRCode(@RequestParam(required = true) @ApiParam("openId") String openId, HttpServletRequest request, HttpServletResponse response) {
+        String binary = null;
+        Hashtable hints = new Hashtable();
+        hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
         try {
-            //二维码中包含的信息
-            String content = new sun.misc.BASE64Encoder().encode((openId).getBytes("UTF-8"));//数据进行base64加密
-            Map<EncodeHintType, Object> hints = new HashMap<>();
-            // 指定编码格式
-            hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
-            hints.put(EncodeHintType.MARGIN, 0);
-            hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.Q);
-            // 编码内容,编码类型(这里指定为二维码),生成图片宽度,生成图片高度,设置参数
-            BitMatrix bitMatrix = new MultiFormatWriter().encode(content, BarcodeFormat.QR_CODE, 256, 256, hints);
-            //1.1去白边
-            int[] rec = bitMatrix.getEnclosingRectangle();
-            int resWidth = rec[2] + 1;
-            int resHeight = rec[3] + 1;
-            BitMatrix resMatrix = new BitMatrix(resWidth, resHeight);
-            resMatrix.clear();
-            for (int i = 0; i < resWidth; i++) {
-                for (int j = 0; j < resHeight; j++) {
-                    if (bitMatrix.get(i + rec[0], j + rec[1])) {
-                        resMatrix.set(i, j);
-                    }
-                }
-            }
-            //设置请求头
-            response.setHeader("Content-Type", "application/octet-stream");
-            response.setHeader("Content-Disposition", "attachment;filename=" + "qrcode.png");
-            OutputStream outputStream = response.getOutputStream();
-            MatrixToImageWriter.writeToStream(bitMatrix, "png", outputStream);
-            outputStream.flush();
-            outputStream.close();
-        } catch (Exception e) {
-            logger.error("生成图片失败！" + e.getMessage(), e);
+            BitMatrix bitMatrix = new MultiFormatWriter().encode(
+                    openId, BarcodeFormat.QR_CODE, 200, 200, hints);
+            // 1、读取文件转换为字节数组
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            BufferedImage image = toBufferedImage(bitMatrix);
+            //转换成png格式的IO流
+            ImageIO.write(image, "png", out);
+            byte[] bytes = out.toByteArray();
+
+            // 2、将字节数组转为二进制
+            BASE64Encoder encoder = new BASE64Encoder();
+            binary = encoder.encodeBuffer(bytes).trim();
+        } catch (WriterException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-        return null;
+        return binary;
     }
 }
