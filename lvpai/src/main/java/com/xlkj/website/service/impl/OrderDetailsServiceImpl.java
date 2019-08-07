@@ -8,6 +8,7 @@ import com.xlkj.website.model.*;
 import com.xlkj.website.service.OrderDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -33,6 +34,7 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 
     //新增订单货物信息
     @Override
+    @Transactional
     public ResultVo<Integer> addOrderDetails(OrderDetailsDto orderDetailsDto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
         //垃圾袋对象
@@ -49,6 +51,9 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
             bagDto.setBagCode(orderDetailsDto.getBagCode());
             add =orderFormMapper.addGarbageBag(bagDto);
             resultVo.resultFlag(resultVo,add,"订单垃圾袋新增成功","订单垃圾袋新增失败");
+        }else{
+            resultVo.resultFail("此二维码已绑定其它订单");
+            return resultVo;
         }
 
         //当前垃圾袋内货物详情增加
