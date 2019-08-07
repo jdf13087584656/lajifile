@@ -70,4 +70,14 @@ public class QRCodeController  {
         }
         return binary;
     }
+
+
+    @ApiOperation("动态二维码到本地")
+    @RequestMapping(value = {"/saveCode"}, method = {RequestMethod.GET})
+    @AuthPass
+    public void saveCode(@RequestParam(required = true) @ApiParam("openId") String openId, HttpServletRequest request, HttpServletResponse response) {
+
+    }
+
+
 }

@@ -1,5 +1,7 @@
 package com.xlkj.website.util;
 
+import java.util.Random;
+
 /**
  * @Description: 编号相关工具类
  * @Auther: Created by luxuelei on 2018-11-26
@@ -49,4 +51,12 @@ public class NumberUtil {
 	   return prefix + DateUtil.getStringAllDateS();
    }
 
+
+   public static String getNumRadm(String pre){
+
+       Random random = new Random();
+       int i = random.nextInt(10000);
+       return pre+i+DateUtil.getStringAllDateS();
+
+   }
 }
