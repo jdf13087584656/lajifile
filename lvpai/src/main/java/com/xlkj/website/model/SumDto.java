@@ -22,6 +22,9 @@ public class SumDto implements Serializable {
     @ApiModelProperty(value = "总金额", name = "allPrice")
     private BigDecimal allPrice;
 
+    @ApiModelProperty(value = "总重量", name = "allWeight")
+    private BigDecimal allWeight;
+
     @ApiModelProperty(value = "总扣款", name = "deductMoneyAll")
     private BigDecimal deductMoneyAll;
 

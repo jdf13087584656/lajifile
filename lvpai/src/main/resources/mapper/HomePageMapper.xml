@@ -143,6 +143,30 @@
             and lu.account = #{account}
     </select>
 
+    <!-- 回收重量统计 -->
+    <select id="userWeightAll" parameterType="java.lang.String" resultType="java.math.BigDecimal">
+        select
+        sum(lod.cargo_weight) as allWeight
+        from lp_user lu
+        left join lp_order lo on lu.uid=lo.receive_id
+        left join lp_garbage_bag lgb on lgb.oid=lo.oid
+        left join lp_order_details lod on lod.bag_code=lgb.bag_code
+        where lo.order_state=4
+            and lu.account = #{account}
+    </select>
+
+    <!-- 验收重量统计 -->
+    <select id="userYSWeightAll" parameterType="java.lang.String" resultType="java.math.BigDecimal">
+        select
+        sum(lod.cargo_weight) as allWeight
+        from lp_user lu
+        left join lp_order lo on lu.uid=lo.check_id
+        left join lp_garbage_bag lgb on lgb.oid=lo.oid
+        left join lp_order_details lod on lod.bag_code=lgb.bag_code
+        where lo.order_state=4
+            and lu.account = #{account}
+    </select>
+
 
     <!-- 回收站数量 -->
     <select id="roleEnergy" parameterType="java.lang.String" resultType="java.math.BigDecimal">

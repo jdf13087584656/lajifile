@@ -32,6 +32,10 @@ public interface HomePageMapper {
 
     BigDecimal userYSPriceAll(String account);
 
+    BigDecimal userWeightAll(String account);
+
+    BigDecimal userYSWeightAll(String account);
+
     BigDecimal deductMoneyAll(String account);
 
     BigDecimal YSdeductMoneyAll(String account);

@@ -53,12 +53,15 @@ public class HomePageServiceImpl implements HomePageService {
         BigDecimal allPrice = homePageMapper.userPriceAll(dto.getAccount());
         //总扣款
         BigDecimal deductMoneyAll = homePageMapper.deductMoneyAll(dto.getAccount());
+        //总质量
+        BigDecimal weightAll = homePageMapper.userWeightAll(dto.getAccount());
         PageHelper.startPage(dto.getCurrentPage(),dto.getPageSize());
         List<SumDto> sumDto = homePageMapper.userStatistics(dto);
         if(sumDto.size()>0){
             sumDto.get(0).setOrderSum(orderNum);
             sumDto.get(0).setAllPrice(allPrice);
             sumDto.get(0).setDeductMoneyAll(deductMoneyAll);
+            sumDto.get(0).setAllWeight(weightAll);
             for(int i=0;i<sumDto.size();i++){
                 CargoDto cargoDto = cargoMapper.searchCargo(sumDto.get(i).getCargoName());
                 sumDto.get(i).setPriceSum(sumDto.get(i).getWeightSum().multiply(cargoDto.getCargoPrice()));
@@ -80,12 +83,15 @@ public class HomePageServiceImpl implements HomePageService {
         BigDecimal allPrice = homePageMapper.userYSPriceAll(dto.getAccount());
         //总扣款
         BigDecimal deductMoneyAll = homePageMapper.YSdeductMoneyAll(dto.getAccount());
+        //总质量
+        BigDecimal weightAll = homePageMapper.userYSWeightAll(dto.getAccount());
         PageHelper.startPage(dto.getCurrentPage(),dto.getPageSize());
         List<SumDto> sumDto = homePageMapper.userYSStatistics(dto);
         if(sumDto.size()>0){
             sumDto.get(0).setOrderSum(orderNum);
             sumDto.get(0).setAllPrice(allPrice);
             sumDto.get(0).setDeductMoneyAll(deductMoneyAll);
+            sumDto.get(0).setAllWeight(weightAll);
             for(int i=0;i<sumDto.size();i++){
                 CargoDto cargoDto = cargoMapper.searchCargo(sumDto.get(i).getCargoName());
                 sumDto.get(i).setPriceSum(sumDto.get(i).getWeightSum().multiply(cargoDto.getCargoPrice()));
