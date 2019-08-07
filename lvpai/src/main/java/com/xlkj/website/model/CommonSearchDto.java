@@ -15,4 +15,13 @@ public class CommonSearchDto implements Serializable {
 
     @ApiModelProperty(value = "结束时间", name = "endTime")
     private String endTime;
+
+    @ApiModelProperty(value = "账号", name = "account")
+    private String account;
+
+    @ApiModelProperty(value = "当前页", name = "currentPage")
+    private Integer currentPage;
+
+    @ApiModelProperty(value = "每页数量", name = "pageSize")
+    private Integer pageSize;
 }

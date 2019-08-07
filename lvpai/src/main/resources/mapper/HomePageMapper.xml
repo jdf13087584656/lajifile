@@ -14,7 +14,7 @@
         union all
         select count(oid) as b,'b' as flag from lp_order where order_type=2 and order_state=1
         union all
-        select count( oid ) AS c, 'c' AS flag FROM lp_order WHERE order_state=5
+        select count(oid) AS c, 'c' AS flag FROM lp_order WHERE order_state=5
         )t
     </select>
 
@@ -36,5 +36,118 @@
         select count(eid) from lp_equipment where e_state=1
     </select>
 
+    <!-- 回收员统计 -->
+    <select id="userStatistics" parameterType="com.xlkj.website.model.CommonSearchDto" resultType="com.xlkj.website.model.SumDto">
+        select
+        lc.cargo_name as cargoName,
+        sum(lod.cargo_weight) as weightSum
+        from lp_user lu
+        left join lp_order lo on lu.uid=lo.receive_id
+        left join lp_garbage_bag lgb on lo.oid=lgb.oid
+        left join lp_order_details lod on lod.bag_code=lgb.bag_code
+        left join lp_cargo lc on lc.cid=lod.cid
+        where lo.order_state=4
+        <if test="null != account and '' != account">
+            and lu.account = #{account}
+        </if>
+        <if test="null != startTime and '' != startTime">
+            and lo.order_finish_time <![CDATA[>=]]> #{startTime}
+        </if>
+        <if test="null != endTime and '' != endTime">
+            and lo.order_finish_time <![CDATA[<=]]> #{endTime}
+        </if>
+        group by lod.cid
+    </select>
 
+    <!-- 验收员统计 -->
+    <select id="userYSStatistics" parameterType="com.xlkj.website.model.CommonSearchDto" resultType="com.xlkj.website.model.SumDto">
+        select
+        lc.cargo_name as cargoName,
+        sum(lod.cargo_weight) as weightSum,
+        sum(lo.all_price) as priceSum
+        from lp_user lu
+        left join lp_order lo on lu.uid=lo.check_id
+        left join lp_garbage_bag lgb on lo.oid=lgb.oid
+        left join lp_order_details lod on lod.bag_code=lgb.bag_code
+        left join lp_cargo lc on lc.cid=lod.cid
+        where lo.order_state=4
+        <if test="null != account and '' != account">
+            and lu.account = #{account}
+        </if>
+        <if test="null != startTime and '' != startTime">
+            and lo.order_finish_time <![CDATA[>=]]> #{startTime}
+        </if>
+        <if test="null != endTime and '' != endTime">
+            and lo.order_finish_time <![CDATA[<=]]> #{endTime}
+        </if>
+        group by lod.cid
+    </select>
+
+    <!-- 回收员订单数统计 -->
+    <select id="userOrderAll" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select
+        count(lo.oid) as orderSum
+        from lp_user lu
+        left join lp_order lo on lu.uid=lo.receive_id
+        where lo.order_state=4
+            and lu.account = #{account}
+    </select>
+
+    <!-- 验收订单数统计 -->
+    <select id="userYSOrderAll" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select
+        count(lo.oid) as orderSum
+        from lp_user lu
+        left join lp_order lo on lu.uid=lo.check_id
+        where lo.order_state=4
+            and lu.account = #{account}
+    </select>
+
+    <!-- 回收价格统计 -->
+    <select id="userPriceAll" parameterType="java.lang.String" resultType="java.math.BigDecimal">
+        select
+        sum(lo.all_price) as allPrice
+        from lp_user lu
+        left join lp_order lo on lu.uid=lo.receive_id
+        where lo.order_state=4
+            and lu.account = #{account}
+    </select>
+
+    <!-- 验收价格统计 -->
+    <select id="userYSPriceAll" parameterType="java.lang.String" resultType="java.math.BigDecimal">
+        select
+        sum(lo.all_price) as allPrice
+        from lp_user lu
+        left join lp_order lo on lu.uid=lo.check_id
+        where lo.order_state=4
+            and lu.account = #{account}
+    </select>
+
+    <!-- 回收扣款数统计 -->
+    <select id="deductMoneyAll" parameterType="java.lang.String" resultType="java.math.BigDecimal">
+        select
+        sum(lo.deduct_money) as deductMoneyAll
+        from lp_user lu
+        left join lp_order lo on lu.uid=lo.receive_id
+        where lo.order_state=4
+            and lu.account = #{account}
+    </select>
+
+    <!-- 验收扣款数统计 -->
+    <select id="YSdeductMoneyAll" parameterType="java.lang.String" resultType="java.math.BigDecimal">
+        select
+        sum(lo.deduct_money) as deductMoneyAll
+        from lp_user lu
+        left join lp_order lo on lu.uid=lo.check_id
+        where lo.order_state=4
+            and lu.account = #{account}
+    </select>
+
+
+    <!-- 回收站数量 -->
+    <select id="roleEnergy" parameterType="java.lang.String" resultType="java.math.BigDecimal">
+        select sum(lo.all_price)
+        from lp_order lo
+        where lo.order_state = 4 and lo.open_id=#{openId}
+    </select>
 </mapper>

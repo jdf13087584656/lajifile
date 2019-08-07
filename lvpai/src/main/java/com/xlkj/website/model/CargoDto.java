@@ -26,8 +26,8 @@ public class CargoDto implements Serializable {
     @ApiModelProperty(value = "货物类型(1,个人 2,商家)", name = "cargoType")
     private Integer cargoType;
 
-    @ApiModelProperty(value = "父id", name = "pid")
-    private Integer pid;
+    @ApiModelProperty(value = "父id", name = "pId")
+    private Integer pId;
 
     @ApiModelProperty(value = "图标", name = "icon")
     private String icon;
