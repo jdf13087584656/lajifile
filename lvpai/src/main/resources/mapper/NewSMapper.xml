@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xlkj.website.mapper.NewSMapper">
+
+
+    <insert id="AddNews">
+        insert into lp_news (cid, tital, content, url,urls)
+        values (#{cid},#{tital},#{content},#{url},#{urls})
+
+    </insert>
+    <select id="findNews" resultType="com.xlkj.website.model.NewsDto">
+        select *
+        from lp_news order by createtime desc
+
+    </select>
+</mapper>
