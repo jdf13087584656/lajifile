@@ -32,4 +32,7 @@ public interface OrderFormMapper {
     //用户垃圾袋列表接口(仅绑定,无订单)
     String listRoleGarbageBag(String openId);
 
+    //定点回收
+    RoleGarbageDto designatedRecycling(String bagCode);
+
 }

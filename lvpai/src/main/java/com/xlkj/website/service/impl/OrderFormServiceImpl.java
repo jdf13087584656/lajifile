@@ -4,7 +4,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xlkj.website.mapper.OrderFormMapper;
 import com.xlkj.website.model.*;
-import com.xlkj.website.service.BalanceService;
 import com.xlkj.website.service.OrderFormService;
 import com.xlkj.website.util.DateUtil;
 import com.xlkj.website.util.NumberUtil;
@@ -19,8 +18,6 @@ public class OrderFormServiceImpl implements OrderFormService {
 
     @Autowired
     private OrderFormMapper orderFormMapper;
-    @Autowired
-    private BalanceService balanceService;
 
     //订单新增
     @Override
@@ -30,6 +27,19 @@ public class OrderFormServiceImpl implements OrderFormService {
         String prefix="LP";
         dto.setOrderCode(NumberUtil.getBusinessCode(prefix));
         Integer add = orderFormMapper.addOrderForm(dto);
+        //如果无订单绑定袋子直接绑定此袋
+        String bag = orderFormMapper.listRoleGarbageBag(dto.getOpenId());
+        if(null != bag){
+            GarbageBagDto gar = new GarbageBagDto();
+            gar.setOid(dto.getOid());
+            gar.setBagCode(bag);
+            if(null != orderFormMapper.OrderFormDetails(bag)){
+                resultVo.resultFail("此垃圾袋已绑定");
+                return resultVo;
+            }
+            orderFormMapper.addGarbageBag(gar);
+        }
+        orderFormMapper.deleteRoleGarbageBag(dto.getOpenId());
         if (add > 0){
             resultVo.resultSuccess("新增成功");
         }else{
@@ -127,8 +137,20 @@ public class OrderFormServiceImpl implements OrderFormService {
     @Override
     public ResultVo<Integer> addRoleGarbageBag(RoleGarbageDto dto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
+        //查看无订单袋码表有无数据
+        RoleGarbageDto bag = orderFormMapper.designatedRecycling(dto.getBagCode());
+        if(null != bag){
+            resultVo.resultFail("此垃圾袋已绑定其它用户");
+            return resultVo;
+        }
+        //查看无订单袋码表有无数据
+        if(null != orderFormMapper.OrderFormDetails(dto.getBagCode())){
+            resultVo.resultFail("此垃圾袋已绑定其它用户");
+            return resultVo;
+        }
+        orderFormMapper.deleteRoleGarbageBag(dto.getOpenId());
         Integer add = orderFormMapper.addRoleGarbageBag(dto);
-        resultVo.resultFlag(resultVo,add,"新增成功","新增失败");
+        resultVo.resultFlag(resultVo,add,"绑定成功","绑定失败");
         return resultVo;
     }
 
@@ -140,4 +162,43 @@ public class OrderFormServiceImpl implements OrderFormService {
         resultVo.resultSuccess(bagCode);
         return resultVo;
     }
+
+    //用户垃圾袋删除接口(仅绑定,无订单)
+    @Override
+    public ResultVo<Integer> deleteRoleGarbageBag(String openId) {
+        ResultVo<Integer> resultVo = new ResultVo<>();
+        Integer del = orderFormMapper.deleteRoleGarbageBag(openId);
+        resultVo.resultFlag(resultVo,del,"解除成功","解除失败");
+        return resultVo;
+    }
+
+    //定点回收
+    @Override
+    public ResultVo<Integer> designatedRecycling(String bagCode,Integer receiveId) {
+        ResultVo<Integer> resultVo = new ResultVo<>();
+        OrderFormAddDto dto = new OrderFormAddDto();
+        //查看无订单袋码表有无数据
+        RoleGarbageDto bag = orderFormMapper.designatedRecycling(bagCode);
+        //如果有数据
+        if(null != bag){
+            //生成订单编码
+            String prefix="LP";
+            dto.setOrderCode(NumberUtil.getBusinessCode(prefix));
+            dto.setOpenId(bag.getOpenId());
+            dto.setOrderState(2);
+            dto.setReceiveId(receiveId);
+            dto.setOrderSendTime(DateUtil.getStringDate());
+            Integer add = orderFormMapper.addOrderForm(dto);
+            GarbageBagDto gar = new GarbageBagDto();
+            gar.setOid(dto.getOid());
+            gar.setBagCode(bagCode);
+            orderFormMapper.addGarbageBag(gar);
+            resultVo.setData(dto.getOid());
+            resultVo.resultFlag(resultVo,add,"操作成功","操作失败");
+        }else{
+            resultVo.resultFail("袋号未绑定,请先绑定再执行操作");
+        }
+        return resultVo;
+    }
+
 }

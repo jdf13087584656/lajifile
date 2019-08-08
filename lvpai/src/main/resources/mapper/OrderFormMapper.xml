@@ -298,7 +298,7 @@
 	</insert>
 
 	<!--删除用户新增垃圾袋 -->
-	<delete id="deleteRoleGarbageBag" parameterType="java.lang.String">
+	<delete id="deleteRoleGarbageBag">
 		delete from lp_role_garbage where open_id=#{openId}
 	</delete>
 
@@ -309,6 +309,16 @@
             bag_code
         from lp_role_garbage
         where open_id=#{openId}
+	</select>
+
+	<!--订单垃圾袋查询 -->
+	<select id="designatedRecycling" parameterType="java.lang.String" resultType="com.xlkj.website.model.RoleGarbageDto" >
+		select
+            rgid,
+            open_id openId,
+            bag_code bagCode
+        from lp_role_garbage
+        where bag_code=#{bagCode}
 	</select>
 
 </mapper>

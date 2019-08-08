@@ -28,4 +28,10 @@ public interface OrderFormService {
     //用户垃圾袋列表接口(仅绑定,无订单)
     ResultVo<String> listRoleGarbageBag(String openId);
 
+    //用户垃圾袋删除接口(仅绑定,无订单)
+    ResultVo<Integer> deleteRoleGarbageBag(String openId);
+
+    //定点回收
+    ResultVo<Integer> designatedRecycling(String bagCode,Integer receiverId);
+
 }
