@@ -16,6 +16,9 @@ public class OrderDetailsDto implements Serializable {
     @ApiModelProperty(value = "订单id", name = "oid")
     private Integer oid;
 
+    @ApiModelProperty(value = "openId", name = "openId")
+    private String openId;
+
     @ApiModelProperty(value = "垃圾袋编号", name = "bagCode")
     private String bagCode;
 
@@ -25,7 +28,7 @@ public class OrderDetailsDto implements Serializable {
     @ApiModelProperty(value = "货物重量", name = "cargoWeight")
     private BigDecimal cargoWeight;
 
-    @ApiModelProperty(value = "货物重量价格对应", name = "cargoQuality")
-    private List<cargoQuality> cargoQuality;
+    @ApiModelProperty(value = "货物重量价格对应", name = "CargoQuality")
+    private List<CargoQuality> cargoQuality;
 
 }

@@ -22,4 +22,10 @@ public interface OrderFormService {
     //订单新增垃圾袋
     ResultVo<Integer> addGarbageBag(GarbageBagDto dto);
 
+    //用户绑定垃圾袋接口(仅绑定,无订单)
+    ResultVo<Integer> addRoleGarbageBag(RoleGarbageDto dto);
+
+    //用户垃圾袋列表接口(仅绑定,无订单)
+    ResultVo<String> listRoleGarbageBag(String openId);
+
 }

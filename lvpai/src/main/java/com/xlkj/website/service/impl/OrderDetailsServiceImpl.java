@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.List;
 @Service
 public class OrderDetailsServiceImpl implements OrderDetailsService {
@@ -40,10 +39,6 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
         //垃圾袋对象
         GarbageBagDto bagDto = new GarbageBagDto();
         OrderFormAddDto dto = new OrderFormAddDto();
-        //将订单状态改为已揽件
-        dto.setOrderState(3);
-        dto.setOid(orderDetailsDto.getOid());
-        orderFormMapper.modifyOrderForm(dto);
         Integer add = null;
         if(null == orderFormMapper.OrderFormDetails(orderDetailsDto.getBagCode())){
             //订单新增垃圾袋操作
@@ -58,7 +53,7 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 
         //当前垃圾袋内货物详情增加
         //货物详情集合(单价,质量)
-        List<cargoQuality> cargoQualities = orderDetailsDto.getCargoQuality();
+        List<CargoQuality> cargoQualities = orderDetailsDto.getCargoQuality();
         if(null != cargoQualities && cargoQualities.size()>0){
             for(int i=0;i<cargoQualities.size();i++){
                 //货物id
@@ -67,7 +62,16 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
                 add = cargoMapper.addOrderDetails(orderDetailsDto);
                 resultVo.resultFlag(resultVo,add,"订单详情添加成功","订单详情添加成功");
                 }
+            }else{
+                resultVo.resultFail("未选择货物");
+                return resultVo;
             }
+        //将订单状态改为已揽件
+        dto.setOrderState(3);
+        dto.setOid(orderDetailsDto.getOid());
+        orderFormMapper.modifyOrderForm(dto);
+        //删除账号绑定垃圾袋
+        orderFormMapper.deleteRoleGarbageBag(orderDetailsDto.getOpenId());
 //        }
         return resultVo;
     }

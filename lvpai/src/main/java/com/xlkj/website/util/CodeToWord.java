@@ -21,7 +21,7 @@
 // * @Date: 2019/8/6 14:42
 // * @Description:
 // */
-//public class CodeToWord {
+public class CodeToWord {
 //
 //    private static final String CHARSET = "utf-8";
 //    private static final String FORMAT = "JPG";
@@ -212,4 +212,4 @@
 //        return hints;
 //    }
 //
-//}
+}

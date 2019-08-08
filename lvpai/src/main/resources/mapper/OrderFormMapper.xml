@@ -145,6 +145,7 @@
 		lo.open_id as openId,
 		lo.receive_id AS receiveId,
 		lu.user_name as userName,
+		lu.cell_number as cellNumber,
 		lo.admin_id AS adminId,
 		lu2.user_name as adminName,
 		lo.check_id as checkId,
@@ -282,12 +283,32 @@
 		);
 	</insert>
 
-<!--	&lt;!&ndash;订单垃圾袋查询 &ndash;&gt;-->
-<!--	<select id="listGarbageBag" resultType="com.xlkj.website.model.BagCargoDto" >-->
-<!--		select-->
 
-<!--        from lp_order lo-->
-<!--        lp_garbage_bag-->
-<!--	</select>-->
+	<!--用户新增垃圾袋 -->
+	<insert id="addRoleGarbageBag" parameterType="com.xlkj.website.model.RoleGarbageDto" >
+		INSERT INTO lp_role_garbage (
+		open_id, bag_code, is_delete
+		)
+		VALUES
+		(
+		  #{openId},
+		  #{bagCode},
+		  0
+		);
+	</insert>
+
+	<!--删除用户新增垃圾袋 -->
+	<delete id="deleteRoleGarbageBag" parameterType="java.lang.String">
+		delete from lp_role_garbage where open_id=#{openId}
+	</delete>
+
+
+	<!--订单垃圾袋查询 -->
+	<select id="listRoleGarbageBag" resultType="java.lang.String" >
+		select
+            bag_code
+        from lp_role_garbage
+        where open_id=#{openId}
+	</select>
 
 </mapper>

@@ -122,4 +122,22 @@ public class OrderFormServiceImpl implements OrderFormService {
         }
         return resultVo;
     }
+
+    //用户绑定垃圾袋接口(仅绑定,无订单)
+    @Override
+    public ResultVo<Integer> addRoleGarbageBag(RoleGarbageDto dto) {
+        ResultVo<Integer> resultVo = new ResultVo<>();
+        Integer add = orderFormMapper.addRoleGarbageBag(dto);
+        resultVo.resultFlag(resultVo,add,"新增成功","新增失败");
+        return resultVo;
+    }
+
+    //用户垃圾袋列表接口(仅绑定,无订单)
+    @Override
+    public ResultVo<String> listRoleGarbageBag(String openId) {
+        ResultVo<String> resultVo = new ResultVo<>();
+        String bagCode = orderFormMapper.listRoleGarbageBag(openId);
+        resultVo.resultSuccess(bagCode);
+        return resultVo;
+    }
 }

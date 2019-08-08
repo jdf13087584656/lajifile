@@ -1,11 +1,5 @@
 package com.xlkj.website.controller;
 
-import com.xlkj.website.annotation.AuthPass;
-import com.xlkj.website.exception.Result;
-
-import com.xlkj.website.util.CodeToWord;
-import com.xlkj.website.util.NumberUtil;
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 

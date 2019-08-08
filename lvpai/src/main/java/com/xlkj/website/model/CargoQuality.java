@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 
 @Data
-public class cargoQuality implements Serializable {
+public class CargoQuality implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "货物类别id", name = "cid")

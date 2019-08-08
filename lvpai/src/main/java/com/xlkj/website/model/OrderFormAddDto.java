@@ -30,6 +30,9 @@ public class OrderFormAddDto implements Serializable {
     @ApiModelProperty(value = "回收员姓名", name = "userName")
     private String userName;
 
+    @ApiModelProperty(value = "回收员电话", name = "cellNumber")
+    private String cellNumber;
+
     @ApiModelProperty(value = "验收员id", name = "checkId")
     private Integer checkId;
 

@@ -135,4 +135,34 @@ public class OrderFormController  extends CommonControllerUtils {
         }
         return resultVo;
     }
+
+    @ApiOperation(value = "用户绑定垃圾袋接口(仅绑定,无订单)", httpMethod = "POST")
+    @RequestMapping(value = "/addRoleGarbageBag", method = RequestMethod.POST)
+    @AuthPass
+    public ResultVo<Integer> addRoleGarbageBag(@RequestBody RoleGarbageDto dto) {
+        ResultVo<Integer> resultVo = new ResultVo<>();
+        try {
+            logger.info(String.format("addRoleGarbageBag is start"));
+            resultVo = orderFormService.addRoleGarbageBag(dto);
+        } catch (Exception e) {
+            resultVo.resultFail("系统异常" + e.getMessage());
+            logger.error("addRoleGarbageBag is error", e.getMessage());
+        }
+        return resultVo;
+    }
+
+    @ApiOperation(value = "用户垃圾袋列表接口(仅绑定,无订单)", httpMethod = "POST")
+    @RequestMapping(value = "/listRoleGarbageBag", method = RequestMethod.POST)
+    @AuthPass
+    public ResultVo<String> listRoleGarbageBag(@RequestBody String openId) {
+        ResultVo<String> resultVo = new ResultVo<>();
+        try {
+            logger.info(String.format("listRoleGarbageBag is start"));
+            resultVo = orderFormService.listRoleGarbageBag(openId);
+        } catch (Exception e) {
+            resultVo.resultFail("系统异常" + e.getMessage());
+            logger.error("listRoleGarbageBag is error", e.getMessage());
+        }
+        return resultVo;
+    }
 }
