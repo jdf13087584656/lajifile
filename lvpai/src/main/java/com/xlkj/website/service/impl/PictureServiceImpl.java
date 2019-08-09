@@ -50,10 +50,12 @@ public class PictureServiceImpl implements PictureService {
             String fileSuffix = FileUtils.getFileSuffix(multipartFile, false);
             FileInfo fileInfo = new FileInfo();
             fileInfo.setFilepath(basePath+"/"+activity+"/"+pictureDto.getPicName()+fileSuffix);
+
             fileInfo.setFilename(pictureDto.getPicName()+fileSuffix);
-            fileInfo.setType(pictureDto.getType());
+            fileInfo.setType(0);
             fileInfoMapper.addFile(fileInfo);
-            resultVo.resultSuccess("上传成功");
+            resultVo.resultSuccess(basePath+"/"+activity+"/"+pictureDto.getPicName()+fileSuffix);
+            resultVo.setMsg("上传成功");
         } catch (IOException e) {
             e.printStackTrace();
             resultVo.resultFail("网络异常,上传失败");

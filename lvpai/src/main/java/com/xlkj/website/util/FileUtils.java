@@ -78,6 +78,13 @@ public class FileUtils {
         }
         return file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + spotIndex);
     }
+ public static String getName(MultipartFile file, boolean hasSpot) {
+        int spotIndex = 0;
+        if (hasSpot) {
+            spotIndex = 1;
+        }
+        return file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + spotIndex);
+    }
 
     public static String getFileSuffix(String fileName, boolean hasSpot) {
         int spotIndex = 0;
