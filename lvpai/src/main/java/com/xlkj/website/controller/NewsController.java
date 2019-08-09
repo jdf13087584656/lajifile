@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -46,11 +48,11 @@ public class NewsController {
     @ApiOperation(value = "咨询查询接口", httpMethod = "POST")
     @RequestMapping(value = "/getNews", method = RequestMethod.POST)
     @AuthPass
-    public ResultVo<List<NewsDto>> getNews() {
+    public ResultVo<List<NewsDto>> getNews(HttpServletRequest request, HttpServletResponse response) {
         ResultVo<List<NewsDto>> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("getNews is start"));
-            resultVo = newsService.getListsNew();
+            resultVo = newsService.getListsNew(request,response);
         } catch (Exception e) {
             resultVo.resultFail("系统异常" + e.getMessage());
             logger.error("getNews is error", e.getMessage());
