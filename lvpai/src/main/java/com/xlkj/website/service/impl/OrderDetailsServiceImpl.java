@@ -46,11 +46,7 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
             bagDto.setBagCode(orderDetailsDto.getBagCode());
             add =orderFormMapper.addGarbageBag(bagDto);
             resultVo.resultFlag(resultVo,add,"订单垃圾袋新增成功","订单垃圾袋新增失败");
-        }else{
-            resultVo.resultFail("此二维码已绑定其它订单");
-            return resultVo;
         }
-
         //当前垃圾袋内货物详情增加
         //货物详情集合(单价,质量)
         List<CargoQuality> cargoQualities = orderDetailsDto.getCargoQuality();

@@ -26,7 +26,6 @@ public class OrderFormServiceImpl implements OrderFormService {
         //生成订单编码
         String prefix="LP";
         dto.setOrderCode(NumberUtil.getBusinessCode(prefix));
-        Integer add = orderFormMapper.addOrderForm(dto);
         //如果无订单绑定袋子直接绑定此袋
         String bag = orderFormMapper.listRoleGarbageBag(dto.getOpenId());
         if(null != bag){
@@ -39,6 +38,7 @@ public class OrderFormServiceImpl implements OrderFormService {
             }
             orderFormMapper.addGarbageBag(gar);
         }
+        Integer add = orderFormMapper.addOrderForm(dto);
         orderFormMapper.deleteRoleGarbageBag(dto.getOpenId());
         if (add > 0){
             resultVo.resultSuccess("新增成功");
@@ -143,7 +143,7 @@ public class OrderFormServiceImpl implements OrderFormService {
             resultVo.resultFail("此垃圾袋已绑定其它用户");
             return resultVo;
         }
-        //查看无订单袋码表有无数据
+        //查看订单表有无数据
         if(null != orderFormMapper.OrderFormDetails(dto.getBagCode())){
             resultVo.resultFail("此垃圾袋已绑定其它用户");
             return resultVo;
@@ -174,27 +174,28 @@ public class OrderFormServiceImpl implements OrderFormService {
 
     //定点回收
     @Override
-    public ResultVo<Integer> designatedRecycling(String bagCode,Integer receiveId) {
+    public ResultVo<Integer> designatedRecycling(DesignatedDto dto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
-        OrderFormAddDto dto = new OrderFormAddDto();
+        OrderFormAddDto dtoo = new OrderFormAddDto();
         //查看无订单袋码表有无数据
-        RoleGarbageDto bag = orderFormMapper.designatedRecycling(bagCode);
+        RoleGarbageDto bag = orderFormMapper.designatedRecycling(dto.getBagCode());
         //如果有数据
         if(null != bag){
             //生成订单编码
             String prefix="LP";
-            dto.setOrderCode(NumberUtil.getBusinessCode(prefix));
-            dto.setOpenId(bag.getOpenId());
-            dto.setOrderState(2);
-            dto.setReceiveId(receiveId);
-            dto.setOrderSendTime(DateUtil.getStringDate());
-            Integer add = orderFormMapper.addOrderForm(dto);
+            dtoo.setOrderCode(NumberUtil.getBusinessCode(prefix));
+            dtoo.setOpenId(bag.getOpenId());
+            dtoo.setOrderState(2);
+            dtoo.setOrderType(1);
+            dtoo.setReceiveId(dto.getReceiveId());
+            dtoo.setOrderSendTime(DateUtil.getStringDate());
+            Integer add = orderFormMapper.addOrderForm(dtoo);
             GarbageBagDto gar = new GarbageBagDto();
-            gar.setOid(dto.getOid());
-            gar.setBagCode(bagCode);
+            gar.setOid(dtoo.getOid());
+            gar.setBagCode(dto.getBagCode());
             orderFormMapper.addGarbageBag(gar);
-            resultVo.setData(dto.getOid());
-            resultVo.resultFlag(resultVo,add,"操作成功","操作失败");
+            resultVo.setData(dtoo.getOid());
+            resultVo.resultFlag(resultVo,add,"下单成功","下单失败");
         }else{
             resultVo.resultFail("袋号未绑定,请先绑定再执行操作");
         }

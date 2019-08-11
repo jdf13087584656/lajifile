@@ -54,7 +54,7 @@
 		  #{orderFinishTime},
 		  #{createUserId},
 		  #{modifyUserId},
-		  1,
+		  #{orderState},
 		  1,
 		  #{spMsg},
 		  #{allPrice},
@@ -113,6 +113,9 @@
 		</if>
 		<if test="null != orderState and '' != orderState">
 			order_state = #{orderState},
+		</if>
+		<if test="null != individualOrMerchant and '' != individualOrMerchant">
+			individual_or_merchant = #{individualOrMerchant},
 		</if>
 		<if test="null != deductMoney and '' != deductMoney">
 			deduct_money = #{deductMoney},
@@ -174,6 +177,7 @@
 		lo.order_state as orderState,
 		lo.sp_state as spState,
 		lo.order_type as orderType,
+		lo.individual_or_merchant as individualOrMerchant,
 		GROUP_CONCAT(DISTINCT lgb.bag_code) as bagCode
 		from lp_order lo
 		left join lp_user lu on lo.receive_id=lu.uid
@@ -229,7 +233,7 @@
 		lo.open_id as openId,
 		lo.receive_id AS receiveId,
 		lu.user_name as userName,
-		lu.cell_number as cellNumber
+		lu.cell_number as cellNumber,
 		lo.admin_id AS adminId,
 		lu2.user_name as adminName,
 		lo.check_id as checkId,
@@ -257,6 +261,7 @@
 		lo.all_price as allPrice,
 		lo.order_state as orderState,
 		lo.sp_state as spState,
+		lo.individual_or_merchant as individualOrMerchant,
 		lo.order_type as orderType
 		from lp_garbage_bag lgb
 		left join lp_order lo on lo.oid=lgb.oid

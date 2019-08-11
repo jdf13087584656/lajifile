@@ -132,4 +132,7 @@ public class OrderFormAddDto implements Serializable {
     @ApiModelProperty(value = "垃圾袋编号", name = "bagCode")
     private String bagCode;
 
+    @ApiModelProperty(value = "个人还是商户(1,个人  2,商户)", name = "individualOrMerchant")
+    private String individualOrMerchant;
+
 }

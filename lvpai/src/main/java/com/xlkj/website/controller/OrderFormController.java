@@ -184,11 +184,11 @@ public class OrderFormController  extends CommonControllerUtils {
     @ApiOperation(value = "定点回收", httpMethod = "POST")
     @RequestMapping(value = "/designatedRecycling", method = RequestMethod.POST)
     @AuthPass
-    public ResultVo<Integer> designatedRecycling(@RequestBody String bagCode,@RequestBody Integer receiveId) {
+    public ResultVo<Integer> designatedRecycling(@RequestBody DesignatedDto dto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("designatedRecycling is start"));
-            resultVo = orderFormService.designatedRecycling(bagCode,receiveId);
+            resultVo = orderFormService.designatedRecycling(dto);
         } catch (Exception e) {
             resultVo.resultFail("系统异常" + e.getMessage());
             logger.error("designatedRecycling is error", e.getMessage());

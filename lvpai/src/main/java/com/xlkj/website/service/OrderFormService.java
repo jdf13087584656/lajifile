@@ -32,6 +32,6 @@ public interface OrderFormService {
     ResultVo<Integer> deleteRoleGarbageBag(String openId);
 
     //定点回收
-    ResultVo<Integer> designatedRecycling(String bagCode,Integer receiverId);
+    ResultVo<Integer> designatedRecycling(DesignatedDto dto);
 
 }
