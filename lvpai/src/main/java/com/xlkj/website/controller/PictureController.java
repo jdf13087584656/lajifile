@@ -76,6 +76,11 @@ public class PictureController {
     @RequestMapping(value = "/getPicture")
     public String getimg(@RequestParam("address") String address, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ResultVo resultVo = new ResultVo<>();
+        return getString(address, request, response);
+    }
+
+    private String getString(String address, HttpServletRequest request, HttpServletResponse response) {
+        ResultVo resultVo = new ResultVo<>();
         FileInfo fileByAdr = fileInfoMapper.getFileByAdr(address);
         String fileName = fileByAdr.getFilename();
 //        String fileName = "123.jpg";
@@ -123,7 +128,7 @@ public class PictureController {
             response.getOutputStream().flush();*/
         } catch (IOException e) {
             resultVo.resultFail("网络异常,下传失败");
-            logger.error("addPicture is error", e.getMessage());
+
         } finally {
             // releases any system resources associated with the stream
             if (inStream != null) {
