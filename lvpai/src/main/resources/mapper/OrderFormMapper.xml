@@ -329,4 +329,14 @@
         where bag_code=#{bagCode}
 	</select>
 
+	<!--删除订单垃圾袋 -->
+	<delete id="deleteByOpenId">
+		delete from lp_garbage_bag where oid=#{oid}
+	</delete>
+
+	<!--删除订单垃圾袋详情 -->
+	<delete id="deleteByBagCode">
+		delete from lp_order_details where bag_code=#{bagCode}
+	</delete>
+
 </mapper>

@@ -35,4 +35,11 @@ public interface OrderFormMapper {
     //定点回收
     RoleGarbageDto designatedRecycling(String bagCode);
 
+    //取消订单时删除已绑定数据
+    Integer deleteByOpenId(Integer oid);
+
+    //取消订单时删除详情
+    Integer deleteByBagCode(String bagCode);
+
+
 }
