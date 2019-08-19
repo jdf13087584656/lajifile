@@ -14,4 +14,7 @@ public class DesignatedDto implements Serializable {
 
     @ApiModelProperty(value = "袋号", name = "bagCode")
     private String bagCode;
+
+    @ApiModelProperty(value = "地址主键", name = "aid")
+    private Integer aid;
 }

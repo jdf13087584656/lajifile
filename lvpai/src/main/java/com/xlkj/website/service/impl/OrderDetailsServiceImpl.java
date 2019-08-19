@@ -36,10 +36,13 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     @Transactional
     public ResultVo<Integer> addOrderDetails(OrderDetailsDto orderDetailsDto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
-        //查看订单表有无数据
-        if(null != orderFormMapper.OrderFormDetails(orderDetailsDto.getBagCode())){
-            resultVo.resultFail("此垃圾袋已绑定其它用户");
-            return resultVo;
+
+        if(null != orderDetailsDto.getIsBound() && 1==orderDetailsDto.getIsBound()){
+            //查看订单表有无数据
+            if(null != orderFormMapper.OrderFormDetails(orderDetailsDto.getBagCode())){
+                resultVo.resultFail("此垃圾袋已绑定其它用户");
+                return resultVo;
+            }
         }
         //垃圾袋对象
         GarbageBagDto bagDto = new GarbageBagDto();

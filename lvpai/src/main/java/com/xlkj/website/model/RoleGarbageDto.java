@@ -21,6 +21,9 @@ public class RoleGarbageDto implements Serializable {
     @ApiModelProperty(value = "是否删除(0,正常  1,删除)", name = "isDelete")
     private Integer isDelete;
 
+    @ApiModelProperty(value = "地址主键", name = "aid")
+    private Integer aid;
+
 
 
 

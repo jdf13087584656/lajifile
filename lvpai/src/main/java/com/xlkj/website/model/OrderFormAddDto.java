@@ -135,4 +135,7 @@ public class OrderFormAddDto implements Serializable {
     @ApiModelProperty(value = "个人还是商户(1,个人  2,商户)", name = "individualOrMerchant")
     private String individualOrMerchant;
 
+    @ApiModelProperty(value = "订单货物详情", name = "listOrderDetails")
+    List<BagCargoDto> listOrderDetails;
+
 }

@@ -203,6 +203,9 @@
 		<if test="null != uid and uid != ''">
 			AND lo.receive_id = #{uid}
 		</if>
+		<if test="null != checkId and checkId != ''">
+			AND lo.check_id = #{checkId}
+		</if>
 		<if test="null != openId and openId != ''">
 			AND lo.open_id = #{openId}
 		</if>
@@ -295,13 +298,14 @@
 	<!--用户新增垃圾袋 -->
 	<insert id="addRoleGarbageBag" parameterType="com.xlkj.website.model.RoleGarbageDto" >
 		INSERT INTO lp_role_garbage (
-		open_id, bag_code, is_delete
+		open_id, bag_code, is_delete,aid
 		)
 		VALUES
 		(
 		  #{openId},
 		  #{bagCode},
-		  0
+		  0,
+		  #{aid}
 		);
 	</insert>
 
@@ -324,7 +328,8 @@
 		select
             rgid,
             open_id openId,
-            bag_code bagCode
+            bag_code bagCode,
+            aid aid
         from lp_role_garbage
         where bag_code=#{bagCode}
 	</select>

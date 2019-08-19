@@ -34,6 +34,9 @@ public class SelectOrderDto implements Serializable {
     @ApiModelProperty(value = "回收员Id", name = "uid")
     private Integer uid;
 
+    @ApiModelProperty(value = "验收员Id", name = "checkId")
+    private Integer checkId;
+
     @ApiModelProperty(value = "openId", name = "openId")
     private String openId;
 

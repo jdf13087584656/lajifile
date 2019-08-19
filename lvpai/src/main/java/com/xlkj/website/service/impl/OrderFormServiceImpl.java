@@ -2,6 +2,7 @@ package com.xlkj.website.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.xlkj.website.mapper.CargoMapper;
 import com.xlkj.website.mapper.OrderFormMapper;
 import com.xlkj.website.model.*;
 import com.xlkj.website.service.OrderFormService;
@@ -19,6 +20,8 @@ public class OrderFormServiceImpl implements OrderFormService {
 
     @Autowired
     private OrderFormMapper orderFormMapper;
+    @Autowired
+    private CargoMapper cargoMapper;
 
     //订单新增
     @Override
@@ -46,7 +49,6 @@ public class OrderFormServiceImpl implements OrderFormService {
             }
             orderFormMapper.addGarbageBag(gar);
         }
-
         orderFormMapper.deleteRoleGarbageBag(dto.getOpenId());
         if (add > 0){
             resultVo.resultSuccess("新增成功");
@@ -61,13 +63,20 @@ public class OrderFormServiceImpl implements OrderFormService {
     @Override
     public ResultVo<Integer> modifyOrderForm(OrderFormAddDto dto) {
         ResultVo<Integer> resultVo = new ResultVo<>();
+
         //派单时间
         if(dto.getOrderState()==2){
             dto.setOrderSendTime(DateUtil.getStringDate());
         }
         //揽件时间
         if(dto.getOrderState()==3){
+            SearchCargoDto dto1 = new SearchCargoDto();
+            dto1.setOid(dto.getOid());
             dto.setOrderGetTime(DateUtil.getStringDate());
+            if(null == cargoMapper.listOrderDetails(dto1)){
+                resultVo.resultFail("无货物,请先添加货物");
+                return resultVo;
+            }
         }
         //完成时间
         if(dto.getOrderState()==4){
@@ -114,6 +123,11 @@ public class OrderFormServiceImpl implements OrderFormService {
         PageHelper.startPage(dto.getCurrentPage(),dto.getPageSize());
         ResultVo<List<OrderFormAddDto>> resultVo = new ResultVo<>();
         List<OrderFormAddDto> orders = orderFormMapper.listOrderForm(dto);
+        SearchCargoDto dto1 = new SearchCargoDto();
+        for(int i=0;i<orders.size();i++){
+            dto1.setOid(orders.get(i).getOid());
+            orders.get(i).setListOrderDetails(cargoMapper.listOrderDetails(dto1));
+        }
         PageInfo<OrderFormAddDto> pageInfo = new PageInfo<>(orders);
         resultVo.setTotal((int) pageInfo.getTotal());
         resultVo.resultSuccess(orders);
@@ -211,6 +225,7 @@ public class OrderFormServiceImpl implements OrderFormService {
             dtoo.setOrderType(1);
             dtoo.setReceiveId(dto.getReceiveId());
             dtoo.setOrderSendTime(DateUtil.getStringDate());
+            dtoo.setAddressId(bag.getAid());
             Integer add = orderFormMapper.addOrderForm(dtoo);
             GarbageBagDto gar = new GarbageBagDto();
             gar.setOid(dtoo.getOid());

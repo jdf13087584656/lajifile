@@ -31,4 +31,7 @@ public class OrderDetailsDto implements Serializable {
     @ApiModelProperty(value = "货物重量价格对应", name = "CargoQuality")
     private List<CargoQuality> cargoQuality;
 
+    @ApiModelProperty(value = "是否已绑定垃圾袋标识(1,未绑定)", name = "isBound")
+    private Integer isBound;
+
 }

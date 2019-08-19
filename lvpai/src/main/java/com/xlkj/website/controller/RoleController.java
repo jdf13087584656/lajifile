@@ -57,7 +57,7 @@ public class RoleController {
     @ApiOperation(value = "用户详情接口", httpMethod = "POST")
     @RequestMapping(value = "/listRole", method = RequestMethod.POST)
     @AuthPass
-    public ResultVo<UserWithBLOBs> listRole(@RequestBody String openId) {
+    public ResultVo<UserWithBLOBs> listRole(@RequestParam String openId) {
         ResultVo<UserWithBLOBs> resultVo = new ResultVo<>();
         try {
             logger.info(String.format("listRole is start"));
