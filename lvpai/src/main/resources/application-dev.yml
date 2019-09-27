@@ -14,12 +14,12 @@ logging:
 #        security: info
 
 system.path:
-  basePath: /app/files    # 所有文件根目录
+  basePath: D:\\app/files    # 所有文件根目录
   activity : activity
   picture: picture
   voice: voice
   app: app
-  server-address: 59.110.225.21 #附件下载地址
+  server-address: 127.0.0.1 #附件下载地址
 
 
 
@@ -49,10 +49,11 @@ spring:
 
 
   datasource:
-    url: jdbc:mysql://59.110.225.21:3306/xlkj_website?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true&serverTimezone=UTC
+    url: jdbc:mysql://59.110.226.188:3306/xlkj_website?useUnicode=true&characterEncoding=UTF-8&useSSL=false&allowMultiQueries=true&serverTimezone=UTC
     username: root
-    password: Root!!2019
+    password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+
 
 
 #  http:

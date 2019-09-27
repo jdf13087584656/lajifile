@@ -5,6 +5,7 @@ server:
       key-store-password: rLtxruqy
       keyStoreType: PKCS12
 
+
   tomcat:
     max-http-header-size: 8192
 
@@ -70,9 +71,9 @@ mybatis:
 
 
 
-#  user:
-#    name: admin
-#    password: 123456
+  user:
+    mch_appid: wxaa487dc4bf8a8898
+    mchid: 1537396521
 
 
 
