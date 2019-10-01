@@ -44,7 +44,7 @@ public class PayController {
         String check_name = "NO_CHECK"; // 是否验证真实姓名呢
         String re_user_name = "KOLO"; // 收款用户姓名(非必须)
         String amount = money; // 企业付款金额，最少为100，单位为分
-        String desc = "恭喜你，完成了一个代买订单a6w3fswq51asdf6！"; // 企业付款操作说明信息。必填。
+        String desc = "sucess,pay"; // 企业付款操作说明信息。必填。
         String spbill_create_ip = AuthUtil.getRequestIp(request); // 用户的ip地址
 
         // 2.0 生成map集合
@@ -70,6 +70,9 @@ public class PayController {
 
             // 5.0将当前的map结合转化成xml格式
             String xml = WXPayUtil.mapToXml(packageParams);
+
+            //增加验证签名是否正确的方法
+            boolean valid = WXPayUtil.isSignatureValid(xml, "hhhhnnnnllllvvvvppppkkkkjjjj11112222");
 
             // 6.0获取需要发送的url地址
             String wxUrl = "https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/transfers"; // 获取退款的api接口
