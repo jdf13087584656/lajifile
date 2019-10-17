@@ -39,6 +39,13 @@
         WHERE
             open_id = #{openId};
     </update>
+    <update id="balanceZero">
+        UPDATE lp_balance
+        set
+            balance = 0
+        WHERE
+            open_id = #{openId};
+    </update>
 
     <!--秘钥新增 -->
     <insert id="secretKey">

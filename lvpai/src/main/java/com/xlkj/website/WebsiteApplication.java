@@ -4,6 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
+import java.math.BigDecimal;
+
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.xlkj.website"})
 public class WebsiteApplication {
@@ -13,3 +15,4 @@ public class WebsiteApplication {
 	}
 
 }
+

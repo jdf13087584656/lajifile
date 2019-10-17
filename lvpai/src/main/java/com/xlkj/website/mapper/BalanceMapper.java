@@ -12,6 +12,9 @@ public interface BalanceMapper {
 
     Integer modifyBalance(AddBalanceDto dto);
 
+    //余额归零
+    Integer balanceZero (String openId);
+
     Integer secretKey(@Param("stime") String stime,@Param("secretKey") String secretKey);
 
     Integer searchSecretKey(@Param("stime") String stime,@Param("secretKey") String secretKey);

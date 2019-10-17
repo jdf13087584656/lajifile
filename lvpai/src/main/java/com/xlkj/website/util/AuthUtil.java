@@ -20,7 +20,7 @@ public class AuthUtil {
     public static final String APPID = "wxaa487dc4bf8a8898";
     public static final String APPSECRET = "07f0c840cf33243a95741ff43c6e5ee0";//.商家的app密钥
     public static final String MCHID = "1537396521";
-    public static final String PATERNERKEY = "hhhhnnnnllllvvvvppppkkkkjjjj11112222";
+    public static final String PATERNERKEY = "5l2JKXSBlJ71MvpdmeTNDZrPV15LmYd6";
     public static final String CERTPATH = "/pem/apiclient_cert.p12";
 
     public static JSONObject doGetJson(String url) throws ClientProtocolException, IOException {
@@ -37,7 +37,7 @@ public class AuthUtil {
             String result = EntityUtils.toString(entity, "UTF-8");
             jsonObject = jsonObject.fromObject(result);
         }
-        // 把链接释放掉
+        // 把链接释放掉0
         httpGet.releaseConnection();
         return jsonObject;
     }
