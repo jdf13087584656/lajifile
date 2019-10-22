@@ -195,7 +195,7 @@
 			AND lo.is_deleted = #{isDeleted}
 		</if>
 		<if test="null != keywords and keywords != ''">
-			AND (la.addressee like "%"#{keywords}"%" or ar.name like "%"#{keywords}"%")
+			AND (la.address like "%"#{keywords}"%" or lr.role_name like "%"#{keywords}"%")
 		</if>
 		<if test="null != orderType and orderType != ''">
 			AND lo.order_type = #{orderType}
